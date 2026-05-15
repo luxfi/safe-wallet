@@ -1,4 +1,5 @@
 import { BRAND_NAME } from '@/config/constants'
+import { brand } from '@safe-global/brand'
 
 export const SAFE_COMPATIBLE_METHODS = [
   'eth_accounts',
@@ -34,9 +35,9 @@ export const SAFE_COMPATIBLE_EVENTS = ['chainChanged', 'accountsChanged']
 
 export const SAFE_WALLET_METADATA = {
   name: BRAND_NAME,
-  url: 'https://app.safe.global',
+  url: brand.appUrl,
   description: 'Smart contract wallet for Ethereum',
-  icons: ['https://app.safe.global/images/logo-round.svg'],
+  icons: [`${brand.appUrl}/images/logo-round.svg`],
 }
 
 export const EIP155 = 'eip155' as const

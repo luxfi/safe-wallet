@@ -15,6 +15,7 @@ import { useHasFeature } from '@/hooks/useChains'
 import { FEATURES } from '@safe-global/utils/utils/chains'
 import { EURCV_ASSET_ID } from '@/config/eurcv'
 import css from './styles.module.css'
+import { brand } from '@safe-global/brand'
 
 export type ExplorePossibleApp = {
   id: string
@@ -59,7 +60,7 @@ const EXPLORE_POSSIBLE_CONFIG = [
       light: '/images/explore-possible/spaces-large.svg',
       dark: '/images/explore-possible/spaces-large-dark.svg',
     },
-    getLink: () => 'https://app.safe.global/welcome/spaces',
+    getLink: () => `${brand.appUrl}/welcome/spaces`,
   },
   {
     id: 'transaction-builder',

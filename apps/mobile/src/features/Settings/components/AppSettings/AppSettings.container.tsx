@@ -18,6 +18,7 @@ import { selectCurrency } from '@/src/store/settingsSlice'
 import { capitalize } from '@/src/utils/formatters'
 import { APP_STORE_URL, GOOGLE_PLAY_URL, SAFE_WEB_FEEDBACK_URL } from '@/src/config/constants'
 import { clearAllPendingTxs } from '@/src/store/pendingTxsSlice'
+import { brand } from '@safe-global/brand'
 
 export const AppSettingsContainer = () => {
   const dispatch = useAppDispatch()
@@ -206,7 +207,7 @@ export const AppSettingsContainer = () => {
         {
           label: 'Help center',
           leftIcon: 'question',
-          onPress: () => Linking.openURL('https://help.safe.global'),
+          onPress: () => Linking.openURL(brand.helpUrl),
           disabled: false,
           type: 'external-link',
         },

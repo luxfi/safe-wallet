@@ -7,8 +7,9 @@ import { useLoadFeature } from '@/features/__core__'
 import { SupportChatFeature, useSupportChat } from '@/features/support-chat'
 import { useIsOfficialHost } from '@/hooks/useIsOfficialHost'
 import css from './styles.module.css'
+import { brand } from '@safe-global/brand'
 
-const HELP_CENTER_URL = 'https://help.safe.global'
+const HELP_CENTER_URL = brand.helpUrl
 
 type HelpMenuProps = {
   anchorEl: HTMLElement | null

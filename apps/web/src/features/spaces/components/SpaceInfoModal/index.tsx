@@ -22,6 +22,7 @@ import { trackEvent } from '@/services/analytics'
 import { SPACE_EVENTS, SPACE_LABELS } from '@/services/analytics/events/spaces'
 import { WorkspaceCreateEntryPoint } from '@/services/analytics/mixpanel-events'
 import ExternalLink from '@/components/common/ExternalLink'
+import { brand } from '@safe-global/brand'
 
 const ListIcon = () => (
   <ListItemIcon
@@ -46,8 +47,7 @@ const ListIcon = () => (
   </ListItemIcon>
 )
 
-const SPACE_HELP_ARTICLE_LINK =
-  'https://help.safe.global/articles/8240597068-Spaces:-Team-Collaboration-for-Safe-Accounts'
+const SPACE_HELP_ARTICLE_LINK = `${brand.helpUrl}/articles/8240597068-Spaces:-Team-Collaboration-for-Safe-Accounts`
 
 const SpaceInfoModal = ({
   showButtons = true,
