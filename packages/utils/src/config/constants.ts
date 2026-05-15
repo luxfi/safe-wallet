@@ -1,3 +1,4 @@
+import { brand } from '@safe-global/brand'
 export const LATEST_SAFE_VERSION =
   process.env.NEXT_PUBLIC_SAFE_VERSION || process.env.EXPO_PUBLIC_SAFE_VERSION || '1.4.1'
 
@@ -38,7 +39,7 @@ const TURNSTILE_SITE_KEY_STAGING =
 export const TURNSTILE_SITE_KEY = IS_PRODUCTION ? TURNSTILE_SITE_KEY_PRODUCTION : TURNSTILE_SITE_KEY_STAGING
 
 // Help Center
-export const HELP_CENTER_URL = 'https://help.safe.global'
+export const HELP_CENTER_URL = brand.helpUrl
 export const HelpCenterArticle = {
   ADDRESS_BOOK_DATA: `${HELP_CENTER_URL}/articles/9240138540-address-book-export-and-import`,
   ADVANCED_PARAMS: `${HELP_CENTER_URL}/articles/6061270064-advanced-transaction-parameters`,
@@ -66,6 +67,6 @@ export const HelperCenterArticleTitles = {
   RECOVERY: 'Learn more about the Account recovery process',
 }
 // Social
-export const DISCORD_URL = 'https://chat.safe.global'
-export const TWITTER_URL = 'https://twitter.com/safe'
+export const DISCORD_URL = brand.discordUrl
+export const TWITTER_URL = brand.twitterUrl
 export const SAFE_TO_L2_MIGRATION_VERSION = '1.4.1'

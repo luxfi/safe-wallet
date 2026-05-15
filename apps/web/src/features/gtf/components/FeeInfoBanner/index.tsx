@@ -8,8 +8,9 @@ import useLocalStorage from '@/services/local-storage/useLocalStorage'
 import useChainId from '@/hooks/useChainId'
 import { GTF_FEES_BANNER_DISMISSED_KEY } from '../../constants'
 import css from './styles.module.css'
+import { brand } from '@safe-global/brand'
 
-const LEARN_MORE_URL = 'https://help.safe.global/articles/9993850744-safewallet-gas-fees-faq'
+const LEARN_MORE_URL = `${brand.helpUrl}/articles/9993850744-safewallet-gas-fees-faq`
 
 const FeeInfoBanner = (): ReactElement | null => {
   const chainId = useChainId()

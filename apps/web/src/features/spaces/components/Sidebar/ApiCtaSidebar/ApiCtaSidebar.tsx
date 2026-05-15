@@ -8,8 +8,9 @@ import { SidebarMenuItem, SidebarMenuButton, useSidebar } from '@/components/ui/
 import { cn } from '@/utils/cn'
 import useLocalStorage from '@/services/local-storage/useLocalStorage'
 import css from '../styles.module.css'
+import { brand } from '@safe-global/brand'
 
-const API_DOCS_URL = process.env.NEXT_PUBLIC_DEVELOPER_PORTAL_URL || 'https://developer.safe.global/login'
+const API_DOCS_URL = process.env.NEXT_PUBLIC_DEVELOPER_PORTAL_URL || `${brand.developerUrl}/login`
 const COLLAPSED_KEY = 'api-cta-sidebar-collapsed'
 
 export const ApiCtaSidebar = (): ReactElement => {

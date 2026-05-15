@@ -1,6 +1,7 @@
 import { Platform } from 'react-native'
 import * as Application from 'expo-application'
 import { isIpOrLocalhostUrl } from '@/src/utils/url'
+import { brand } from '@safe-global/brand'
 
 const originalFetch = global.fetch
 /**
@@ -13,7 +14,7 @@ global.fetch = (url: RequestInfo | URL, init?: RequestInit | undefined) => {
   const userAgent = `SafeMobile/${Platform.OS === 'ios' ? 'iOS' : 'Android'}/${Application.nativeApplicationVersion}/${
     Application.nativeBuildVersion
   }`
-  const origin = 'https://app.safe.global'
+  const origin = brand.appUrl
   if (url instanceof Request && !init) {
     // If url is a Request object and no init is provided, modify its headers directly
     const headers = new Headers(url.headers)

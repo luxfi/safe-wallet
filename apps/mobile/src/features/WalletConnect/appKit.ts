@@ -4,6 +4,7 @@ import { EthersAdapter } from '@reown/appkit-ethers-react-native'
 import type { Network, Storage } from '@reown/appkit-common-react-native'
 import { createMMKV } from 'react-native-mmkv'
 import { safeJsonParse, safeJsonStringify } from '@walletconnect/safe-json'
+import { brand } from '@safe-global/brand'
 
 const projectId = process.env.EXPO_PUBLIC_REOWN_PROJECT_ID ?? ''
 
@@ -59,8 +60,8 @@ export function createAppKitInstance(networks: [Network, ...Network[]], defaultN
     metadata: {
       name: 'Safe{Mobile}',
       description: 'Safe multi-signature wallet',
-      url: 'https://app.safe.global',
-      icons: ['https://app.safe.global/favicons/favicon.ico'],
+      url: brand.appUrl,
+      icons: [`${brand.appUrl}/favicons/favicon.ico`],
     },
     features: {
       onramp: false,

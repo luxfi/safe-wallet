@@ -1,8 +1,9 @@
+import { brand } from '@safe-global/brand'
 export const EARN_TITLE = 'Earn'
 export const WIDGET_TESTNET_URL = 'https://safe.widget.testnet.kiln.fi/earn'
 export const WIDGET_PRODUCTION_URL = 'https://safe-defi.widget.kiln.fi/earn'
 export const EARN_CONSENT_STORAGE_KEY = 'lendDisclaimerAcceptedV1'
-export const EARN_HELP_ARTICLE = 'https://help.safe.global/articles/4071700443-DeFi-Lending-in-Safe{Wallet}'
+export const EARN_HELP_ARTICLE = `${brand.helpUrl}/articles/4071700443-DeFi-Lending-in-Safe{Wallet}`
 
 export const widgetAppData = {
   url: WIDGET_TESTNET_URL,
