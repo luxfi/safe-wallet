@@ -89,6 +89,8 @@ thumbs.db
 # web
 apps/web/.next/*
 apps/web/out/*
+# white-label build output: select-brand.sh copies the active brand here
+apps/web/public/brand/active/
 apps/web/public/work*.js
 apps/web/public/sw.js
 apps/web/public/firebase*.js
