@@ -1,6 +1,7 @@
 import EthHashInfo from '@/components/common/EthHashInfo'
 import useSafeInfo from '@/hooks/useSafeInfo'
 import { Paper, Grid, Typography, Box, IconButton, SvgIcon } from '@mui/material'
+import { brand } from '@safe-global/brand'
 
 import ExternalLink from '@/components/common/ExternalLink'
 import { RemoveModuleFlow } from '@/components/tx-flow/flows'
@@ -82,7 +83,7 @@ const SafeModules = () => {
             <Typography>
               Modules allow you to customize the access-control logic of your Safe Account. Modules are potentially
               risky, so make sure to only use modules from trusted sources. Learn more about modules{' '}
-              <ExternalLink href="https://help.safe.global/articles/5490514177-What-is-a-module?">here</ExternalLink>
+              <ExternalLink href={`${brand.helpUrl}/articles/5490514177-What-is-a-module?`}>here</ExternalLink>
             </Typography>
             {safeModules.length === 0 ? (
               <NoModules />

@@ -17,6 +17,7 @@ import TxCard from '@/components/tx-flow/common/TxCard'
 import DeleteTxModal from './DeleteTxModal'
 import ExternalLink from '@/components/common/ExternalLink'
 import ChoiceButton from '@/components/common/ChoiceButton'
+import { brand } from '@safe-global/brand'
 import useWallet from '@/hooks/wallets/useWallet'
 import { sameAddress } from '@safe-global/utils/utils/addresses'
 import { AppRoutes } from '@/config/routes'
@@ -131,7 +132,9 @@ const ReplaceTxMenu = ({
         <Typography variant="body2" mt={-1} mb={1}>
           You can replace or reject this transaction on-chain. It requires gas fees and your signature.{' '}
           <Track {...REJECT_TX_EVENTS.READ_MORE}>
-            <ExternalLink href="https://help.safe.global/articles/4016097317-Why-do-I-need-to-pay-for-cancelling-a-transaction?">
+            <ExternalLink
+              href={`${brand.helpUrl}/articles/4016097317-Why-do-I-need-to-pay-for-cancelling-a-transaction?`}
+            >
               Read more
             </ExternalLink>
           </Track>
