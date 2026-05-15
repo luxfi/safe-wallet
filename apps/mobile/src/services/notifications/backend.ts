@@ -1,6 +1,7 @@
 import DeviceInfo from 'react-native-device-info'
 import { SiweMessage } from 'siwe'
 import { Wallet, HDNodeWallet } from 'ethers'
+import { brand } from '@safe-global/brand'
 
 import { NOTIFICATION_ACCOUNT_TYPE, ERROR_MSG } from '@/src/store/constants'
 import { REGULAR_NOTIFICATIONS, OWNER_NOTIFICATIONS } from '@/src/utils/notifications'
@@ -49,9 +50,9 @@ const getNotificationRegisterPayload = async ({
     address: signer.address,
     chainId: Number(chainId),
     domain: 'global.safe.mobileapp',
-    statement: 'Safe Wallet wants you to sign in with your Ethereum account',
+    statement: `${brand.name} wants you to sign in with your Ethereum account`,
     nonce,
-    uri: 'https://safe.global',
+    uri: `https://${brand.domain}`,
     version: '1',
     issuedAt: new Date().toISOString(),
   })

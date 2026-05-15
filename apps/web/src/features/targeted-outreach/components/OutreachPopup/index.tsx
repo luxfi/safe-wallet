@@ -13,6 +13,7 @@ import useLocalStorage, { useSessionStorage } from '@/services/local-storage/use
 import useShowOutreachPopup from '../../hooks/useShowOutreachPopup'
 import { ACTIVE_OUTREACH, OUTREACH_LS_KEY, OUTREACH_SS_KEY } from '@/features/targeted-outreach/constants'
 import Track from '@/components/common/Track'
+import { brand } from '@safe-global/brand'
 import { OUTREACH_EVENTS } from '@/services/analytics/events/outreach'
 import SafeThemeProvider from '@/components/theme/SafeThemeProvider'
 import useChainId from '@/hooks/useChainId'
@@ -105,11 +106,11 @@ const OutreachPopup = (): ReactElement | null => {
                 <Typography variant="h4" fontWeight={700}>
                   Your voice matters!
                   <br />
-                  Help us improve {'Safe{Wallet}'}.
+                  Help us improve {brand.name}.
                 </Typography>
                 <Typography>
-                  In 1 minute, tell us why you use {'Safe{Wallet}'}. Your input will help us create a better, smarter
-                  wallet experience for you!
+                  In 1 minute, tell us why you use {brand.name}. Your input will help us create a better, smarter wallet
+                  experience for you!
                 </Typography>
                 <Track {...OUTREACH_EVENTS.OPEN_SURVEY}>
                   <Link rel="noreferrer noopener" target="_blank" href={outreachUrl}>
