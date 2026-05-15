@@ -119,7 +119,7 @@ const SwapWidget = ({ sell }: Params) => {
     },
     content: {
       feeLabel: 'Widget Fee',
-      feeTooltipMarkdown: `The [tiered widget fee](https://help.safe.global/articles/9969629388-How-does-the-widget-fee-work-for-native-swaps) incurred here is charged by CoW Protocol for the operation of this widget. The fee is automatically calculated into this quote. Part of the fee will contribute to a license fee that supports the Safe Community. Neither the Safe Ecosystem Foundation nor ${BRAND_NAME} operate the CoW Swap Widget and/or CoW Swap`,
+      feeTooltipMarkdown: `The [tiered widget fee](${brand.helpUrl}/articles/9969629388-How-does-the-widget-fee-work-for-native-swaps) incurred here is charged by CoW Protocol for the operation of this widget. The fee is automatically calculated into this quote. Part of the fee will contribute to a license fee that supports the Safe Community. Neither the Safe Ecosystem Foundation nor ${BRAND_NAME} operate the CoW Swap Widget and/or CoW Swap`,
     },
   })
 

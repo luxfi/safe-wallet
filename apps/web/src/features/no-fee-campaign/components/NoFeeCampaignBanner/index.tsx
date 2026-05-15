@@ -6,6 +6,7 @@ import useWallet from '@/hooks/wallets/useWallet'
 import useIsSafeOwner from '@/hooks/useIsSafeOwner'
 import { useSafeSDK } from '@/hooks/coreSDK/safeCoreSDK'
 import { Link } from '@mui/material'
+import { brand } from '@safe-global/brand'
 
 const NoFeeCampaignBanner = ({ onDismiss }: { onDismiss: () => void }) => {
   const { setTxFlow } = useContext(TxModalContext)
@@ -25,7 +26,7 @@ const NoFeeCampaignBanner = ({ onDismiss }: { onDismiss: () => void }) => {
         <>
           No-Fee for Ethena USDe holders on Ethereum Mainnet, this January!{' '}
           <Link
-            href="https://help.safe.global/articles/9605526657-no-fee-january-campaign"
+            href={`${brand.helpUrl}/articles/9605526657-no-fee-january-campaign`}
             target="_blank"
             rel="noopener noreferrer"
             sx={{ color: 'inherit', textDecoration: 'underline', fontWeight: 'bold' }}

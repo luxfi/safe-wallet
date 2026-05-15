@@ -23,6 +23,7 @@ import InfoIcon from '@/public/images/notifications/info.svg'
 import ErrorMessage from '@/components/tx/ErrorMessage'
 import ExternalLink from '@/components/common/ExternalLink'
 import ChainIndicator from '@/components/common/ChainIndicator'
+import { brand } from '@safe-global/brand'
 import { txDispatch, TxEvent } from '@/services/tx/txEvents'
 import { REJECT_TX_EVENTS } from '@/services/analytics/events/reject-tx'
 import { trackEvent } from '@/services/analytics'
@@ -118,7 +119,9 @@ const InternalDeleteTxModal = ({
 
         <Box mt={2}>
           Make sure that you are aware of the{' '}
-          <ExternalLink href="https://help.safe.global/articles/4016097317-Why-do-I-need-to-pay-for-cancelling-a-transaction?">
+          <ExternalLink
+            href={`${brand.helpUrl}/articles/4016097317-Why-do-I-need-to-pay-for-cancelling-a-transaction?`}
+          >
             potential risks
           </ExternalLink>{' '}
           related to deleting a transaction off-chain.
