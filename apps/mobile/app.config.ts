@@ -15,7 +15,11 @@ const sslPinningDomains = {
   ],
 }
 
-const name = IS_DEV ? 'Dev-Safe{Mobile}' : 'Safe{Mobile}'
+// Brand-aware product name. Reads EXPO_PUBLIC_BRAND_NAME at build time so
+// `yarn build:lux` / `yarn build:hanzo` produce correctly-branded artifacts
+// without touching this file. Defaults match upstream Safe.
+const brandName = process.env.EXPO_PUBLIC_BRAND_NAME ?? 'Safe{Mobile}'
+const name = IS_DEV ? `Dev-${brandName}` : brandName
 
 const config: ExpoConfig = {
   name: name,
@@ -147,7 +151,7 @@ const config: ExpoConfig = {
     [
       'react-native-vision-camera',
       {
-        cameraPermissionText: 'Safe{Mobile} needs access to your Camera to scan QR Codes.',
+        cameraPermissionText: `${brandName} needs access to your Camera to scan QR Codes.`,
         enableCodeScanner: true,
         enableLocation: false,
       },
