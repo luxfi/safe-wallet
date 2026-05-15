@@ -34,7 +34,7 @@ jobs:
       # Uses the selected branch (from GitHub UI) as the baseline
       # TurboSnap is always enabled to only test changed stories
       - name: Run Chromatic
-        uses: chromaui/action@a200f3ba3ff81232c47ac7942347fb212b1a67dc # v16.8.0
+        uses: chromaui/action@e3eb8ec36101d8f0253c7c3ae66e5a2b4e2197ba # v16.10.0
         with:
           workingDir: apps/web
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
