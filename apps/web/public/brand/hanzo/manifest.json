@@ -1,0 +1,19 @@
+{
+  "name": "Hanzo Vault",
+  "short_name": "Vault",
+  "description": "Hanzo Vault is the multi-signature smart account wallet for the Hanzo AI ecosystem.",
+  "icons": [
+    {
+      "src": "/brand/active/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/brand/active/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone"
+}
