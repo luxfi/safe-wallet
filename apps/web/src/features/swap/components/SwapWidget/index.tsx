@@ -1,5 +1,6 @@
 import { TradeType, type CowSwapWidgetParams } from '@cowprotocol/widget-lib'
 import { type OnTradeParamsPayload, type CowEventListeners, CowEvents } from '@cowprotocol/events'
+import { brand } from '@safe-global/brand'
 import { type MutableRefObject, useEffect, useMemo, useRef, useState } from 'react'
 import { Box, useTheme } from '@mui/material'
 import { CowSwapWidget } from '@cowprotocol/widget-react'
@@ -69,7 +70,7 @@ const SwapWidget = ({ sell }: Params) => {
   const blockedAddress = getKeyWithTrueValue(blockedAddresses)
 
   const [params, setParams] = useState<CowSwapWidgetParams>({
-    appCode: 'Safe Wallet Swaps', // Name of your app (max 50 characters)
+    appCode: `${brand.name} Swaps`.slice(0, 50), // Name of your app (max 50 characters)
     width: '100%', // Width in pixels (or 100% to use all available space)
     height: '860px',
     chainId: cowChainId,

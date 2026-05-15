@@ -1,5 +1,6 @@
 import { getAddress } from 'viem'
 import type { EthereumSignTypedDataMessage, EthereumSignTypedDataTypes } from '@trezor/connect-web'
+import { brand } from '@safe-global/brand'
 import type { ResolvedAddress, TrezorTransaction } from './types'
 import { mapTrezorError } from './errors'
 
@@ -12,7 +13,7 @@ export async function getTrezorSdk() {
 
   if (!trezorConnectInitialized) {
     await TrezorConnect.init({
-      manifest: { appName: 'Safe{Wallet}', appUrl: TREZOR_APP_URL, email: TREZOR_EMAIL },
+      manifest: { appName: brand.name, appUrl: TREZOR_APP_URL, email: TREZOR_EMAIL },
       lazyLoad: true,
       coreMode: 'popup',
     })

@@ -2,6 +2,7 @@ import type { TransactionInfoType, OrderTransactionInfo } from '@safe-global/sto
 import type { TokenInfo, SwapOrderTransactionInfo } from '@safe-global/store/gateway/AUTO_GENERATED/transactions'
 import { Builder, type IBuilder } from '@/tests/Builder'
 import { faker } from '@faker-js/faker'
+import { brand } from '@safe-global/brand'
 
 // Seed faker for deterministic values in stories/tests
 faker.seed(42)
@@ -10,7 +11,7 @@ export function appDataBuilder(
   orderClass: 'limit' | 'market' | 'twap' | 'liquidity' = 'limit',
 ): IBuilder<Record<string, unknown>> {
   return Builder.new<Record<string, unknown>>().with({
-    appCode: 'Safe Wallet Swaps',
+    appCode: `${brand.name} Swaps`.slice(0, 50),
     metadata: {
       orderClass: {
         orderClass,

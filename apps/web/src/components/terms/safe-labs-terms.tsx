@@ -14,6 +14,7 @@ import {
 import { OpenInNewRounded } from '@mui/icons-material'
 import CheckIcon from '@/public/images/common/check.svg'
 import SafeLabsLogo from '@/public/images/logo-safe-labs.svg'
+import { brand } from '@safe-global/brand'
 import css from './styles.module.css'
 import { AppRoutes } from '@/config/routes'
 import { useRouter } from 'next/router'
@@ -92,12 +93,12 @@ const SafeLabsTerms = () => {
                     <Divider className={css.divider} />
 
                     <Typography variant="body2" fontWeight={700} className={css.featureTitle}>
-                      Why you should use Safe{'{Wallet}'}, powered by Safe Labs:
+                      Why you should use {brand.name}, powered by Safe Labs:
                     </Typography>
 
                     <Stack spacing={1}>
                       {[
-                        'Continuous development of Safe{Wallet} features',
+                        `Continuous development of ${brand.name} features`,
                         'Security standards recognized in the industry',
                         'Alignment with Safe DAO governance',
                         'Leading interface to the Safe Smart Contract multi-signature wallet',

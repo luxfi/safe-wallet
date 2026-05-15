@@ -58,8 +58,8 @@ export function createAppKitInstance(networks: [Network, ...Network[]], defaultN
     adapters: [ethersAdapter],
     storage,
     metadata: {
-      name: 'Safe{Mobile}',
-      description: 'Safe multi-signature wallet',
+      name: brand.name,
+      description: `${brand.name} multi-signature wallet`,
       url: brand.appUrl,
       icons: [`${brand.appUrl}/favicons/favicon.ico`],
     },
