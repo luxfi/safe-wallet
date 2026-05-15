@@ -1,5 +1,6 @@
 import { BRAND_NAME } from '@/config/constants'
 import type { AppInfo } from '.'
+import { brand } from '@safe-global/brand'
 
 export const showNotification = (title: string, options?: NotificationOptions) => {
   if (Notification.permission !== 'granted' || document.hasFocus()) {
@@ -7,7 +8,7 @@ export const showNotification = (title: string, options?: NotificationOptions) =
   }
 
   const notification = new Notification(title, {
-    icon: '/images/safe-logo-green.png',
+    icon: brand.logoUrl,
     ...options,
   })
 

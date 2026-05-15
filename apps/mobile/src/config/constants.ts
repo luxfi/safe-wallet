@@ -1,5 +1,6 @@
 import Constants from 'expo-constants'
 import { Platform } from 'react-native'
+import { brand } from '@safe-global/brand'
 
 // export const isProduction = process.env.NODE_ENV === 'production'
 // TODO: put it to get from process.env.NODE_ENV once we remove the mocks for the user account.
@@ -30,7 +31,7 @@ export const SECURITY_RASP_ENABLED = process.env.EXPO_PUBLIC_SECURITY_RASP_ENABL
  */
 export const ONBOARDING_VERSION = 'v1'
 
-export const SAFE_WEB_URL = 'https://app.safe.global'
+export const SAFE_WEB_URL = brand.appUrl
 export const SAFE_WEB_TRANSACTIONS_URL = `${SAFE_WEB_URL}/transactions/tx?safe=:safeAddressWithChainPrefix&id=:txId`
 export const SAFE_WEB_FEEDBACK_URL =
   'https://docs.google.com/forms/d/e/1FAIpQLSfJXkNNsZqVtg3w3dwk-YrTNutQ00n3MMfLtH-dN8zSHaJu5Q/viewform?usp=dialog'

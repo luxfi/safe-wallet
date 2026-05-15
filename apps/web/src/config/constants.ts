@@ -1,5 +1,6 @@
 import chains from '@safe-global/utils/config/chains'
 import { HELP_CENTER_URL } from '@safe-global/utils/config/constants'
+import { brand } from '@safe-global/brand'
 
 type Environment = 'development' | 'production' | 'test' | 'cypress'
 
@@ -16,13 +17,12 @@ export const DEFAULT_MAINNET_CHAIN_ID = +(process.env.NEXT_PUBLIC_DEFAULT_MAINNE
 // default chain ID used in the application
 export const DEFAULT_CHAIN_ID = IS_PRODUCTION ? DEFAULT_MAINNET_CHAIN_ID : DEFAULT_TESTNET_CHAIN_ID
 
-export const GATEWAY_URL_PRODUCTION =
-  process.env.NEXT_PUBLIC_GATEWAY_URL_PRODUCTION || 'https://safe-client.safe.global'
-export const GATEWAY_URL_STAGING = process.env.NEXT_PUBLIC_GATEWAY_URL_STAGING || 'https://safe-client.staging.5afe.dev'
+export const GATEWAY_URL_PRODUCTION = process.env.NEXT_PUBLIC_GATEWAY_URL_PRODUCTION || brand.gatewayUrl
+export const GATEWAY_URL_STAGING = process.env.NEXT_PUBLIC_GATEWAY_URL_STAGING || brand.gatewayStagingUrl
 export const CONFIG_SERVICE_KEY = process.env.NEXT_PUBLIC_CONFIG_SERVICE_KEY || 'WALLET_WEB'
 
 // Status page
-export const STATUS_PAGE_URL = process.env.NEXT_PUBLIC_SAFE_STATUS_PAGE_URL || 'https://status.safe.global'
+export const STATUS_PAGE_URL = process.env.NEXT_PUBLIC_SAFE_STATUS_PAGE_URL || brand.statusUrl
 
 // Magic numbers
 export const POLLING_INTERVAL = 15_000
@@ -77,8 +77,8 @@ export const DATADOG_RUM_DEFAULT_PRIVACY_LEVEL = (process.env.NEXT_PUBLIC_DATADO
 
 // Wallets
 export const WC_PROJECT_ID = process.env.NEXT_PUBLIC_WC_PROJECT_ID || ''
-export const TREZOR_APP_URL = 'app.safe.global'
-export const TREZOR_EMAIL = 'support@safe.global'
+export const TREZOR_APP_URL = brand.appHost
+export const TREZOR_EMAIL = brand.email
 
 // Safe Token
 export const SAFE_TOKEN_ADDRESSES: { [chainId: string]: string } = {
@@ -86,13 +86,11 @@ export const SAFE_TOKEN_ADDRESSES: { [chainId: string]: string } = {
   [chains.sep]: '0xd16d9C09d13E9Cf77615771eADC5d51a1Ae92a26',
 }
 
-export const DEVELOPER_PORTAL_URL =
-  process.env.NEXT_PUBLIC_DEVELOPER_PORTAL_URL || 'https://developer.safe.global/login'
+export const DEVELOPER_PORTAL_URL = process.env.NEXT_PUBLIC_DEVELOPER_PORTAL_URL || `${brand.developerUrl}/login`
 
 export const SAFE_APPS_THIRD_PARTY_COOKIES_CHECK_URL = 'https://third-party-cookies-check.gnosis-safe.com'
 export const SAFE_APPS_DEMO_SAFE_MAINNET = 'eth:0xfF501B324DC6d78dC9F983f140B9211c3EdB4dc7'
-export const SAFE_APPS_SDK_DOCS_URL =
-  'https://help.safe.global/articles/6872363437-How-to-create-a-Safe-App-with-Safe-Apps-SDK-and-list-it'
+export const SAFE_APPS_SDK_DOCS_URL = `${brand.helpUrl}/articles/6872363437-How-to-create-a-Safe-App-with-Safe-Apps-SDK-and-list-it`
 
 // Google Analytics
 export const PROD_GA_TRACKING_ID = process.env.NEXT_PUBLIC_PROD_GA_TRACKING_ID || ''
@@ -106,11 +104,12 @@ const STAGING_MIXPANEL_TOKEN = process.env.NEXT_PUBLIC_STAGING_MIXPANEL_TOKEN ||
 export const MIXPANEL_TOKEN = IS_PRODUCTION ? PROD_MIXPANEL_TOKEN : STAGING_MIXPANEL_TOKEN
 
 // Support chat (Pylon)
-export const SUPPORT_CHAT_ALIAS_DOMAIN = process.env.NEXT_PUBLIC_SUPPORT_CHAT_ALIAS_DOMAIN || 'anon.safe.global'
+export const SUPPORT_CHAT_ALIAS_DOMAIN =
+  process.env.NEXT_PUBLIC_SUPPORT_CHAT_ALIAS_DOMAIN || brand.supportChatAliasDomain
 export const SUPPORT_CHAT_URL = process.env.NEXT_PUBLIC_PYLON_CHAT_URL || 'https://safe-support.vercel.app/chat'
 export const SUPPORT_CHAT_ALLOWED_PARENTS =
   process.env.NEXT_PUBLIC_SUPPORT_CHAT_ALLOWED_PARENTS ||
-  'http://localhost https://app.safe.global https://safe-support.vercel.app/'
+  `http://localhost ${brand.appUrl} https://safe-support.vercel.app/`
 export const SUPPORT_CHAT_APP_ID = process.env.NEXT_PUBLIC_PYLON_APP_ID || ''
 
 // Safe Apps tags
@@ -133,8 +132,8 @@ export enum SafeAppsName {
 export const IS_OFFICIAL_HOST = process.env.NEXT_PUBLIC_IS_OFFICIAL_HOST === 'true'
 export const OFFICIAL_HOSTS = /app\.safe\.global|.+\.5afe\.dev|localhost:3000|localhost:4000|localhost:6006/
 export const IPFS_HOSTS = /app\.safe\.eth\.limo|app\.5afedev\.eth\.limo/
-export const BRAND_NAME = process.env.NEXT_PUBLIC_BRAND_NAME || (IS_OFFICIAL_HOST ? 'Safe{Wallet}' : 'Wallet fork')
-export const BRAND_LOGO = process.env.NEXT_PUBLIC_BRAND_LOGO || ''
+export const BRAND_NAME = IS_OFFICIAL_HOST ? brand.name : process.env.NEXT_PUBLIC_BRAND_NAME || 'Wallet fork'
+export const BRAND_LOGO = process.env.NEXT_PUBLIC_BRAND_LOGO || brand.logoUrl
 
 export const CHAINALYSIS_OFAC_CONTRACT = '0x40c57923924b5c5c5455c48d93317139addac8fb'
 
