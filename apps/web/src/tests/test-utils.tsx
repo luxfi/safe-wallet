@@ -13,10 +13,11 @@ import { checksumAddress } from '@safe-global/utils/utils/addresses'
 import { faker } from '@faker-js/faker'
 import { userEvent } from '@testing-library/user-event'
 import { createMockWeb3Provider, type MockCallImplementation } from '@safe-global/utils/tests/web3Provider'
+import { brand } from '@safe-global/brand'
 
 export const getAppName = (): string => {
   const isOfficialHost = process.env.NEXT_PUBLIC_IS_OFFICIAL_HOST === 'true'
-  return isOfficialHost ? 'Safe{Wallet}' : 'Wallet fork'
+  return isOfficialHost ? brand.name : 'Wallet fork'
 }
 
 export const createAppNameRegex = (template: string): RegExp => {

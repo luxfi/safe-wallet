@@ -1,3 +1,4 @@
+import { brand } from '@safe-global/brand'
 import { BridgeStatus, ContractStatus, RecipientStatus, type Severity } from './types'
 import { capitalise, formatCount, pluralise } from './utils/stringUtils'
 
@@ -43,7 +44,7 @@ export const MULTI_RESULT_DESCRIPTION: Record<
       'Safe',
     )}, execute a test transaction, and then proceed with bridging. Funds sent may be inaccessible.`,
   [BridgeStatus.UNSUPPORTED_NETWORK]: (number, totalNumber) =>
-    `app.safe.global does not support the network for ${formatCount(
+    `${brand.appHost} does not support the network for ${formatCount(
       number,
       'recipient',
       totalNumber,
@@ -67,7 +68,7 @@ export const MULTI_RESULT_DESCRIPTION: Record<
   [ContractStatus.NOT_VERIFIED_BY_SAFE]: (number, totalNumber) =>
     `${capitalise(formatCount(number, 'contract', totalNumber))} ${
       number === 1 ? 'has' : 'have'
-    } not been interacted with on Safe{Wallet}. If verified, ${
+    } not been interacted with on ${brand.name}. If verified, ${
       number === 1 ? 'it' : 'they'
     } will be marked as such after the first transaction.`,
   [ContractStatus.VERIFICATION_UNAVAILABLE]: undefined,

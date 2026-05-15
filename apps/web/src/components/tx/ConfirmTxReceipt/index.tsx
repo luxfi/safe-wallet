@@ -1,5 +1,6 @@
 import TxCard from '@/components/tx-flow/common/TxCard'
 import { Grid2 as Grid, Stack, StepIcon, Typography } from '@mui/material'
+import { brand } from '@safe-global/brand'
 import ExternalLink from '@/components/common/ExternalLink'
 import { type PropsWithChildren, useContext } from 'react'
 import { SafeTxContext } from '@/components/tx-flow/SafeTxProvider'
@@ -20,7 +21,9 @@ const InfoSteps = [
       <Typography>
         Signing is an irreversible action so make sure you know what you are signing.{' '}
         <Track {...MODALS_EVENTS.SIGNING_ARTICLE}>
-          <ExternalLink href="https://help.safe.global/articles/2485383995-How-to-perform-basic-transactions-checks-on-Safe{Wallet}">
+          <ExternalLink
+            href={`${brand.helpUrl}/articles/2485383995-How-to-perform-basic-transactions-checks-on-Safe{Wallet}`}
+          >
             Read more
           </ExternalLink>
         </Track>

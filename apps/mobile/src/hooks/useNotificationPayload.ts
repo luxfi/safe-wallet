@@ -2,6 +2,7 @@ import { ERROR_MSG } from '@/src/store/constants'
 import { useLazyAuthGetNonceV1Query } from '@safe-global/store/gateway/AUTO_GENERATED/auth'
 import { useCallback } from 'react'
 import { useSiwe } from '@/src/hooks/useSiwe'
+import { brand } from '@safe-global/brand'
 
 import Logger from '@/src/utils/logger'
 import { HDNodeWallet, Wallet } from 'ethers'
@@ -26,7 +27,7 @@ export function useNotificationPayload() {
         address: signer.address,
         chainId: Number(chainId),
         nonce: nonceData.nonce,
-        statement: 'Safe Wallet wants you to sign in with your Ethereum account',
+        statement: `${brand.name} wants you to sign in with your Ethereum account`,
       })
 
       return {
