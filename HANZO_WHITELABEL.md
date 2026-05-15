@@ -128,3 +128,60 @@ That's the entire surface area. No source file changes needed.
 After all phases land, `grep -RIn 'safe\.global\|support@safe\.global\|Safe{Wallet}' apps/ packages/`
 returns only protocol references (the CGW/tx-service hosts) and the brand
 package's own defaults — no brand strings in app source.
+
+## Manual review queue
+
+The build pipeline is correct; the items below need human follow-up before a
+true non-Safe branded release ships, but do not block per-brand builds.
+
+### Brand assets (placeholders in tree)
+
+The `lux/` and `hanzo/` directories ship 1x1 transparent placeholder PNGs and
+a text-only SVG logo so the manifests resolve at runtime. Design must replace
+with real artwork before public release:
+
+- `apps/web/public/brand/lux/logo.svg`
+- `apps/web/public/brand/lux/favicon.ico`
+- `apps/web/public/brand/lux/android-chrome-192x192.png`
+- `apps/web/public/brand/lux/android-chrome-512x512.png`
+- `apps/web/public/brand/hanzo/logo.svg`
+- `apps/web/public/brand/hanzo/favicon.ico`
+- `apps/web/public/brand/hanzo/android-chrome-192x192.png`
+- `apps/web/public/brand/hanzo/android-chrome-512x512.png`
+
+### Legal copy
+
+The terms-of-service and privacy markdown is the upstream Safe-DAO legal text.
+A real lux/hanzo brand needs its own legal copy. The env file points
+`termsUrl` / `privacyUrl` to the brand domain (e.g. `https://lux.network/terms`),
+but the in-app markdown body still reads as Safe Foundation copy:
+
+- `apps/web/src/markdown/terms/terms.md`
+- `apps/web/src/markdown/privacy/privacy.md`
+
+### Safe Labs page
+
+`apps/web/src/components/terms/safe-labs-terms.tsx` is a Safe-Labs-specific
+upstream marketing/legal page (`https://safe.global/blog`, `https://safe.global`).
+For a non-Safe brand this page should be hidden, replaced, or unlinked from
+the routes. Leaving it for now because no current branded build needs it.
+
+### Test fixture brand strings
+
+`__snapshots__/*.snap`, `__tests__/*.test.ts`, and a couple of `*.stories.tsx`
+files reference the upstream Safe brand. Snapshots regenerate; tests use
+literals as fixed string fixtures. Not a brand leak in shipped output.
+
+### Help-article slugs
+
+Some `${brand.helpUrl}/articles/...` paths still embed the upstream article
+slug (which includes `Safe{Wallet}` or `Safe{Staking}` in the URL path). The
+hostname is brand-correct, but the slug is upstream. Acceptable so long as
+the brand's docs site (e.g. `docs.lux.network/safe`) either hosts the same
+slug or returns a sensible redirect. Track per-article as docs migrate.
+
+## Status
+
+| Phase | Status | Commit prefix                                                                 |
+| ----- | ------ | ----------------------------------------------------------------------------- |
+| 5     | landed | `refactor(brand): pass 5 — missed help.safe.global hrefs, placeholder assets` |
