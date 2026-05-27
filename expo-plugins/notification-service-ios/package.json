@@ -4,8 +4,7 @@
   "description": "This plugin will allow you to use Notifee with a notification service extension without needing to eject from Expo managed workflow.",
   "main": "./app.plugin.js",
   "scripts": {
-    "build": "rm -rf dist && tsc && cp -a ./ios-notification-service-files dist/ios-notification-service-files/",
-    "postinstall": "pnpm run build"
+    "build": "rm -rf dist && pnpm exec tsc && cp -a ./ios-notification-service-files dist/ios-notification-service-files/"
   },
   "keywords": [
     "notifee",
