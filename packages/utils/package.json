@@ -23,14 +23,21 @@
     "jest": "^29.7.0",
     "prettier": "^3.6.2",
     "typescript": "~5.9.2",
-    "typescript-eslint": "^8.31.1"
+    "typescript-eslint": "^8.31.1",
+    "@types/react": "^19.0.0",
+    "@types/semver": "^7.5.8",
+    "@types/lodash": "^4.17.13"
   },
   "dependencies": {
     "@cowprotocol/app-data": "^3.1.0",
     "@testing-library/react": "^16.3.0",
     "date-fns": "^4.1.0",
     "jest-fixed-jsdom": "^0.0.10",
-    "ts-node": "^10.9.2"
+    "ts-node": "^10.9.2",
+    "react": "^19.2.0",
+    "@safe-global/safe-deployments": "^1.37.56",
+    "semver": "^7.6.3",
+    "lodash": "^4.17.21"
   },
   "peerDependencies": {
     "@safe-global/protocol-kit": "^7.1.x",
