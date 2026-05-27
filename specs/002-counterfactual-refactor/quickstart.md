@@ -11,7 +11,7 @@ Before starting:
 
 - ✅ Clean working directory (commit or stash all changes)
 - ✅ On branch `002-counterfactual-refactor`
-- ✅ All tests passing: `yarn workspace @safe-global/web test`
+- ✅ All tests passing: `pnpm --filter @safe-global/web test`
 - ✅ Familiarize with walletconnect reference: `apps/web/src/features/walletconnect/`
 - ✅ Read `research.md` and `data-model.md` for context
 
@@ -64,7 +64,7 @@ ls -la
 # Should see directories: components/, hooks/, services/, store/
 
 # Verify type-check still passes (empty files don't break anything)
-yarn workspace @safe-global/web type-check
+pnpm --filter @safe-global/web type-check
 ```
 
 **Checkpoint**: Type-check passes, new files exist, nothing broken yet.
@@ -157,7 +157,7 @@ rmdir __tests__
 
 ```bash
 # Run type-check to find broken imports
-yarn workspace @safe-global/web type-check | grep counterfactual
+pnpm --filter @safe-global/web type-check | grep counterfactual
 # Fix imports until no counterfactual-related errors
 ```
 
@@ -372,7 +372,7 @@ export * from '@/features/counterfactual/store/undeployedSafesSlice'
 export * from '@/features/counterfactual'
 ```
 
-**Verify**: `yarn workspace @safe-global/web type-check` - store imports should resolve.
+**Verify**: `pnpm --filter @safe-global/web type-check` - store imports should resolve.
 
 ### Step 4.2: Priority 2 - Transaction Flows (8 files)
 
@@ -459,7 +459,7 @@ grep -r "from '@/features/counterfactual/" apps/web/src --exclude-dir=features/c
 **Verify After Each Group**:
 
 ```bash
-yarn workspace @safe-global/web type-check
+pnpm --filter @safe-global/web type-check
 ```
 
 **Checkpoint**: All 49 files updated, type-check passes.
@@ -475,7 +475,7 @@ yarn workspace @safe-global/web type-check
 ### Step 5.1: Type Check
 
 ```bash
-yarn workspace @safe-global/web type-check
+pnpm --filter @safe-global/web type-check
 ```
 
 **Expected**: Exit code 0, zero errors.
@@ -483,7 +483,7 @@ yarn workspace @safe-global/web type-check
 ### Step 5.2: Linting
 
 ```bash
-yarn workspace @safe-global/web lint
+pnpm --filter @safe-global/web lint
 ```
 
 **Expected**: Zero `no-restricted-imports` warnings for counterfactual.
@@ -493,7 +493,7 @@ yarn workspace @safe-global/web lint
 ### Step 5.3: Unit Tests
 
 ```bash
-yarn workspace @safe-global/web test
+pnpm --filter @safe-global/web test
 ```
 
 **Expected**: 100% pass rate, all tests pass.
@@ -503,7 +503,7 @@ yarn workspace @safe-global/web test
 ### Step 5.4: Build
 
 ```bash
-yarn workspace @safe-global/web build
+pnpm --filter @safe-global/web build
 ```
 
 **Expected**: Build succeeds without errors.
@@ -657,7 +657,7 @@ git log --oneline | grep "counterfactual"
 git revert <commit-sha>
 
 # Verify rollback
-yarn workspace @safe-global/web test
+pnpm --filter @safe-global/web test
 
 # Push revert
 git push origin 002-counterfactual-refactor
@@ -698,7 +698,7 @@ git push origin 002-counterfactual-refactor
 **Solution**:
 
 1. Clear cache: `rm -rf apps/web/.next`
-2. Reinstall dependencies: `yarn install`
+2. Reinstall dependencies: `pnpm install`
 3. Verify all imports resolve
 4. Check for circular dependencies
 

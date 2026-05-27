@@ -156,7 +156,7 @@ Focus on any component imports and test mock updates.
 
 ### Bundle Verification
 
-- [ ] T046 [US6] Run production build: `yarn workspace @safe-global/web build`
+- [ ] T046 [US6] Run production build: `pnpm --filter @safe-global/web build`
 - [ ] T047 [US6] Verify hypernative chunk exists in `.next/static/chunks/`
 - [ ] T048 [US6] Verify main bundle size reduced (compare before/after)
 

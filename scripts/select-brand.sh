@@ -8,7 +8,7 @@
 #   1) Copies apps/web/.env.<slug> -> apps/web/.env.local         (overridden each run)
 #   2) Mirrors apps/web/public/brand/<slug>/ -> apps/web/public/brand/active/
 #
-# After this runs, `yarn workspace @safe-global/web build` produces the branded build.
+# After this runs, `pnpm --filter @safe-global/web build` produces the branded build.
 
 set -euo pipefail
 

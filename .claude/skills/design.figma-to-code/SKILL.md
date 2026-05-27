@@ -167,8 +167,8 @@ export const Default: Story = {
 ## Step 7: Verify
 
 ```bash
-yarn workspace @safe-global/web type-check
-yarn workspace @safe-global/web storybook
+pnpm --filter @safe-global/web type-check
+pnpm --filter @safe-global/web storybook
 ```
 
 ## Project Notes

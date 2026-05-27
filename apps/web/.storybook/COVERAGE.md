@@ -1845,7 +1845,7 @@ Detailed view - every component with its coverage status.
 Run when story files change:
 
 ```bash
-yarn workspace @safe-global/web storybook:generate-coverage
+pnpm --filter @safe-global/web storybook:generate-coverage
 ```
 
 ### Understanding Coverage

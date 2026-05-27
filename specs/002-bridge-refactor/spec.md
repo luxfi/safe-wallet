@@ -120,7 +120,7 @@ The bridge feature must be lazy-loaded using Next.js `dynamic()` imports to ensu
 - **SC-001**: The bridge feature passes 100% of the structural compliance checklist from the feature architecture documentation
 - **SC-002**: All existing bridge tests pass without modification
 - **SC-003**: ESLint produces no warnings for bridge feature imports from the rest of the codebase
-- **SC-004**: After `yarn build`, a separate chunk file exists for bridge feature code (verified via filename inspection)
+- **SC-004**: After `pnpm build`, a separate chunk file exists for bridge feature code (verified via filename inspection)
 - **SC-005**: When BRIDGE feature flag is disabled, network tab shows zero requests to bridge-related endpoints
 - **SC-006**: The refactoring introduces zero regressions (existing E2E tests pass, if any exist for bridge)
 - **SC-007**: A developer can import the bridge feature using only `import Bridge, { useIsBridgeFeatureEnabled } from '@/features/bridge'`

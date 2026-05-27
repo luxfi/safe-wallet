@@ -78,7 +78,7 @@ The migrate-feature codemod tool should successfully analyze and generate migrat
 
 **Why this priority**: The codemod accelerates migration and reduces manual error. However, manual migration is possible as a fallback.
 
-**Independent Test**: Can be fully tested by running `yarn migrate analyze hypernative` and verifying the generated config, then running `yarn migrate execute hypernative --dry-run` and reviewing proposed changes.
+**Independent Test**: Can be fully tested by running `pnpm migrate analyze hypernative` and verifying the generated config, then running `pnpm migrate execute hypernative --dry-run` and reviewing proposed changes.
 
 **Acceptance Scenarios**:
 

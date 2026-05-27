@@ -263,7 +263,7 @@ return [
 Run the dependency audit to identify fixture gaps:
 
 ```bash
-yarn workspace @safe-global/web storybook:dependencies
+pnpm --filter @safe-global/web storybook:dependencies
 ```
 
 This analyzes uncovered components and reports:

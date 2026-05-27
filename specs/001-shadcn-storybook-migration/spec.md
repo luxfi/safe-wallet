@@ -93,7 +93,7 @@ As a developer, I need the inventory tool to group components by family so I can
 
 **Why this priority**: Component families (components in the same directory) are typically covered by a single story file with multiple exports. This approach keeps Storybook organized while still achieving comprehensive visual regression testing.
 
-**Independent Test**: Can be fully tested by running `yarn workspace @safe-global/web storybook:inventory --family` and verifying it produces a grouped report showing family coverage instead of individual component coverage.
+**Independent Test**: Can be fully tested by running `pnpm --filter @safe-global/web storybook:inventory --family` and verifying it produces a grouped report showing family coverage instead of individual component coverage.
 
 **Acceptance Scenarios**:
 

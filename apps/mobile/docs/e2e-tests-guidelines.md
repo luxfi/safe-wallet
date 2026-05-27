@@ -45,7 +45,7 @@ The easiest way to write tests is to use Maestro Studio:
 - build the app and start the the e2e metro server:
 
 ```
-yarn workspace @safe-global/mobile e2e:metro-ios
+pnpm --filter @safe-global/mobile e2e:metro-ios
 ```
 
 to run Maestro Studio:

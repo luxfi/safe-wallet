@@ -86,13 +86,13 @@ Each `apps/web/public/brand/<slug>/` directory holds the per-brand
 
 ```bash
 # From repo root.
-yarn workspace @safe-global/web build:lux       # Lux Safe
-yarn workspace @safe-global/web build:hanzo     # Hanzo Vault
-yarn workspace @safe-global/web build:safe      # Upstream Safe defaults (sanity check)
+pnpm --filter @safe-global/web build:lux       # Lux Safe
+pnpm --filter @safe-global/web build:hanzo     # Hanzo Vault
+pnpm --filter @safe-global/web build:safe      # Upstream Safe defaults (sanity check)
 ```
 
 Under the hood each `build:<slug>` runs
-`scripts/select-brand.sh <slug>` then `yarn build`. The selector:
+`scripts/select-brand.sh <slug>` then `pnpm build`. The selector:
 
 1. Copies `apps/web/.env.<slug>` → `apps/web/.env.local`
 2. Copies `apps/web/public/brand/<slug>/` → `apps/web/public/brand/active/`

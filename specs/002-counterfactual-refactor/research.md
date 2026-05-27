@@ -301,22 +301,22 @@ These remain internal (not exported):
 **Testing Pyramid**:
 
 1. **Type Safety** (fast feedback):
-   - `yarn workspace @safe-global/web type-check` → MUST pass
+   - `pnpm --filter @safe-global/web type-check` → MUST pass
    - Catches 80% of issues immediately
    - Run after every batch of import updates
 
 2. **Linting** (import compliance):
-   - `yarn workspace @safe-global/web lint` → zero no-restricted-imports warnings
+   - `pnpm --filter @safe-global/web lint` → zero no-restricted-imports warnings
    - Validates public API boundary enforcement
    - Run before commit
 
 3. **Unit Tests** (logic correctness):
-   - `yarn workspace @safe-global/web test` → 100% pass rate
+   - `pnpm --filter @safe-global/web test` → 100% pass rate
    - Existing tests must pass without modification (except import path updates)
    - Run before commit
 
 4. **Build Verification** (code splitting):
-   - `yarn workspace @safe-global/web build` → succeeds
+   - `pnpm --filter @safe-global/web build` → succeeds
    - Check `.next/static/chunks/` for counterfactual chunks
    - Verify separate bundle exists (not in main chunk)
 
@@ -330,10 +330,10 @@ These remain internal (not exported):
 
 | Check                    | Command                                      | Success Criteria                       | When to Run             |
 | ------------------------ | -------------------------------------------- | -------------------------------------- | ----------------------- |
-| Type Check               | `yarn workspace @safe-global/web type-check` | Exit code 0, no errors                 | After each import batch |
-| Linting                  | `yarn workspace @safe-global/web lint`       | Zero no-restricted-imports warnings    | Before commit           |
-| Unit Tests               | `yarn workspace @safe-global/web test`       | 100% pass rate                         | Before commit           |
-| Build                    | `yarn workspace @safe-global/web build`      | Succeeds, counterfactual chunks exist  | Before commit           |
+| Type Check               | `pnpm --filter @safe-global/web type-check` | Exit code 0, no errors                 | After each import batch |
+| Linting                  | `pnpm --filter @safe-global/web lint`       | Zero no-restricted-imports warnings    | Before commit           |
+| Unit Tests               | `pnpm --filter @safe-global/web test`       | 100% pass rate                         | Before commit           |
+| Build                    | `pnpm --filter @safe-global/web build`      | Succeeds, counterfactual chunks exist  | Before commit           |
 | Bundle Analysis          | Inspect `.next/static/chunks/`               | Counterfactual code in separate chunks | After build             |
 | Manual QA: Activate      | Test activate account flow                   | Works identically                      | Before PR               |
 | Manual QA: First TX      | Test pay later flow                          | Works identically                      | Before PR               |
@@ -350,7 +350,7 @@ These remain internal (not exported):
 **Rollback Verification**:
 
 1. Run `git revert <commit-sha>`
-2. Run full test suite: `yarn workspace @safe-global/web test`
+2. Run full test suite: `pnpm --filter @safe-global/web test`
 3. Verify 100% pass rate (back to pre-refactor state)
 4. Deploy reverted code if issues found in production
 
@@ -398,10 +398,10 @@ These remain internal (not exported):
 
 **Phase 5: Verification** (gate before commit):
 
-1. Type-check: `yarn workspace @safe-global/web type-check` → PASS
-2. Lint: `yarn workspace @safe-global/web lint` → zero warnings
-3. Tests: `yarn workspace @safe-global/web test` → 100% pass
-4. Build: `yarn workspace @safe-global/web build` → succeeds
+1. Type-check: `pnpm --filter @safe-global/web type-check` → PASS
+2. Lint: `pnpm --filter @safe-global/web lint` → zero warnings
+3. Tests: `pnpm --filter @safe-global/web test` → 100% pass
+4. Build: `pnpm --filter @safe-global/web build` → succeeds
 5. Bundle analysis: verify code splitting
 6. Manual QA: all critical flows work
 

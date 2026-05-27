@@ -166,9 +166,9 @@ export default Bridge
 
 After implementation, verify:
 
-- [ ] `yarn workspace @safe-global/web type-check` passes
-- [ ] `yarn workspace @safe-global/web lint` passes (no restricted import warnings)
-- [ ] `yarn workspace @safe-global/web test` passes (bridge tests pass)
-- [ ] `yarn workspace @safe-global/web build` succeeds
+- [ ] `pnpm --filter @safe-global/web type-check` passes
+- [ ] `pnpm --filter @safe-global/web lint` passes (no restricted import warnings)
+- [ ] `pnpm --filter @safe-global/web test` passes (bridge tests pass)
+- [ ] `pnpm --filter @safe-global/web build` succeeds
 - [ ] Bridge feature chunk exists in build output
 - [ ] Feature structure matches standard checklist in `docs/feature-architecture.md`

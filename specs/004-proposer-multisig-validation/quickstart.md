@@ -13,10 +13,10 @@
 
 ```bash
 # Install dependencies
-yarn install
+pnpm install
 
 # Start the web app in development mode (points to staging backend)
-yarn workspace @safe-global/web dev
+pnpm --filter @safe-global/web dev
 ```
 
 ## Key Files to Understand
@@ -113,10 +113,10 @@ Modify `apps/web/src/components/settings/ProposersList/index.tsx`:
 
 ```bash
 # Run tests
-yarn workspace @safe-global/web test --watch
+pnpm --filter @safe-global/web test --watch
 
 # Run type-check
-yarn workspace @safe-global/web type-check
+pnpm --filter @safe-global/web type-check
 ```
 
 **MSW Handlers needed**:
