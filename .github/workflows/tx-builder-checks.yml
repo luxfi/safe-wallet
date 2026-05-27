@@ -29,9 +29,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.0
-      - uses: ./.github/actions/yarn
+      - uses: ./.github/actions/pnpm
       - name: Run ESLint
-        run: yarn workspace @safe-global/tx-builder lint
+        run: pnpm --filter @safe-global/tx-builder lint
 
   prettier:
     permissions:
@@ -41,9 +41,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.0
-      - uses: ./.github/actions/yarn
+      - uses: ./.github/actions/pnpm
       - name: Run Prettier check
-        run: yarn workspace @safe-global/tx-builder prettier
+        run: pnpm --filter @safe-global/tx-builder prettier
 
   type-check:
     permissions:
@@ -53,17 +53,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.0
-      - uses: ./.github/actions/yarn
+      - uses: ./.github/actions/pnpm
       - name: Type check
-        run: yarn workspace @safe-global/tx-builder type-check
+        run: pnpm --filter @safe-global/tx-builder type-check
 
   unit-tests:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.0
-      - uses: ./.github/actions/yarn
+      - uses: ./.github/actions/pnpm
       - name: Run unit tests
-        run: yarn workspace @safe-global/tx-builder test --ci --coverage
+        run: pnpm --filter @safe-global/tx-builder test --ci --coverage
       - name: Upload coverage
         uses: codecov/codecov-action@57e3a136b779b570ffcdbf80b3bdc90e7fab3de2 # v6.0.0
         with:
@@ -74,9 +74,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.0
-      - uses: ./.github/actions/yarn
+      - uses: ./.github/actions/pnpm
       - name: Build
-        run: yarn workspace @safe-global/tx-builder build
+        run: pnpm --filter @safe-global/tx-builder build
       - name: Upload build artifacts
         uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
         with:

@@ -24,12 +24,12 @@ jobs:
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.0
 
-      - uses: ./.github/actions/yarn
+      - uses: ./.github/actions/pnpm
 
       # Run tests with coverage
       - name: Run Jest tests with coverage
         run: |
-          yarn workspace @safe-global/utils test:coverage \
+          pnpm --filter @safe-global/utils test:coverage \
             --coverageReporters=text \
             --coverageReporters=json-summary \
             --coverageReporters=lcov \

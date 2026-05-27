@@ -34,7 +34,7 @@
   },
   "peerDependencies": {
     "@safe-global/protocol-kit": "^7.1.x",
-    "@safe-global/store": "*",
+    "@safe-global/store": "workspace:*",
     "@safe-global/types-kit": "^3.1.x"
   }
 }

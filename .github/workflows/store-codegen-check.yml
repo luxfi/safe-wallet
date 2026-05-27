@@ -37,12 +37,12 @@ jobs:
             echo "⏭️ Neither schema.json nor AUTO_GENERATED files changed - skipping validation"
           fi
 
-      - uses: ./.github/actions/yarn
+      - uses: ./.github/actions/pnpm
         if: steps.check-files.outputs.should_validate == 'true'
 
       - name: Run codegen
         if: steps.check-files.outputs.should_validate == 'true'
-        run: yarn workspace @safe-global/store build:dev
+        run: pnpm --filter @safe-global/store build:dev
 
       - name: Check for uncommitted changes
         if: steps.check-files.outputs.should_validate == 'true'

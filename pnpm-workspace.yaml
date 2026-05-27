@@ -1,0 +1,6 @@
+packages:
+  - 'expo-plugins/*'
+  - 'apps/*'
+  - 'config/*'
+  - 'packages/*'
+  - 'tools/codemods/*'

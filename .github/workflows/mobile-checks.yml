@@ -27,11 +27,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.0
-      - uses: ./.github/actions/yarn
+      - uses: ./.github/actions/pnpm
         with:
           after-install: 'false'
       - name: Run lint
-        run: yarn workspace @safe-global/mobile lint
+        run: pnpm --filter @safe-global/mobile lint
 
   prettier:
     permissions:
@@ -42,11 +42,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.0
-      - uses: ./.github/actions/yarn
+      - uses: ./.github/actions/pnpm
         with:
           after-install: 'false'
       - name: Run Prettier check
-        run: yarn workspace @safe-global/mobile prettier
+        run: pnpm --filter @safe-global/mobile prettier
 
   type-check:
     permissions:
@@ -57,8 +57,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.0
-      - uses: ./.github/actions/yarn
+      - uses: ./.github/actions/pnpm
         with:
           after-install: 'false'
       - name: Type check
-        run: yarn workspace @safe-global/mobile type-check
+        run: pnpm --filter @safe-global/mobile type-check

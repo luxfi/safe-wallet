@@ -26,7 +26,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.0
-      - uses: ./.github/actions/yarn
+      - uses: ./.github/actions/pnpm
         with:
           turbo-token: ${{ secrets.TURBO_TOKEN }}
           turbo-team: ${{ vars.TURBO_TEAM }}
@@ -42,7 +42,7 @@ jobs:
           config-path: './apps/web/eslint.config.mjs'
       - name: Run ESLint (push only)
         if: github.event_name == 'push'
-        run: yarn turbo run lint --filter=@safe-global/web
+        run: pnpm turbo run lint --filter=@safe-global/web
 
   prettier:
     permissions:
@@ -52,12 +52,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.0
-      - uses: ./.github/actions/yarn
+      - uses: ./.github/actions/pnpm
         with:
           turbo-token: ${{ secrets.TURBO_TOKEN }}
           turbo-team: ${{ vars.TURBO_TEAM }}
       - name: Run Prettier check
-        run: yarn workspace @safe-global/web prettier
+        run: pnpm --filter @safe-global/web prettier
 
   type-check:
     permissions:
@@ -67,12 +67,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.0
-      - uses: ./.github/actions/yarn
+      - uses: ./.github/actions/pnpm
         with:
           turbo-token: ${{ secrets.TURBO_TOKEN }}
           turbo-team: ${{ vars.TURBO_TEAM }}
       - name: Type check
-        run: yarn turbo run type-check --filter=@safe-global/web
+        run: pnpm turbo run type-check --filter=@safe-global/web
 
   knip-exports:
     permissions:
@@ -82,12 +82,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.0
-      - uses: ./.github/actions/yarn
+      - uses: ./.github/actions/pnpm
         with:
           turbo-token: ${{ secrets.TURBO_TOKEN }}
           turbo-team: ${{ vars.TURBO_TEAM }}
       - name: Check for unused exports
-        run: yarn turbo run knip:exports --filter=@safe-global/web
+        run: pnpm turbo run knip:exports --filter=@safe-global/web
 
   notify:
     if: failure() && github.event_name == 'push'
