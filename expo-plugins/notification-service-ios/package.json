@@ -5,7 +5,7 @@
   "main": "./app.plugin.js",
   "scripts": {
     "build": "rm -rf dist && tsc && cp -a ./ios-notification-service-files dist/ios-notification-service-files/",
-    "postinstall": "yarn run build"
+    "postinstall": "pnpm run build"
   },
   "keywords": [
     "notifee",

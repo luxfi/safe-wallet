@@ -51,10 +51,10 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.sha }}
 
-      - uses: ./.github/actions/yarn
+      - uses: ./.github/actions/pnpm
 
       - name: Build
-        run: yarn workspace @safe-global/tx-builder build
+        run: pnpm --filter @safe-global/tx-builder build
         env:
           VITE_TENDERLY_ORG_NAME: ${{ secrets.NEXT_PUBLIC_TENDERLY_ORG_NAME }}
           VITE_TENDERLY_PROJECT_NAME: ${{ secrets.NEXT_PUBLIC_TENDERLY_PROJECT_NAME }}
@@ -102,10 +102,10 @@ jobs:
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.0
 
-      - uses: ./.github/actions/yarn
+      - uses: ./.github/actions/pnpm
 
       - name: Build
-        run: yarn workspace @safe-global/tx-builder build
+        run: pnpm --filter @safe-global/tx-builder build
         env:
           VITE_TENDERLY_ORG_NAME: ${{ secrets.NEXT_PUBLIC_TENDERLY_ORG_NAME }}
           VITE_TENDERLY_PROJECT_NAME: ${{ secrets.NEXT_PUBLIC_TENDERLY_PROJECT_NAME }}
@@ -138,7 +138,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - uses: ./.github/actions/yarn
+      - uses: ./.github/actions/pnpm
 
       - name: Extract version
         id: version
@@ -159,7 +159,7 @@ jobs:
           echo "Tag is new"
 
       - name: Build (production base path)
-        run: yarn workspace @safe-global/tx-builder build
+        run: pnpm --filter @safe-global/tx-builder build
         env:
           VITE_BASE_PATH: /tx-builder/
           VITE_TENDERLY_ORG_NAME: ${{ secrets.NEXT_PUBLIC_TENDERLY_ORG_NAME }}

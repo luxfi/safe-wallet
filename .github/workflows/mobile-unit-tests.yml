@@ -26,14 +26,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.0
 
-      - uses: ./.github/actions/yarn
+      - uses: ./.github/actions/pnpm
         with:
           after-install: 'false'
 
       # Run tests with coverage
       - name: Run Jest tests with coverage
         run: |
-          yarn workspace @safe-global/mobile test:coverage \
+          pnpm --filter @safe-global/mobile test:coverage \
             --coverageReporters=text \
             --coverageReporters=json-summary \
             --coverageReporters=lcov \
