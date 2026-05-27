@@ -1,6 +1,6 @@
-name: 'Yarn'
+name: 'pnpm'
 
-description: 'Set up Node.js and install dependencies'
+description: 'Set up Node.js + pnpm and install workspace dependencies'
 
 inputs:
   after-install:
@@ -21,10 +21,16 @@ runs:
   steps:
     - uses: ./.github/actions/corepack
 
+    - name: Set up pnpm
+      uses: pnpm/action-setup@a7487c7e89a18df4991f7f222e4898a00d66ddda # v4.1.0
+      with:
+        version: 9.15.0
+        run_install: false
+
     - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
       with:
         node-version: '24.14.0'
-        cache: 'yarn'
+        cache: 'pnpm'
 
     - name: Export Turbo remote cache env
       if: inputs.turbo-token != ''
@@ -34,30 +40,30 @@ runs:
         echo "TURBO_TEAM=${{ inputs.turbo-team }}" >> "$GITHUB_ENV"
         echo "TURBO_REMOTE_ONLY=false" >> "$GITHUB_ENV"
 
-    - name: Restore Yarn Cache & Types
-      id: restore-yarn-types
+    - name: Restore pnpm cache & generated types
+      id: restore-pnpm-types
       uses: ./.github/actions/cache-deps
       with:
-        mode: restore-yarn
+        mode: restore-pnpm
 
     - name: Echo cache hit
       shell: bash
       run: |
-        echo "Yarn cache hit: ${{ steps.restore-yarn-types.outputs.cache-hit-yarn }}"
+        echo "pnpm cache hit: ${{ steps.restore-pnpm-types.outputs.cache-hit-pnpm }}"
 
-    - name: Yarn install
-      if: steps.restore-yarn-types.outputs.cache-hit-yarn != 'true'
+    - name: pnpm install
+      if: steps.restore-pnpm-types.outputs.cache-hit-pnpm != 'true'
       shell: bash
-      run: yarn install --immutable
+      run: pnpm install --frozen-lockfile
 
-    - name: Yarn after-install to generate contracts types
-      if: steps.restore-yarn-types.outputs.cache-hit-yarn != 'true' && inputs.after-install == 'true'
+    - name: pnpm after-install — generate contracts types
+      if: steps.restore-pnpm-types.outputs.cache-hit-pnpm != 'true' && inputs.after-install == 'true'
       shell: bash
-      run: yarn workspace @safe-global/web after-install
+      run: pnpm --filter @safe-global/web run after-install
 
-    - name: Save Yarn Cache & Types
-      if: steps.restore-yarn-types.outputs.cache-hit-yarn != 'true'
+    - name: Save pnpm cache & types
+      if: steps.restore-pnpm-types.outputs.cache-hit-pnpm != 'true'
       uses: ./.github/actions/cache-deps
       with:
-        mode: save-yarn
-        key: ${{ steps.restore-yarn-types.outputs.computed-cache-key-yarn }}
+        mode: save-pnpm
+        key: ${{ steps.restore-pnpm-types.outputs.computed-cache-key-pnpm }}
