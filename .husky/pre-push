@@ -5,7 +5,7 @@ set -euo pipefail
 initial_status=$(git status --porcelain)
 
 # Run the lint command
-yarn run lint --fix
+pnpm run lint --fix
 
 # Store the status after running lint
 post_lint_status=$(git status --porcelain)
@@ -20,7 +20,7 @@ if [ "$initial_status" != "$post_lint_status" ]; then
 fi
 
 # Run type-check on all workspaces
-if ! yarn run type-check; then
+if ! pnpm run type-check; then
   echo "===================================="
   echo "Type check failed. Please fix the type errors before pushing or push with --no-verify flag to omit this check."
   echo "===================================="
@@ -30,7 +30,7 @@ fi
 # Check if the user wants to run tests on push
 if [ "${RUN_TESTS_ON_PUSH:-}" == "true" ]; then
   echo "Running tests..."
-  if ! yarn test; then
+  if ! pnpm test; then
     echo "===================================="
     echo "Tests failed. Guess they need more 'exercise'!"
     echo "Please fix the issues before pushing or push with --no-verify flag to omit this check."
