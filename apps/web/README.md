@@ -15,7 +15,7 @@ Safe{Wallet} is a smart contract wallet for Ethereum and other EVM chains. Based
 
 You can run commands for this workspace in two ways:
 
-1. **From the root of the monorepo using `yarn workspace` commands**
+1. **From the root of the monorepo using `pnpm --filter` commands**
 2. **From within the `apps/web` directory**
 
 ## Prerequisites
@@ -27,7 +27,7 @@ Except for the main monorepo prerequisites, no additional prerequisites are requ
 1. Install all dependencies from the **root of the monorepo**:
 
 ```bash
-yarn install
+pnpm install
 ```
 
 ## Contributing
@@ -95,7 +95,7 @@ From the root of the monorepo:
 **Default (fastest):**
 
 ```bash
-yarn workspace @safe-global/web dev
+pnpm --filter @safe-global/web dev
 ```
 
 Uses [Rspack](https://rspack.dev) for faster development builds and hot reload. Optimized for speed with simplified MDX processing.
@@ -103,7 +103,7 @@ Uses [Rspack](https://rspack.dev) for faster development builds and hot reload. 
 **Full features (Webpack + Experimental optimizations + PWA):**
 
 ```bash
-yarn workspace @safe-global/web dev:full
+pnpm --filter @safe-global/web dev:full
 ```
 
 Uses webpack with:
@@ -115,7 +115,7 @@ Uses webpack with:
 **Alternative commands:**
 
 ```bash
-yarn workspace @safe-global/web start
+pnpm --filter @safe-global/web start
 ```
 
 Standard Next.js dev server (webpack, no optimizations)
@@ -131,13 +131,13 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 ESLint:
 
 ```
-yarn workspace @safe-global/web lint --fix
+pnpm --filter @safe-global/web lint --fix
 ```
 
 Prettier:
 
 ```
-yarn workspace @safe-global/web prettier
+pnpm --filter @safe-global/web prettier
 ```
 
 ## Tests
@@ -145,7 +145,7 @@ yarn workspace @safe-global/web prettier
 Unit tests:
 
 ```
-yarn workspace @safe-global/web test --watch
+pnpm --filter @safe-global/web test --watch
 ```
 
 ### Cypress tests
@@ -153,13 +153,13 @@ yarn workspace @safe-global/web test --watch
 Build a static site:
 
 ```
-yarn workspace @safe-global/web build
+pnpm --filter @safe-global/web build
 ```
 
 Serve the static files:
 
 ```
-yarn workspace @safe-global/web serve
+pnpm --filter @safe-global/web serve
 ```
 
 **Interactive mode:**
@@ -167,7 +167,7 @@ yarn workspace @safe-global/web serve
 Launch the Cypress UI:
 
 ```
-yarn workspace @safe-global/web cypress:open
+pnpm --filter @safe-global/web cypress:open
 ```
 
 You can then choose which e2e tests to run.
@@ -177,7 +177,7 @@ You can then choose which e2e tests to run.
 Run all tests in headless mode:
 
 ```
-yarn workspace @safe-global/web cypress:run
+pnpm --filter @safe-global/web cypress:run
 ```
 
 Run a specific test file in headless mode with Chrome:
@@ -199,7 +199,7 @@ Some tests will require signer private keys, please include them in your .env fi
 To create a new component from a template:
 
 ```
-yarn workspace @safe-global/web cmp MyNewComponent
+pnpm --filter @safe-global/web cmp MyNewComponent
 ```
 
 ## Pre-push hooks
@@ -211,7 +211,7 @@ This repo has a pre-push hook that runs the linter (always) and the tests (if th
 This project uses Storybook for developing and documenting UI components in isolation.
 
 ```bash
-yarn workspace @safe-global/web storybook
+pnpm --filter @safe-global/web storybook
 ```
 
 This will start Storybook on [http://localhost:6006](http://localhost:6006).

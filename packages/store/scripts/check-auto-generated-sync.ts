@@ -25,7 +25,7 @@ const storedHash = readStoredHash()
 if (storedHash === null) {
   console.error(
     'AUTO_GENERATED/.schema-hash not found.\n' +
-      'Run `yarn workspace @safe-global/store build:dev` to regenerate AUTO_GENERATED files and update the hash.',
+      'Run `pnpm --filter @safe-global/store build:dev` to regenerate AUTO_GENERATED files and update the hash.',
   )
   process.exit(1)
 }
@@ -35,7 +35,7 @@ if (currentHash !== storedHash) {
     'AUTO_GENERATED files may be out of date.\n' +
       `Schema hash: ${currentHash}\n` +
       `Stored hash: ${storedHash}\n` +
-      'Run `yarn workspace @safe-global/store build:dev` to regenerate.',
+      'Run `pnpm --filter @safe-global/store build:dev` to regenerate.',
   )
   process.exit(1)
 }

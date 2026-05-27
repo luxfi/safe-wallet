@@ -113,16 +113,16 @@ Run quality gates:
 
 ```bash
 # Type check
-yarn workspace @safe-global/web type-check
+pnpm --filter @safe-global/web type-check
 
 # Lint (should show no restricted import warnings)
-yarn workspace @safe-global/web lint
+pnpm --filter @safe-global/web lint
 
 # Format
-yarn workspace @safe-global/web prettier
+pnpm --filter @safe-global/web prettier
 
 # Tests (all should pass)
-yarn workspace @safe-global/web test
+pnpm --filter @safe-global/web test
 ```
 
 ### Step 6: Verify Bundle Splitting
@@ -130,7 +130,7 @@ yarn workspace @safe-global/web test
 Build and verify code-splitting:
 
 ```bash
-yarn workspace @safe-global/web build
+pnpm --filter @safe-global/web build
 
 # Check that No Fee Campaign code is in separate chunk
 ls -la apps/web/.next/static/chunks/ | grep -i no-fee

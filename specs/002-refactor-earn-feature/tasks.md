@@ -20,8 +20,8 @@
 **Purpose**: Prepare for refactoring by backing up, documenting current state, and verifying baseline
 
 - [x] T001 Create a backup of the current earn feature state (git commit or branch checkpoint)
-- [x] T002 Run and document current type-check status: `yarn workspace @safe-global/web type-check | grep earn`
-- [x] T003 [P] Run and document current lint status: `yarn workspace @safe-global/web lint | grep earn`
+- [x] T002 Run and document current type-check status: `pnpm --filter @safe-global/web type-check | grep earn`
+- [x] T003 [P] Run and document current lint status: `pnpm --filter @safe-global/web lint | grep earn`
 - [x] T004 [P] Document all current external imports (search codebase for `@/features/earn`)
 
 **Checkpoint**: Baseline documented and verified - ready to begin refactoring
@@ -158,7 +158,7 @@
 
 ### 5.3: Bundle Analysis
 
-- [x] T030 [US3] Build the app: `yarn workspace @safe-global/web build`
+- [x] T030 [US3] Build the app: `pnpm --filter @safe-global/web build`
 - [x] T031 [US3] Analyze bundle to verify earn is in separate chunk:
   - Look for chunk files containing "earn" in `.next/static/chunks/`
   - Verify earn code is not in main bundle (`main-*.js`)
@@ -199,7 +199,7 @@
 
 ### 6.3: Verify Type Safety
 
-- [x] T043 [US4] Run type-check: `yarn workspace @safe-global/web type-check`
+- [x] T043 [US4] Run type-check: `pnpm --filter @safe-global/web type-check`
 - [x] T044 [US4] Verify no type errors related to earn feature
 - [x] T045 [US4] Verify external consumers of `EarnButton` still type-check correctly
 
@@ -215,14 +215,14 @@
 
 ### 7.1: Type Checking & Linting
 
-- [x] T046 [US5] Run type-check: `yarn workspace @safe-global/web type-check` (must pass with zero errors)
-- [x] T047 [US5] Run lint: `yarn workspace @safe-global/web lint` (must pass or match baseline from T003)
-- [x] T048 [US5] Run format check: `yarn workspace @safe-global/web prettier` (must pass)
+- [x] T046 [US5] Run type-check: `pnpm --filter @safe-global/web type-check` (must pass with zero errors)
+- [x] T047 [US5] Run lint: `pnpm --filter @safe-global/web lint` (must pass or match baseline from T003)
+- [x] T048 [US5] Run format check: `pnpm --filter @safe-global/web prettier` (must pass)
 
 ### 7.2: Build Verification
 
 - [x] T049 [US5] Clean build artifacts: `rm -rf apps/web/.next`
-- [x] T050 [US5] Build app: `yarn workspace @safe-global/web build` (must succeed)
+- [x] T050 [US5] Build app: `pnpm --filter @safe-global/web build` (must succeed)
 
 ### 7.3: Manual Testing - Feature Flag Behavior
 
@@ -241,9 +241,9 @@
 
 ### 8.1: Code Quality
 
-- [x] T089 [P] Run prettier auto-fix: `yarn prettier:fix`
-- [x] T090 [P] Final type-check: `yarn workspace @safe-global/web type-check` (must pass)
-- [x] T091 [P] Final lint check: `yarn workspace @safe-global/web lint` (must pass)
+- [x] T089 [P] Run prettier auto-fix: `pnpm prettier:fix`
+- [x] T090 [P] Final type-check: `pnpm --filter @safe-global/web type-check` (must pass)
+- [x] T091 [P] Final lint check: `pnpm --filter @safe-global/web lint` (must pass)
 
 ### 8.2: Architecture Compliance
 

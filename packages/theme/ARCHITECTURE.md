@@ -345,7 +345,7 @@ const lightPalette: ColorPalette = {
 Then regenerate CSS vars for web:
 
 ```bash
-yarn workspace @safe-global/web css-vars
+pnpm --filter @safe-global/web css-vars
 ```
 
 ### Changing Web-Only Colors
@@ -453,19 +453,19 @@ function MyComponent() {
 Run tests for the theme package:
 
 ```bash
-yarn workspace @safe-global/theme test
+pnpm --filter @safe-global/theme test
 ```
 
 Regenerate CSS variables after palette changes:
 
 ```bash
-yarn workspace @safe-global/web css-vars
+pnpm --filter @safe-global/web css-vars
 ```
 
 Run type checking:
 
 ```bash
-yarn workspace @safe-global/theme type-check
+pnpm --filter @safe-global/theme type-check
 ```
 
 ## Summary

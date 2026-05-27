@@ -60,9 +60,9 @@
 
 **Purpose**: Quality gates, type checking, and validation across all stories.
 
-- [x] T007 Run `yarn workspace @safe-global/web type-check` and fix any TypeScript errors introduced by the changes in ProposersList, UpsertProposer, and utils.ts.
-- [x] T008 Run `yarn workspace @safe-global/web lint` and fix any linting issues.
-- [x] T009 Run `yarn workspace @safe-global/web test` to verify all existing tests pass (no regressions) and all new tests pass.
+- [x] T007 Run `pnpm --filter @safe-global/web type-check` and fix any TypeScript errors introduced by the changes in ProposersList, UpsertProposer, and utils.ts.
+- [x] T008 Run `pnpm --filter @safe-global/web lint` and fix any linting issues.
+- [x] T009 Run `pnpm --filter @safe-global/web test` to verify all existing tests pass (no regressions) and all new tests pass.
 - [x] T010 Verify edge case handling: (1) Confirm undeployed Safe still shows disabled button regardless of nested ownership, (2) Confirm address validation (not self, not existing owner) works for nested Safe owner flow, (3) Confirm ETH_SIGN wallet detection still works correctly for nested Safe owners (Trezor/Keystone use `signProposerData` fallback).
 
 ---

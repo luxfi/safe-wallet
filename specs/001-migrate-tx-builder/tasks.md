@@ -113,7 +113,7 @@
 
 ## Phase 3: User Story 1 - Developer Runs tx-builder Locally (Priority: P1) 🎯 MVP
 
-**Goal**: Developer can run `yarn workspace @safe-global/tx-builder dev` and access the app locally
+**Goal**: Developer can run `pnpm --filter @safe-global/tx-builder dev` and access the app locally
 
 **Independent Test**: Run dev server, verify app loads at localhost:3000/tx-builder/
 
@@ -128,14 +128,14 @@
 
 ### Implementation for US1
 
-- [x] T051 [US1] Verify `yarn install` succeeds with tx-builder workspace
-- [x] T052 [US1] Run `yarn workspace @safe-global/tx-builder dev` and fix any startup errors
+- [x] T051 [US1] Verify `pnpm install` succeeds with tx-builder workspace
+- [x] T052 [US1] Run `pnpm --filter @safe-global/tx-builder dev` and fix any startup errors
 - [x] T053 [US1] Verify hot reload works when editing a component
-- [x] T054 [US1] Run `yarn workspace @safe-global/tx-builder type-check` and fix all type errors
-- [x] T055 [US1] Run `yarn workspace @safe-global/tx-builder lint` and fix all lint errors
-- [x] T056 [US1] Run `yarn workspace @safe-global/tx-builder prettier` and fix formatting
-- [x] T057 [US1] Run `yarn workspace @safe-global/tx-builder test` and verify migrated tests pass
-- [x] T058 [US1] Run `yarn workspace @safe-global/tx-builder build` and verify production build succeeds
+- [x] T054 [US1] Run `pnpm --filter @safe-global/tx-builder type-check` and fix all type errors
+- [x] T055 [US1] Run `pnpm --filter @safe-global/tx-builder lint` and fix all lint errors
+- [x] T056 [US1] Run `pnpm --filter @safe-global/tx-builder prettier` and fix formatting
+- [x] T057 [US1] Run `pnpm --filter @safe-global/tx-builder test` and verify migrated tests pass
+- [x] T058 [US1] Run `pnpm --filter @safe-global/tx-builder build` and verify production build succeeds
 
 **Checkpoint**: Local development fully functional - `dev`, `build`, `test`, `lint` all pass
 
@@ -220,7 +220,7 @@
 - [x] T091 [P] Create `apps/tx-builder/README.md` with setup and development instructions
 - [ ] T092 [P] Remove any CRA-specific files (config-overrides.js, react-app-env.d.ts)
 - [ ] T093 [P] Remove hardhat contracts if not needed in monorepo context
-- [ ] T094 Run full unit test suite: `yarn workspace @safe-global/tx-builder test`
+- [ ] T094 Run full unit test suite: `pnpm --filter @safe-global/tx-builder test`
 - [ ] T095 Verify bundle size is within 20% of current production
 - [ ] T096 Verify build time is under 3 minutes
 - [ ] T097 Verify dev server starts in under 30 seconds

@@ -44,10 +44,10 @@ All changes flow through pull requests. Direct pushes to protected branches are 
 - **MUST** never push directly to `dev` (default) or `main` (production) branches
 - **MUST** create feature branches for all changes: `feature/your-feature-name`
 - **MUST** pass all quality gates before committing:
-  - `yarn workspace @safe-global/web type-check` (or mobile)
-  - `yarn workspace @safe-global/web lint`
-  - `yarn workspace @safe-global/web prettier`
-  - `yarn workspace @safe-global/web test`
+  - `pnpm --filter @safe-global/web type-check` (or mobile)
+  - `pnpm --filter @safe-global/web lint`
+  - `pnpm --filter @safe-global/web prettier`
+  - `pnpm --filter @safe-global/web test`
 - **MUST** use semantic commit messages: `feat:`, `fix:`, `refactor:`, `docs:`, `test:`, `chore:`
 - **MUST** never commit failing code - all tests must pass
 
@@ -104,7 +104,7 @@ The `@safe-global/theme` package is the single source of truth for all design to
 - **MUST** never edit `apps/web/src/styles/vars.css` directly - it's auto-generated
 - **MUST** use theme tokens: MUI theme (web) or Tamagui tokens (mobile)
 - **MUST** update both light and dark mode palettes together for consistency
-- **MUST** run `yarn workspace @safe-global/web css-vars` after theme changes
+- **MUST** run `pnpm --filter @safe-global/web css-vars` after theme changes
 
 **Rationale**: Hardcoded values create visual inconsistencies and make theme updates impossible
 to apply uniformly.

@@ -7,7 +7,7 @@
 
 - Node.js (version per `.nvmrc`)
 - Yarn 4 (via corepack)
-- Repository cloned and dependencies installed: `yarn install`
+- Repository cloned and dependencies installed: `pnpm install`
 
 ## Development Setup
 
@@ -16,10 +16,10 @@
 git checkout 001-nested-safe-proposer
 
 # Install dependencies
-yarn install
+pnpm install
 
 # Run web app in development mode
-yarn workspace @safe-global/web dev
+pnpm --filter @safe-global/web dev
 ```
 
 ## Key Files to Modify
@@ -54,16 +54,16 @@ yarn workspace @safe-global/web dev
 
 ```bash
 # Run unit tests
-yarn workspace @safe-global/web test
+pnpm --filter @safe-global/web test
 
 # Run specific test file
-yarn workspace @safe-global/web test --testPathPattern="ProposersList"
+pnpm --filter @safe-global/web test --testPathPattern="ProposersList"
 
 # Type checking
-yarn workspace @safe-global/web type-check
+pnpm --filter @safe-global/web type-check
 
 # Linting
-yarn workspace @safe-global/web lint
+pnpm --filter @safe-global/web lint
 ```
 
 ## Test Scenarios

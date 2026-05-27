@@ -42,8 +42,8 @@ From the repository root:
 
 ```bash
 cd tools/codemods/migrate-feature
-yarn install
-yarn build
+pnpm install
+pnpm build
 ```
 
 ## Usage
@@ -53,7 +53,7 @@ yarn build
 See which features are migrated and which aren't:
 
 ```bash
-yarn migrate list
+pnpm migrate list
 ```
 
 ### Phase 1: Analyze a feature
@@ -61,13 +61,13 @@ yarn migrate list
 Interactive mode (recommended):
 
 ```bash
-yarn migrate analyze --interactive
+pnpm migrate analyze --interactive
 ```
 
 Analyze a specific feature:
 
 ```bash
-yarn migrate analyze hypernative
+pnpm migrate analyze hypernative
 ```
 
 This will:
@@ -81,29 +81,29 @@ This will:
 After reviewing the config, execute the migration:
 
 ```bash
-yarn migrate execute hypernative
+pnpm migrate execute hypernative
 ```
 
 Or specify a custom config file:
 
 ```bash
-yarn migrate execute --config .codemod/hypernative.config.json
+pnpm migrate execute --config .codemod/hypernative.config.json
 ```
 
 Dry run (preview changes without modifying files):
 
 ```bash
-yarn migrate execute hypernative --dry-run
+pnpm migrate execute hypernative --dry-run
 ```
 
 ## Example Workflow
 
 ```bash
 # 1. List features to see what needs migration
-yarn migrate list
+pnpm migrate list
 
 # 2. Analyze a feature
-yarn migrate analyze hypernative
+pnpm migrate analyze hypernative
 
 # 3. Review the generated config
 cat .codemod/hypernative.config.json
@@ -112,10 +112,10 @@ cat .codemod/hypernative.config.json
 vim .codemod/hypernative.config.json
 
 # 5. Execute migration (dry run first)
-yarn migrate execute hypernative --dry-run
+pnpm migrate execute hypernative --dry-run
 
 # 6. Execute for real
-yarn migrate execute hypernative
+pnpm migrate execute hypernative
 
 # 7. Manual cleanup
 # - Review generated files
@@ -125,9 +125,9 @@ yarn migrate execute hypernative
 
 # 8. Verify
 cd ../../..
-yarn workspace @safe-global/web type-check
-yarn workspace @safe-global/web lint
-yarn workspace @safe-global/web test
+pnpm --filter @safe-global/web type-check
+pnpm --filter @safe-global/web lint
+pnpm --filter @safe-global/web test
 ```
 
 ## Config File Format
@@ -225,7 +225,7 @@ function Consumer() {
 Run type-check and fix any errors:
 
 ```bash
-yarn workspace @safe-global/web type-check
+pnpm --filter @safe-global/web type-check
 ```
 
 ### 4. Update Tests
@@ -253,13 +253,13 @@ jest.mock('@/features/myfeature', () => ({
 ### 5. Run Tests
 
 ```bash
-yarn workspace @safe-global/web test
+pnpm --filter @safe-global/web test
 ```
 
 ### 6. Lint
 
 ```bash
-yarn workspace @safe-global/web lint
+pnpm --filter @safe-global/web lint
 ```
 
 ## Architecture Reference
@@ -300,8 +300,8 @@ This is expected. The tool generates boilerplate but you need to:
 To modify the tool:
 
 1. Edit TypeScript files in `src/`
-2. Rebuild: `yarn build`
-3. Test: `yarn migrate --help`
+2. Rebuild: `pnpm build`
+3. Test: `pnpm migrate --help`
 
 ### File Structure
 

@@ -108,7 +108,7 @@ export default FeatureWidget
 Verify code splitting with:
 
 ```bash
-yarn workspace @safe-global/web build
+pnpm --filter @safe-global/web build
 # Check .next/static/chunks/ for feature-specific chunks
 ```
 

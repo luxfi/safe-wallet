@@ -6,7 +6,7 @@
 ## Prerequisites
 
 - Node.js and Yarn 4 installed
-- Repository cloned and dependencies installed (`yarn install`)
+- Repository cloned and dependencies installed (`pnpm install`)
 - On the feature branch (`002-bridge-refactor`)
 
 ## Implementation Order
@@ -71,10 +71,10 @@ Update files outside the feature to use the public API:
 Run all checks:
 
 ```bash
-yarn workspace @safe-global/web type-check
-yarn workspace @safe-global/web lint
-yarn workspace @safe-global/web test --testPathPattern=bridge
-yarn workspace @safe-global/web build
+pnpm --filter @safe-global/web type-check
+pnpm --filter @safe-global/web lint
+pnpm --filter @safe-global/web test --testPathPattern=bridge
+pnpm --filter @safe-global/web build
 ```
 
 ## Key Files Reference
@@ -119,10 +119,10 @@ export { BridgeWidget } from './BridgeWidget'
 After implementation:
 
 - [ ] All new files created per target structure
-- [ ] No TypeScript errors (`yarn workspace @safe-global/web type-check`)
-- [ ] No ESLint warnings for internal imports (`yarn workspace @safe-global/web lint`)
-- [ ] All bridge tests pass (`yarn workspace @safe-global/web test --testPathPattern=bridge`)
-- [ ] Build succeeds (`yarn workspace @safe-global/web build`)
+- [ ] No TypeScript errors (`pnpm --filter @safe-global/web type-check`)
+- [ ] No ESLint warnings for internal imports (`pnpm --filter @safe-global/web lint`)
+- [ ] All bridge tests pass (`pnpm --filter @safe-global/web test --testPathPattern=bridge`)
+- [ ] Build succeeds (`pnpm --filter @safe-global/web build`)
 - [ ] Bridge chunk visible in `.next/static/chunks/`
 
 ## Rollback

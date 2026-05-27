@@ -16,6 +16,8 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+permissions: {}
+
 jobs:
   test:
     permissions:
@@ -36,7 +38,7 @@ jobs:
           skip-step: install
           annotations: failed-tests
           package-manager: yarn
-          test-script: yarn test:ci
+          test-script: pnpm test:ci
           working-directory: apps/web
           github-token: ${{ secrets.GITHUB_TOKEN }}
         env:
@@ -44,7 +46,7 @@ jobs:
 
       - name: Run tests (push only)
         if: github.event_name == 'push'
-        run: yarn test:ci
+        run: pnpm test:ci
         working-directory: apps/web
         env:
           NEXT_PUBLIC_IS_OFFICIAL_HOST: true

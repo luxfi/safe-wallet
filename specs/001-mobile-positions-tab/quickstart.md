@@ -18,10 +18,10 @@
 git checkout 001-mobile-positions-tab
 
 # Install dependencies
-yarn install
+pnpm install
 
 # Start mobile development
-yarn workspace @safe-global/mobile start
+pnpm --filter @safe-global/mobile start
 ```
 
 ## Development Workflow
@@ -45,7 +45,7 @@ Files to create:
 
 ```bash
 # Run shared package tests
-yarn workspace @safe-global/utils test --watch
+pnpm --filter @safe-global/utils test --watch
 ```
 
 ### 3. Create Mobile Components
@@ -63,17 +63,17 @@ mkdir -p apps/mobile/src/features/Assets/components/Positions/PositionsError
 
 ```bash
 # Run mobile tests
-yarn workspace @safe-global/mobile test --watch
+pnpm --filter @safe-global/mobile test --watch
 ```
 
 ### 5. Test on Device/Simulator
 
 ```bash
 # iOS
-yarn workspace @safe-global/mobile ios
+pnpm --filter @safe-global/mobile ios
 
 # Android
-yarn workspace @safe-global/mobile android
+pnpm --filter @safe-global/mobile android
 ```
 
 ## Testing Positions
@@ -134,9 +134,9 @@ Before marking tasks complete:
 - [x] Position type labels display correctly
 - [x] Feature flag hides tab when disabled
 - [x] Web app still works after refactor to use shared utilities
-- [x] Type-check passes: `yarn workspace @safe-global/mobile type-check`
-- [x] Lint passes: `yarn workspace @safe-global/mobile lint`
-- [x] All tests pass: `yarn workspace @safe-global/mobile test`
+- [x] Type-check passes: `pnpm --filter @safe-global/mobile type-check`
+- [x] Lint passes: `pnpm --filter @safe-global/mobile lint`
+- [x] All tests pass: `pnpm --filter @safe-global/mobile test`
 
 ## Common Issues
 

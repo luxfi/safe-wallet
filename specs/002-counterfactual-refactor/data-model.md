@@ -232,13 +232,13 @@ Relay-specific:
 **Before Refactoring** (baseline):
 
 ```bash
-yarn workspace @safe-global/web test store/undeployedSafesSlice
+pnpm --filter @safe-global/web test store/undeployedSafesSlice
 ```
 
 **After Refactoring** (must be identical):
 
 ```bash
-yarn workspace @safe-global/web test store/undeployedSafesSlice
+pnpm --filter @safe-global/web test store/undeployedSafesSlice
 ```
 
 All tests MUST pass with zero modifications (except import path updates in test files).

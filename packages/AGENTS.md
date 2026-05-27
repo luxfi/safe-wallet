@@ -14,7 +14,7 @@ Guidance for shared libraries under `packages/` consumed by both `apps/web/` and
 Never manually edit:
 
 - `packages/utils/src/types/contracts/` — generated from contract ABIs.
-- `packages/store/src/gateway/AUTO_GENERATED/` — generated from `schema.json`. Run `yarn workspace @safe-global/store build:dev` to regenerate.
+- `packages/store/src/gateway/AUTO_GENERATED/` — generated from `schema.json`. Run `pnpm --filter @safe-global/store build:dev` to regenerate.
 
 CI will fail if AUTO_GENERATED files don't match the schema.
 
@@ -23,8 +23,8 @@ CI will fail if AUTO_GENERATED files don't match the schema.
 When changing shared code, run tests for both consumers:
 
 ```bash
-yarn workspace @safe-global/web test
-yarn workspace @safe-global/mobile test
+pnpm --filter @safe-global/web test
+pnpm --filter @safe-global/mobile test
 ```
 
 Ensure shared package tests work in both web and mobile environments — test files should not assume DOM globals or React Native primitives.

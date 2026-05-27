@@ -78,7 +78,7 @@ runs:
 
     - name: Build
       shell: bash
-      run: yarn workspace @safe-global/web build
+      run: pnpm --filter @safe-global/web build
       env:
         NEXT_PUBLIC_IS_PRODUCTION: ${{ inputs.prod }}
 
@@ -107,7 +107,7 @@ runs:
       # Skip SRI for Cypress test builds (NODE_ENV=cypress)
       run: |
         if [ "$NODE_ENV" != "cypress" ]; then
-          yarn workspace @safe-global/web integrity
+          pnpm --filter @safe-global/web integrity
         else
           echo "Skipping SRI generation for Cypress test environment"
         fi

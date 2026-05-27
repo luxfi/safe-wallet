@@ -123,8 +123,8 @@ If variants exist, capture each variant.
 ## Step 6: Verify
 
 ```bash
-yarn workspace @safe-global/web type-check
-yarn workspace @safe-global/web storybook
+pnpm --filter @safe-global/web type-check
+pnpm --filter @safe-global/web storybook
 ```
 
 ## Naming Convention
@@ -143,4 +143,4 @@ yarn workspace @safe-global/web storybook
 - **Icon Library**: `lucide-react`
 - **Prototypes Path**: `apps/web/src/features/design-system/prototypes/`
 - **Stories Path**: `apps/web/src/features/design-system/stories/prototypes/`
-- **Storybook**: `yarn workspace @safe-global/web storybook`
+- **Storybook**: `pnpm --filter @safe-global/web storybook`

@@ -22,19 +22,19 @@ Common commands for getting started:
 
 ```bash
 # Install dependencies (uses Yarn 4 via corepack)
-yarn install
+pnpm install
 
 # Run web app in development mode
-yarn workspace @safe-global/web dev
+pnpm --filter @safe-global/web dev
 
 # Run mobile app in development mode
-yarn workspace @safe-global/mobile start
+pnpm --filter @safe-global/mobile start
 
 # Run tests for web
-yarn workspace @safe-global/web test
+pnpm --filter @safe-global/web test
 
 # Run Storybook for web
-yarn workspace @safe-global/web storybook
+pnpm --filter @safe-global/web storybook
 ```
 
 ## Turborepo
@@ -181,8 +181,8 @@ import { lightPalette, darkPalette, spacingMobile, spacingWeb, typography } from
 To add or modify colors/tokens:
 
 1. Edit files in `packages/theme/src/palettes/` or `packages/theme/src/tokens/`
-2. Run type-check to ensure consistency: `yarn workspace @safe-global/theme type-check`
-3. Regenerate CSS vars for web: `yarn workspace @safe-global/web css-vars`
+2. Run type-check to ensure consistency: `pnpm --filter @safe-global/theme type-check`
+3. Regenerate CSS vars for web: `pnpm --filter @safe-global/web css-vars`
 
 ### Important Notes
 
@@ -217,7 +217,7 @@ The repo provides automated verification:
 
 2. **Manual**: Run `yarn verify:changed:web` anytime to check your work. Run `yarn verify:web` for a full check before committing.
 
-3. **Test scaffolding**: Run `yarn test:scaffold <file>` to generate a test skeleton with the correct imports, mocks, and structure. See the Test Decision Matrix in the Testing Guidelines section for which files need tests.
+3. **Test scaffolding**: Run `pnpm test:scaffold <file>` to generate a test skeleton with the correct imports, mocks, and structure. See the Test Decision Matrix in the Testing Guidelines section for which files need tests.
 
 **Rules for agents:**
 
@@ -265,7 +265,7 @@ Before writing code for any non-trivial change (anything beyond a typo, doc twea
 - When you open the PR, carry the relevant lines into the "Affected flows", "Blast radius", and "Risks / not checked" fields of the PR template.
 - If the checklist reveals that a shared abstraction has many unknown consumers, slow down and investigate before coding — that is the signal this process is designed to surface.
 
-1. **Install dependencies**: `yarn install` (from the repository root).
+1. **Install dependencies**: `pnpm install` (from the repository root).
    - Uses Yarn 4 (managed via `corepack`)
    - Automatically runs `yarn after-install` for the web workspace, which generates TypeScript types from contract ABIs
 
@@ -274,9 +274,9 @@ Before writing code for any non-trivial change (anything beyond a typo, doc twea
    - **pre-push**: Runs linting before pushing
    - These hooks ensure code quality before commits reach the repository
    - **If hooks fail**: Fix the reported issues and try committing again. Common issues:
-     - Type errors: Run `yarn workspace @safe-global/web type-check` to see all errors
+     - Type errors: Run `pnpm --filter @safe-global/web type-check` to see all errors
      - Formatting: Run `yarn prettier:fix` to auto-fix
-     - Linting: Run `yarn workspace @safe-global/web lint:fix` to auto-fix where possible
+     - Linting: Run `pnpm --filter @safe-global/web lint:fix` to auto-fix where possible
 
 3. **Formatting (CRITICAL)**: **ALWAYS** run `yarn prettier:fix` before staging and committing. Do NOT rely on lint-staged alone — it can miss formatting issues due to stash/restore edge cases. Run it explicitly:
 
@@ -284,24 +284,24 @@ Before writing code for any non-trivial change (anything beyond a typo, doc twea
    yarn prettier:fix
    ```
 
-   Then verify with `yarn workspace @safe-global/web prettier` (the check-only command). **CI will reject unformatted code.**
+   Then verify with `pnpm --filter @safe-global/web prettier` (the check-only command). **CI will reject unformatted code.**
 
 4. **Linting and tests**: when you change any source code under `apps/` or `packages/`, execute, for web:
 
    ```bash
-   yarn workspace @safe-global/web type-check
-   yarn workspace @safe-global/web lint
-   yarn workspace @safe-global/web prettier   # verify formatting (CI runs this)
-   yarn workspace @safe-global/web test
+   pnpm --filter @safe-global/web type-check
+   pnpm --filter @safe-global/web lint
+   pnpm --filter @safe-global/web prettier   # verify formatting (CI runs this)
+   pnpm --filter @safe-global/web test
    ```
 
    For mobile:
 
    ```bash
-   yarn workspace @safe-global/mobile type-check
-   yarn workspace @safe-global/mobile lint
-   yarn workspace @safe-global/mobile prettier
-   yarn workspace @safe-global/mobile test
+   pnpm --filter @safe-global/mobile type-check
+   pnpm --filter @safe-global/mobile lint
+   pnpm --filter @safe-global/mobile prettier
+   pnpm --filter @safe-global/mobile test
    ```
 
 5. **Commit messages**: use [semantic commit messages](https://www.conventionalcommits.org/en/v1.0.0/) as described in `CONTRIBUTING.md`.
@@ -421,6 +421,6 @@ Cross-cutting mistakes to avoid. Web-specific pitfalls live in [apps/web/AGENTS.
 1. **Using `any` type** – Always properly type your code, create interfaces/types as needed.
 2. **Forgetting to run tests** – Always run tests before committing.
 3. **Breaking mobile when changing shared code** – Shared packages (`packages/**`) affect both web and mobile.
-4. **Modifying generated files** – Never manually edit auto-generated files in `packages/utils/src/types/contracts/` or `packages/store/src/gateway/AUTO_GENERATED/`. CI fails if they don't match the schema. Run `yarn workspace @safe-global/store build:dev` to regenerate the store types.
+4. **Modifying generated files** – Never manually edit auto-generated files in `packages/utils/src/types/contracts/` or `packages/store/src/gateway/AUTO_GENERATED/`. CI fails if they don't match the schema. Run `pnpm --filter @safe-global/store build:dev` to regenerate the store types.
 5. **Not handling chain-specific logic** – Always consider multi-chain scenarios.
 6. **Incomplete error handling** – Always handle loading, error, and empty states in UI components.

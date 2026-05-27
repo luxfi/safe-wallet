@@ -19,7 +19,7 @@ cd safe-wallet-monorepo
 corepack enable
 
 # Install all dependencies
-yarn install
+pnpm install
 ```
 
 ### 2. Environment Variables
@@ -40,7 +40,7 @@ VITE_ETHERSCAN_API_KEY=your-key
 
 ```bash
 # Start tx-builder dev server
-yarn workspace @safe-global/tx-builder dev
+pnpm --filter @safe-global/tx-builder dev
 
 # Opens at http://localhost:3000/tx-builder
 ```
@@ -59,19 +59,19 @@ tx-builder runs as a Safe App inside Safe{Wallet}. To test:
 
 ```bash
 # Development
-yarn workspace @safe-global/tx-builder dev        # Start dev server
-yarn workspace @safe-global/tx-builder build      # Production build
-yarn workspace @safe-global/tx-builder preview    # Preview production build
+pnpm --filter @safe-global/tx-builder dev        # Start dev server
+pnpm --filter @safe-global/tx-builder build      # Production build
+pnpm --filter @safe-global/tx-builder preview    # Preview production build
 
 # Quality Gates
-yarn workspace @safe-global/tx-builder type-check # TypeScript check
-yarn workspace @safe-global/tx-builder lint       # ESLint
-yarn workspace @safe-global/tx-builder prettier   # Prettier check
-yarn workspace @safe-global/tx-builder test       # Jest tests
+pnpm --filter @safe-global/tx-builder type-check # TypeScript check
+pnpm --filter @safe-global/tx-builder lint       # ESLint
+pnpm --filter @safe-global/tx-builder prettier   # Prettier check
+pnpm --filter @safe-global/tx-builder test       # Jest tests
 
 # Fix issues
-yarn workspace @safe-global/tx-builder lint:fix   # Auto-fix lint issues
-yarn prettier:fix                                  # Fix formatting (root)
+pnpm --filter @safe-global/tx-builder lint:fix   # Auto-fix lint issues
+pnpm prettier:fix                                  # Fix formatting (root)
 ```
 
 ## Project Structure
@@ -149,7 +149,7 @@ const mockSafe = {
 
 ```bash
 # Regenerate types
-yarn workspace @safe-global/tx-builder type-check
+pnpm --filter @safe-global/tx-builder type-check
 
 # Clear TypeScript cache
 rm -rf apps/tx-builder/node_modules/.cache

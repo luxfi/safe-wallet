@@ -8,7 +8,7 @@
     "dev": "cross-env USE_RSPACK=1 next dev",
     "dev:full": "cross-env USE_RSPACK=0 ENABLE_PWA=1 ENABLE_EXPERIMENTAL_OPTIMIZATIONS=1 next dev",
     "start": "next dev",
-    "build": "pnpm fetch-chains && next build",
+    "build": "pnpm fetch-chains && node scripts/generate-version.mjs && next build",
     "build:safe": "../../scripts/select-brand.sh safe && pnpm build",
     "build:lux": "../../scripts/select-brand.sh lux && pnpm build",
     "build:hanzo": "../../scripts/select-brand.sh hanzo && pnpm build",

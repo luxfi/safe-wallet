@@ -16,7 +16,7 @@ const sslPinningDomains = {
 }
 
 // Brand-aware product name. Reads EXPO_PUBLIC_BRAND_NAME at build time so
-// `yarn build:lux` / `yarn build:hanzo` produce correctly-branded artifacts
+// `pnpm build:lux` / `pnpm build:hanzo` produce correctly-branded artifacts
 // without touching this file. Defaults match upstream Safe.
 const brandName = process.env.EXPO_PUBLIC_BRAND_NAME ?? 'Safe{Mobile}'
 const name = IS_DEV ? `Dev-${brandName}` : brandName

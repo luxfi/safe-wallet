@@ -342,7 +342,7 @@ async function main() {
         console.log(`  ${w.file} -> ${w.message}`)
       }
       console.log(`  ${testWarnings.length} changed file(s) have no corresponding tests.`)
-      console.log('  Run: yarn test:scaffold <file> to generate a test skeleton.')
+      console.log('  Run: pnpm test:scaffold <file> to generate a test skeleton.')
     }
   }
 

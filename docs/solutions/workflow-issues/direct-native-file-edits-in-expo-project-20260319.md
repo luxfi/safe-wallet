@@ -25,7 +25,7 @@ During an upgrade of `react-native-quick-crypto` and `react-native-mmkv`, the iO
 
 These changes were made to the generated `apps/mobile/ios/Podfile` rather than through the Expo config plugin that generates it (`expo-plugins/notification-service-ios`).
 
-Additionally, when the Expo plugin source (`plugin/config.ts`) was correctly updated, the build step (`yarn build` in the plugin directory) was not run, so the compiled output in `dist/` was stale and the changes were not applied during the next prebuild.
+Additionally, when the Expo plugin source (`plugin/config.ts`) was correctly updated, the build step (`pnpm build` in the plugin directory) was not run, so the compiled output in `dist/` was stale and the changes were not applied during the next prebuild.
 
 ## Root Cause
 
@@ -33,7 +33,7 @@ Two workflow gaps:
 
 1. **Expo continuously regenerates native files.** The `ios/` and `android/` directories are generated artifacts in an Expo managed/custom dev client workflow. Direct edits to `Podfile`, `AppDelegate`, `Info.plist`, etc. will be overwritten on the next `expo prebuild`. All native configuration must flow through Expo config plugins or `app.config.ts`.
 
-2. **Expo plugins with a build step require compilation.** The `notification-service-ios` plugin has a TypeScript source in `plugin/` and compiled output in `dist/`. The `app.plugin.js` entry point loads from `dist/`. Editing `plugin/config.ts` without running `yarn build` (or the plugin's build script) means the changes never reach the compiled output that Expo actually reads.
+2. **Expo plugins with a build step require compilation.** The `notification-service-ios` plugin has a TypeScript source in `plugin/` and compiled output in `dist/`. The `app.plugin.js` entry point loads from `dist/`. Editing `plugin/config.ts` without running `pnpm build` (or the plugin's build script) means the changes never reach the compiled output that Expo actually reads.
 
 ## Solution
 
@@ -58,7 +58,7 @@ apps/mobile/ios/Podfile  # This is a generated output
 ```bash
 # After editing any file in expo-plugins/notification-service-ios/plugin/
 cd expo-plugins/notification-service-ios
-yarn build  # Compiles TS and copies ios-notification-service-files/ to dist/
+pnpm build  # Compiles TS and copies ios-notification-service-files/ to dist/
 
 # Then regenerate native project
 cd apps/mobile
@@ -80,7 +80,7 @@ Before modifying any native iOS/Android file in an Expo project:
 1. **Ask: "Is this file generated?"** If it's under `ios/` or `android/`, it almost certainly is.
 2. **Find the config plugin** that generates or modifies it. Search `expo-plugins/` and `app.config.ts`.
 3. **Edit the plugin source**, not the generated output.
-4. **Run the plugin build step** if the plugin has one (`yarn build`).
+4. **Run the plugin build step** if the plugin has one (`pnpm build`).
 5. **Run `expo prebuild`** to verify changes are applied correctly.
 
 ## Related

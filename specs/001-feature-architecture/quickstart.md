@@ -199,7 +199,7 @@ import WalletConnect, { useIsWalletConnectEnabled } from '@/features/walletconne
 ### Step 7: Run ESLint to Verify
 
 ```bash
-yarn workspace @safe-global/web lint
+pnpm --filter @safe-global/web lint
 ```
 
 ESLint will warn on any remaining internal imports.
@@ -405,7 +405,7 @@ function MyFeatureContent() {
 
 After creating/migrating a feature:
 
-1. Run `yarn workspace @safe-global/web lint` to check for violations
-2. Run `yarn workspace @safe-global/web type-check` to verify types
-3. Run `yarn workspace @safe-global/web test` to ensure tests pass
-4. Run `yarn workspace @safe-global/web build` to verify bundle splitting
+1. Run `pnpm --filter @safe-global/web lint` to check for violations
+2. Run `pnpm --filter @safe-global/web type-check` to verify types
+3. Run `pnpm --filter @safe-global/web test` to ensure tests pass
+4. Run `pnpm --filter @safe-global/web build` to verify bundle splitting

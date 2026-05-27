@@ -13,10 +13,10 @@ A Safe App that allows users to compose custom contract interactions and batch t
 
 ```bash
 # From monorepo root
-yarn install
+pnpm install
 
 # Start development server
-yarn workspace @safe-global/tx-builder dev
+pnpm --filter @safe-global/tx-builder dev
 ```
 
 The app will be available at `http://localhost:3000/tx-builder/`
@@ -25,11 +25,11 @@ The app will be available at `http://localhost:3000/tx-builder/`
 
 | Command                                             | Description      |
 | --------------------------------------------------- | ---------------- |
-| `yarn workspace @safe-global/tx-builder dev`        | Start dev server |
-| `yarn workspace @safe-global/tx-builder build`      | Production build |
-| `yarn workspace @safe-global/tx-builder test`       | Run unit tests   |
-| `yarn workspace @safe-global/tx-builder lint`       | Run ESLint       |
-| `yarn workspace @safe-global/tx-builder type-check` | TypeScript check |
+| `pnpm --filter @safe-global/tx-builder dev`        | Start dev server |
+| `pnpm --filter @safe-global/tx-builder build`      | Production build |
+| `pnpm --filter @safe-global/tx-builder test`       | Run unit tests   |
+| `pnpm --filter @safe-global/tx-builder lint`       | Run ESLint       |
+| `pnpm --filter @safe-global/tx-builder type-check` | TypeScript check |
 
 ## Testing
 
@@ -38,7 +38,7 @@ The app will be available at `http://localhost:3000/tx-builder/`
 Unit tests use Jest with React Testing Library:
 
 ```bash
-yarn workspace @safe-global/tx-builder test
+pnpm --filter @safe-global/tx-builder test
 ```
 
 ### E2E Tests

@@ -7,7 +7,7 @@ const filePath = process.argv[2]
 
 if (!filePath) {
   console.error('Usage: test-scaffold <file-path>')
-  console.error('Example: yarn workspace @safe-global/web test:scaffold src/hooks/useMyHook.ts')
+  console.error('Example: pnpm --filter @safe-global/web test:scaffold src/hooks/useMyHook.ts')
   process.exit(1)
 }
 
