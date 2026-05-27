@@ -80,7 +80,7 @@ All components are pure and stateless, accepting pre-formatted data via props.
 ## Storybook
 
 ```bash
-yarn workspace @safe-global/web storybook
+pnpm --filter @safe-global/web storybook
 ```
 
 Navigate to: **Features > Spaces > SafeSelectorDropdown**

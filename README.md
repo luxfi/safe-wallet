@@ -8,7 +8,7 @@
 
 Welcome to the Safe{Wallet} monorepo! Safe (formerly Gnosis Safe) is a multi-signature smart contract wallet for Ethereum and other EVM chains, requiring multiple signatures to execute transactions.
 
-This repository houses both web and mobile applications along with shared packages, managed under a unified structure using Yarn Workspaces. The monorepo setup simplifies dependency management and ensures consistent development practices across projects.
+This repository houses both web and mobile applications along with shared packages, managed under a unified structure using pnpm Workspaces. The monorepo setup simplifies dependency management and ensures consistent development practices across projects.
 
 ### Key components
 
@@ -65,23 +65,23 @@ cd monorepo
 2. Install dependencies:
 
 ```bash
-yarn install
+pnpm install
 ```
 
 ### Quick start commands
 
 ```bash
 # Run web app in development mode
-yarn workspace @safe-global/web dev
+pnpm --filter @safe-global/web dev
 
 # Run mobile app in development mode
-yarn workspace @safe-global/mobile start
+pnpm --filter @safe-global/mobile start
 
 # Run tests for web
-yarn workspace @safe-global/web test
+pnpm --filter @safe-global/web test
 
 # Run Storybook for web
-yarn workspace @safe-global/web storybook
+pnpm --filter @safe-global/web storybook
 ```
 
 > [!TIP]
@@ -100,25 +100,25 @@ Here are some essential commands to help you navigate the monorepo:
 - **Run a script in a specific workspace:**
 
 ```bash
-yarn workspace <workspace-name> <script>
+pnpm --filter <workspace-name> <script>
 ```
 
 Example:
 
 ```bash
-yarn workspace @safe-global/web dev
+pnpm --filter @safe-global/web dev
 ```
 
 - **Add a dependency to a specific workspace:**
 
 ```bash
-yarn workspace <workspace-name> add <package-name>
+pnpm --filter <workspace-name> add <package-name>
 ```
 
 - **Remove a dependency from a specific workspace:**
 
 ```bash
-yarn workspace <workspace-name> remove <package-name>
+pnpm --filter <workspace-name> remove <package-name>
 ```
 
 > [!Note]
@@ -134,7 +134,7 @@ yarn workspace <workspace-name> remove <package-name>
 > is equivalent to:
 >
 > ```bash
-> yarn workspace @safe-global/web cypress:open
+> pnpm --filter @safe-global/web cypress:open
 > ```
 
 ### Linting, formatting, and type-checking
@@ -142,7 +142,7 @@ yarn workspace <workspace-name> remove <package-name>
 - **Run ESLint across all workspaces:**
 
 ```bash
-yarn lint
+pnpm lint
 ```
 
 - **Run Prettier to check formatting:**
@@ -154,8 +154,8 @@ yarn prettier
 - **Run type-check for a workspace:**
 
 ```bash
-yarn workspace @safe-global/web type-check
-yarn workspace @safe-global/mobile type-check
+pnpm --filter @safe-global/web type-check
+pnpm --filter @safe-global/mobile type-check
 ```
 
 ### Testing
@@ -163,14 +163,14 @@ yarn workspace @safe-global/mobile type-check
 - **Run unit tests across all workspaces:**
 
 ```bash
-yarn test
+pnpm test
 ```
 
 - **Run E2E tests (web only):**
 
 ```bash
-yarn workspace @safe-global/web cypress:open  # Interactive mode
-yarn workspace @safe-global/web cypress:run   # Headless mode
+pnpm --filter @safe-global/web cypress:open  # Interactive mode
+pnpm --filter @safe-global/web cypress:run   # Headless mode
 ```
 
 ## Contributing
@@ -182,12 +182,12 @@ yarn workspace @safe-global/web cypress:run   # Headless mode
 3. Run:
 
 ```bash
-yarn install
+pnpm install
 ```
 
 ### Best practices
 
-- Use Yarn Workspaces commands for managing dependencies.
+- Use pnpm Workspaces commands for managing dependencies.
 - Ensure type-check, lint, prettier, and tests pass before pushing changes.
 - Follow the [semantic commit message guidelines](https://www.conventionalcommits.org/).
 - For AI contributors, see [AGENTS.md](AGENTS.md) for detailed guidelines.
@@ -209,7 +209,7 @@ For information on releasing the web app, see the [Automated Release Procedure](
 
 ## Useful links
 
-- [Yarn Workspaces Documentation](https://yarnpkg.com/features/workspaces)
+- [pnpm Workspaces Documentation](https://pnpm.io/workspaces)
 - [Expo Documentation](https://docs.expo.dev/)
 - [Next.js Documentation](https://nextjs.org/docs)
 - [Storybook Documentation](https://storybook.js.org/docs)

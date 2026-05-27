@@ -27,13 +27,13 @@ This package includes a script to generate the necessary boilerplate API code fr
 From the mono-repo root directory, run the following command:
 
 ```bash
-yarn workspace @safe-global/store build
+pnpm --filter @safe-global/store build
 ```
 
 or, for staging API:
 
 ```bash
-yarn workspace @safe-global/store build:dev
+pnpm --filter @safe-global/store build:dev
 ```
 
 This will:

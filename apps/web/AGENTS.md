@@ -126,8 +126,8 @@ Located in [cypress/e2e/](cypress/e2e/). Full conventions and patterns: [cypress
 | Happy path | `e2e/happypath/`  | On-demand                    | User journey tests                         |
 
 ```bash
-yarn workspace @safe-global/web cypress:open   # interactive
-yarn workspace @safe-global/web cypress:run    # headless
+pnpm --filter @safe-global/web cypress:open   # interactive
+pnpm --filter @safe-global/web cypress:run    # headless
 ```
 
 Coverage report: [cypress/COVERAGE.md](cypress/COVERAGE.md)
@@ -135,7 +135,7 @@ Coverage report: [cypress/COVERAGE.md](cypress/COVERAGE.md)
 ### Test Coverage
 
 - Aim for comprehensive test coverage of business logic and critical paths
-- Run `yarn workspace @safe-global/web test:coverage` to generate coverage reports
+- Run `pnpm --filter @safe-global/web test:coverage` to generate coverage reports
 - Coverage reports help identify untested code paths
 
 ### Test Decision Matrix
@@ -164,7 +164,7 @@ Storybook is used for developing and documenting UI components in isolation.
 ### Running Storybook
 
 ```bash
-yarn workspace @safe-global/web storybook
+pnpm --filter @safe-global/web storybook
 # Runs on http://localhost:6006
 ```
 
@@ -369,7 +369,7 @@ Chromatic is integrated for visual regression testing. It automatically captures
 To run locally (set `CHROMATIC_PROJECT_TOKEN` in `.env.local`):
 
 ```bash
-yarn workspace @safe-global/web chromatic
+pnpm --filter @safe-global/web chromatic
 ```
 
 ## Web-specific common pitfalls
@@ -381,8 +381,8 @@ yarn workspace @safe-global/web chromatic
 
 ## Debugging Tips
 
-- **Type errors**: Run `yarn workspace @safe-global/web type-check` to see all TypeScript errors
-- **Test failures**: Run tests in watch mode with `yarn workspace @safe-global/web test --watch`
+- **Type errors**: Run `pnpm --filter @safe-global/web type-check` to see all TypeScript errors
+- **Test failures**: Run tests in watch mode with `pnpm --filter @safe-global/web test --watch`
 - **RPC issues**: Check that `INFURA_TOKEN` or other RPC provider env vars are set correctly
 - **Build errors**: Check `.next` cache – sometimes `rm -rf apps/web/.next` helps
 - **Storybook issues**: Try `rm -rf node_modules/.cache/storybook`

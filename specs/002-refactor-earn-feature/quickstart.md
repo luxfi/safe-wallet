@@ -171,7 +171,7 @@ function EarnPage() {
 
 ```bash
 # Start development server
-yarn workspace @safe-global/web dev
+pnpm --filter @safe-global/web dev
 
 # Navigate to earn page
 # http://localhost:3000/earn
@@ -181,40 +181,40 @@ yarn workspace @safe-global/web dev
 
 ```bash
 # Run TypeScript type checker
-yarn workspace @safe-global/web type-check
+pnpm --filter @safe-global/web type-check
 ```
 
 ### Linting
 
 ```bash
 # Run linter
-yarn workspace @safe-global/web lint
+pnpm --filter @safe-global/web lint
 
 # Auto-fix linting issues
-yarn workspace @safe-global/web lint:fix
+pnpm --filter @safe-global/web lint:fix
 ```
 
 ### Formatting
 
 ```bash
 # Check formatting
-yarn workspace @safe-global/web prettier
+pnpm --filter @safe-global/web prettier
 
 # Auto-fix formatting
-yarn prettier:fix
+pnpm prettier:fix
 ```
 
 ### Testing
 
 ```bash
 # Run all tests
-yarn workspace @safe-global/web test
+pnpm --filter @safe-global/web test
 
 # Run tests in watch mode
-yarn workspace @safe-global/web test --watch
+pnpm --filter @safe-global/web test --watch
 
 # Run tests with coverage
-yarn workspace @safe-global/web test:coverage
+pnpm --filter @safe-global/web test:coverage
 ```
 
 ---
@@ -414,7 +414,7 @@ export type { NewType } from './types'
 
 1. Search codebase for `@/features/earn/components/` (deep import pattern)
 2. Replace with `@/features/earn` (public API pattern)
-3. Run `yarn workspace @safe-global/web type-check` to verify
+3. Run `pnpm --filter @safe-global/web type-check` to verify
 
 ### Bundle Still Includes Earn Code When Disabled
 
@@ -426,7 +426,7 @@ export type { NewType } from './types'
 2. Ensure all page-level imports use `dynamic(() => import('@/features/earn'), { ssr: false })`
 3. Run bundle analyzer to verify code splitting:
    ```bash
-   yarn workspace @safe-global/web analyze
+   pnpm --filter @safe-global/web analyze
    ```
 
 ### Widget Not Loading
@@ -470,8 +470,8 @@ export type { NewType } from './types'
 
 ## Getting Help
 
-- **Type Errors**: Run `yarn workspace @safe-global/web type-check` for detailed error messages
-- **Lint Errors**: Run `yarn workspace @safe-global/web lint` for detailed error messages
+- **Type Errors**: Run `pnpm --filter @safe-global/web type-check` for detailed error messages
+- **Lint Errors**: Run `pnpm --filter @safe-global/web lint` for detailed error messages
 - **Feature Not Working**: Follow the manual testing checklist above
 - **Questions**: Refer to the feature architecture documentation or ask the team
 

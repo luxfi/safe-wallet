@@ -158,8 +158,8 @@ const FEATURE_FLAG_MAPPING: Record<string, FEATURES> = {
 ### Step 1.5: Verify Infrastructure
 
 ```bash
-yarn workspace @safe-global/web type-check
-yarn workspace @safe-global/web lint
+pnpm --filter @safe-global/web type-check
+pnpm --filter @safe-global/web lint
 ```
 
 ---
@@ -284,23 +284,23 @@ jest.mock('@/features/hypernative', () => ({
 
 ```bash
 # Type check
-yarn workspace @safe-global/web type-check
+pnpm --filter @safe-global/web type-check
 
 # Lint (check for import violations)
-yarn workspace @safe-global/web lint
+pnpm --filter @safe-global/web lint
 
 # Prettier
-yarn workspace @safe-global/web prettier
+pnpm --filter @safe-global/web prettier
 
 # Tests
-yarn workspace @safe-global/web test
+pnpm --filter @safe-global/web test
 ```
 
 ### Verify Bundle
 
 ```bash
 # Build
-yarn workspace @safe-global/web build
+pnpm --filter @safe-global/web build
 
 # Check for hypernative chunk
 ls -la apps/web/.next/static/chunks/ | grep -i hypernative

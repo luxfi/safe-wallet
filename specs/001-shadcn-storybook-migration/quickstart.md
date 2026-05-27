@@ -24,10 +24,10 @@ Ensure you have the monorepo set up:
 
 ```bash
 # Install dependencies
-yarn install
+pnpm install
 
 # Verify Storybook works
-yarn workspace @safe-global/web storybook
+pnpm --filter @safe-global/web storybook
 ```
 
 ---
@@ -36,14 +36,14 @@ yarn workspace @safe-global/web storybook
 
 ```bash
 # Development mode (with hot reload)
-yarn workspace @safe-global/web storybook
+pnpm --filter @safe-global/web storybook
 # Opens at http://localhost:6006
 
 # Build static version
-yarn workspace @safe-global/web build-storybook
+pnpm --filter @safe-global/web build-storybook
 
 # Run snapshot tests
-yarn workspace @safe-global/web test:storybook
+pnpm --filter @safe-global/web test:storybook
 ```
 
 ---
@@ -56,20 +56,20 @@ The inventory tool helps you find components that need stories and prioritizes t
 
 ```bash
 # Family-based inventory (default)
-yarn workspace @safe-global/web storybook:inventory
+pnpm --filter @safe-global/web storybook:inventory
 
 # Verbose output with details
-yarn workspace @safe-global/web storybook:inventory --verbose
+pnpm --filter @safe-global/web storybook:inventory --verbose
 
 # JSON output for processing
-yarn workspace @safe-global/web storybook:inventory --json
+pnpm --filter @safe-global/web storybook:inventory --json
 
 # Save to file
-yarn workspace @safe-global/web storybook:inventory --json --output inventory.json
+pnpm --filter @safe-global/web storybook:inventory --json --output inventory.json
 
 # Legacy per-component view (opt-in)
-yarn workspace @safe-global/web storybook:inventory --components
-yarn workspace @safe-global/web storybook:inventory --components --verbose
+pnpm --filter @safe-global/web storybook:inventory --components
+pnpm --filter @safe-global/web storybook:inventory --components --verbose
 ```
 
 ### Example Output
@@ -101,13 +101,13 @@ sidebar      [░░░░░░░░░░░░░░░░░░░░] 0/3 
 
 ```bash
 # Markdown report
-yarn workspace @safe-global/web storybook:coverage --format md --output coverage.md
+pnpm --filter @safe-global/web storybook:coverage --format md --output coverage.md
 
 # HTML report (visual dashboard)
-yarn workspace @safe-global/web storybook:coverage --format html --output coverage.html
+pnpm --filter @safe-global/web storybook:coverage --format html --output coverage.html
 
 # JSON report (for CI/tooling)
-yarn workspace @safe-global/web storybook:coverage --format json --output coverage.json
+pnpm --filter @safe-global/web storybook:coverage --format json --output coverage.json
 ```
 
 ### Coverage Documentation (Version-Controlled)
@@ -116,7 +116,7 @@ The repository maintains a persistent `apps/web/.storybook/COVERAGE.md` file tha
 
 ```bash
 # Regenerate after adding stories
-yarn workspace @safe-global/web storybook:generate-coverage
+pnpm --filter @safe-global/web storybook:generate-coverage
 ```
 
 The COVERAGE.md file contains three views:
@@ -168,7 +168,7 @@ The family-based approach groups related components by directory and covers them
 
 ```bash
 # Default mode - shows family-based coverage
-yarn workspace @safe-global/web storybook:inventory
+pnpm --filter @safe-global/web storybook:inventory
 ```
 
 Example output:
@@ -343,7 +343,7 @@ export const AllVariants: Story = {
 
 ### Step 3: Verify in Storybook
 
-1. Run Storybook: `yarn workspace @safe-global/web storybook`
+1. Run Storybook: `pnpm --filter @safe-global/web storybook`
 2. Navigate to UI → Switch in the sidebar
 3. Verify all stories render correctly
 4. Check the Docs tab for auto-generated documentation
@@ -682,14 +682,14 @@ export const LoadingSpinner: Story = {
 
 ```bash
 # Run type-check to see all errors
-yarn workspace @safe-global/web type-check
+pnpm --filter @safe-global/web type-check
 ```
 
 ### Snapshots failing
 
 ```bash
 # Update snapshots after intentional changes
-yarn workspace @safe-global/web test:storybook -u
+pnpm --filter @safe-global/web test:storybook -u
 ```
 
 ### Component needs router
@@ -716,7 +716,7 @@ decorators: [
 - [ ] `tags: ['autodocs']` included
 - [ ] All significant states covered (default, loading, error, empty, disabled)
 - [ ] Deterministic mock data (no random/faker values)
-- [ ] Type-check passes: `yarn workspace @safe-global/web type-check`
+- [ ] Type-check passes: `pnpm --filter @safe-global/web type-check`
 - [ ] Stories render correctly in Storybook
 - [ ] No console errors
 

@@ -316,9 +316,9 @@ export async function executeMigration(config: FeatureConfig, dryRun: boolean = 
   console.log('     - Replace: service.method() → feature.service?.method() (check $isReady for services)')
   console.log('  3. Keep hooks lightweight - move heavy imports to services if needed')
   console.log('  4. Update test file imports if needed')
-  console.log('  5. Run: yarn workspace @safe-global/web type-check')
-  console.log('  6. Run: yarn workspace @safe-global/web lint')
-  console.log('  7. Run: yarn workspace @safe-global/web test')
+  console.log('  5. Run: pnpm --filter @safe-global/web type-check')
+  console.log('  6. Run: pnpm --filter @safe-global/web lint')
+  console.log('  7. Run: pnpm --filter @safe-global/web test')
   console.log('=' + '='.repeat(59))
 
   return result

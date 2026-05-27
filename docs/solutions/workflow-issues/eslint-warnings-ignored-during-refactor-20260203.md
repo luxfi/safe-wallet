@@ -53,20 +53,20 @@ After completing a refactor, run ESLint with grep to filter for the specific fea
 
 ```bash
 # For swap feature migration
-yarn workspace @safe-global/web lint 2>&1 | grep -i swap
+pnpm --filter @safe-global/web lint 2>&1 | grep -i swap
 
 # Generic pattern
-yarn workspace @safe-global/web lint 2>&1 | grep -i [feature-name]
+pnpm --filter @safe-global/web lint 2>&1 | grep -i [feature-name]
 ```
 
 ### 2. Run ESLint specifically on the feature directory
 
 ```bash
 # Check the feature directory itself for any issues
-yarn workspace @safe-global/web lint src/features/swap/
+pnpm --filter @safe-global/web lint src/features/swap/
 
 # Check for any consumers importing incorrectly
-yarn workspace @safe-global/web lint 2>&1 | grep "@/features/swap"
+pnpm --filter @safe-global/web lint 2>&1 | grep "@/features/swap"
 ```
 
 ### 3. Verify zero warnings for the feature
@@ -75,7 +75,7 @@ Before considering a refactor complete, ensure:
 
 ```bash
 # This should return NO results if refactor is complete
-yarn workspace @safe-global/web lint 2>&1 | grep "@/features/[feature-name]" | grep -v "node_modules"
+pnpm --filter @safe-global/web lint 2>&1 | grep "@/features/[feature-name]" | grep -v "node_modules"
 ```
 
 ### 4. Create a verification checklist
@@ -110,7 +110,7 @@ Add this to the end of any feature architecture migration:
 ```bash
 # Final verification - must return empty
 FEATURE_NAME="swap"  # Change for each migration
-yarn workspace @safe-global/web lint 2>&1 | grep -i "$FEATURE_NAME" && echo "WARNINGS FOUND - FIX BEFORE COMPLETING" || echo "No warnings - migration complete"
+pnpm --filter @safe-global/web lint 2>&1 | grep -i "$FEATURE_NAME" && echo "WARNINGS FOUND - FIX BEFORE COMPLETING" || echo "No warnings - migration complete"
 ```
 
 ## Related Issues

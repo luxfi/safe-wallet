@@ -58,7 +58,7 @@ Remaining uncovered groups (SKIPPED - no stories needed):
 
 ✅ 100% COVERAGE of non-skipped groups achieved!
 
-Run: yarn workspace @safe-global/web storybook:inventory --toplevel
+Run: pnpm --filter @safe-global/web storybook:inventory --toplevel
 ```
 
 ---
@@ -108,7 +108,7 @@ Run: yarn workspace @safe-global/web storybook:inventory --toplevel
 
 **Goal**: Automated inventory of all components with coverage tracking and dependency analysis
 
-**Independent Test**: Run `yarn workspace @safe-global/web storybook:inventory` and verify it produces a JSON report with component count, coverage percentage, and dependencies
+**Independent Test**: Run `pnpm --filter @safe-global/web storybook:inventory` and verify it produces a JSON report with component count, coverage percentage, and dependencies
 
 ### Implementation for User Story 1
 
@@ -316,8 +316,8 @@ Run: yarn workspace @safe-global/web storybook:inventory --toplevel
 - [ ] T105 [P] Update AGENTS.md with Storybook story requirements (existing guidance sufficient)
 - [x] T106 Run final coverage report and document results (coverage report in this tasks.md)
 - [x] T107 Verify Storybook builds successfully with all stories (smoke test passed)
-- [x] T108 Run yarn workspace @safe-global/web type-check (passed)
-- [x] T109 Run yarn workspace @safe-global/web lint (passed - 0 errors, existing warnings)
+- [x] T108 Run pnpm --filter @safe-global/web type-check (passed)
+- [x] T109 Run pnpm --filter @safe-global/web lint (passed - 0 errors, existing warnings)
 - [ ] T110 Create PR with all changes (user to commit)
 
 ---
@@ -409,7 +409,7 @@ Within Phase 6 (page stories):
 - [x] T113 [US6] Update inventory.ts to support --family flag for grouped output
 - [x] T114 [US6] Implement story export counting per family (not just file existence)
 - [x] T115 [US6] Add family coverage reporting functions: calculateFamilyCoverage, getFamilyCoverageByCategory
-- [x] T116 [US6] Test updated inventory tool: yarn workspace @safe-global/web storybook:inventory --family
+- [x] T116 [US6] Test updated inventory tool: pnpm --filter @safe-global/web storybook:inventory --family
 
 ### Phase 9.2: Documentation Updates
 
@@ -521,7 +521,7 @@ Each story should render the main component with realistic mock data, covering p
 - 🚫 Wrappers (3 families) - HOC wrappers (Disclaimer, Feature, Sanction)
 - 🚫 Terms (1 family) - Simple static content
 
-**Checkpoint**: Run `yarn storybook:inventory --toplevel` - ✅ 100% top-level coverage achieved (36/41 groups, 5 skipped)
+**Checkpoint**: Run `pnpm storybook:inventory --toplevel` - ✅ 100% top-level coverage achieved (36/41 groups, 5 skipped)
 
 ---
 
@@ -537,6 +537,6 @@ Each story should render the main component with realistic mock data, covering p
 
 **Inventory Tool Commands:**
 
-- `yarn storybook:inventory` - Family-level coverage (default)
-- `yarn storybook:inventory --toplevel` - Top-level group coverage (recommended for tracking)
-- `yarn storybook:inventory --components` - Legacy per-component view
+- `pnpm storybook:inventory` - Family-level coverage (default)
+- `pnpm storybook:inventory --toplevel` - Top-level group coverage (recommended for tracking)
+- `pnpm storybook:inventory --components` - Legacy per-component view

@@ -1417,7 +1417,7 @@ Verify that features are properly code-split:
 ### Build and Analyze
 
 ```bash
-yarn workspace @safe-global/web build
+pnpm --filter @safe-global/web build
 ```
 
 ### Check Chunks
@@ -1435,7 +1435,7 @@ Each feature should have its own chunk file, indicating proper code splitting.
 For detailed analysis, use `@next/bundle-analyzer`:
 
 ```bash
-ANALYZE=true yarn workspace @safe-global/web build
+ANALYZE=true pnpm --filter @safe-global/web build
 ```
 
 ## Feature Creation Guide
@@ -1528,9 +1528,9 @@ export enum FEATURES {
 ### Step 7: Verify
 
 ```bash
-yarn workspace @safe-global/web lint
-yarn workspace @safe-global/web type-check
-yarn workspace @safe-global/web test
+pnpm --filter @safe-global/web lint
+pnpm --filter @safe-global/web type-check
+pnpm --filter @safe-global/web test
 ```
 
 ## Migration Guide
@@ -1551,7 +1551,7 @@ For each feature:
 4. **Organize internals** in `components/`, `hooks/`, `services/`, `store/` folders
 5. **Update consumers** to use `useLoadFeature()` with the feature handle
 6. **Remove null checks** where proxy stubs suffice
-7. **Verify** with `yarn lint && yarn type-check && yarn test`
+7. **Verify** with `pnpm lint && yarn type-check && pnpm test`
 
 ### Phase 3: Enforce
 
@@ -1672,10 +1672,10 @@ function SafeShieldScannerWithStates() {
 
 ### Verification
 
-- [ ] `yarn lint` passes (no restricted import warnings)
+- [ ] `pnpm lint` passes (no restricted import warnings)
 - [ ] `yarn type-check` passes
-- [ ] `yarn test` passes
-- [ ] `yarn build` succeeds
+- [ ] `pnpm test` passes
+- [ ] `pnpm build` succeeds
 - [ ] Feature chunk exists in build output
 
 ## FAQ

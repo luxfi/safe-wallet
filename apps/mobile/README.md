@@ -6,7 +6,7 @@ applications and shared libraries. This workspace (`apps/mobile`) contains the S
 
 You can run commands for this workspace in two ways:
 
-1. **From the root of the monorepo using `yarn workspace` commands**
+1. **From the root of the monorepo using `pnpm --filter` commands**
 2. **From within the `apps/mobile` directory**
 
 ## Prerequisites
@@ -27,7 +27,7 @@ Follow the [Maestro](https://maestro.mobile.dev/) documentation to install the t
 1. Install all dependencies from the **root of the monorepo**:
 
 ```bash
-yarn install
+pnpm install
 ```
 
 ## Running the app
@@ -51,13 +51,13 @@ command. This will pull the variables from your eas project and place them in th
 From the root of the monorepo:
 
 ```bash
-yarn workspace @safe-global/mobile start:ios
+pnpm --filter @safe-global/mobile start:ios
 ```
 
 Or directly from the `apps/mobile` directory:
 
 ```bash
-yarn start:ios
+pnpm start:ios
 ```
 
 > [!NOTE]
@@ -70,7 +70,7 @@ yarn start:ios
 From the root of the monorepo:
 
 ```bash
-yarn workspace @safe-global/mobile start:android
+pnpm --filter @safe-global/mobile start:android
 ```
 
 ### How to open the custom devtools menu
@@ -88,7 +88,7 @@ The app supports **Redux**, **RTK Query**, and **React DevTools**. To access the
 Run the storybook command from the root:
 
 ```bash
-yarn workspace @safe-global/mobile storybook:web
+pnpm --filter @safe-global/mobile storybook:web
 ```
 
 ### Running on a mobile device
@@ -96,7 +96,7 @@ yarn workspace @safe-global/mobile storybook:web
 To run the storybook on a mobile device:
 
 ```bash
-yarn workspace @safe-global/mobile storybook:[ios|android]
+pnpm --filter @safe-global/mobile storybook:[ios|android]
 ```
 
 To View stories press `i` on iOS or `a` on Android.
@@ -130,13 +130,13 @@ To build the app for tests:
 #### For iOS:
 
 ```bash
-yarn workspace @safe-global/mobile e2e:metro-ios
+pnpm --filter @safe-global/mobile e2e:metro-ios
 ```
 
 #### For Android:
 
 ```bash
-yarn workspace @safe-global/mobile e2e:metro-android
+pnpm --filter @safe-global/mobile e2e:metro-android
 ```
 
 These commands include `.e2e.ts|.e2e.tsx` files for mocking services or adding test-specific code.
@@ -146,7 +146,7 @@ These commands include `.e2e.ts|.e2e.tsx` files for mocking services or adding t
 In a second terminal run:
 
 ```bash
-yarn workspace @safe-global/mobile e2e:run
+pnpm --filter @safe-global/mobile e2e:run
 ```
 
 ### Use Maestro Studio to write tests
@@ -172,19 +172,19 @@ unit, component, and hook tests.
 Run tests:
 
 ```bash
-yarn workspace @safe-global/mobile test
+pnpm --filter @safe-global/mobile test
 ```
 
 Run in watch mode:
 
 ```bash
-yarn workspace @safe-global/mobile test:watch
+pnpm --filter @safe-global/mobile test:watch
 ```
 
 Check coverage:
 
 ```bash
-yarn workspace @safe-global/mobile test
+pnpm --filter @safe-global/mobile test
 ```
 
 Navigate to the `coverage` folder and open `index.html` in your browser.
@@ -196,7 +196,7 @@ This project uses ESLint, Prettier, and TypeScript for linting and formatting.
 Run linting from the root:
 
 ```bash
-yarn workspace @safe-global/mobile lint
+pnpm --filter @safe-global/mobile lint
 ```
 
 This command validates files with TypeScript, ESLint, and Prettier configurations.

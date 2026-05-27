@@ -321,10 +321,10 @@ Developer guide for executing the refactoring:
    - Priority order: `store/slices.ts` first (most critical), then features, then components
 
 5. **Phase 5: Verification** (gate before commit)
-   - `yarn workspace @safe-global/web type-check` → MUST pass
-   - `yarn workspace @safe-global/web lint` → zero no-restricted-imports warnings
-   - `yarn workspace @safe-global/web test` → 100% pass rate
-   - `yarn workspace @safe-global/web build` → succeeds, check bundle analysis
+   - `pnpm --filter @safe-global/web type-check` → MUST pass
+   - `pnpm --filter @safe-global/web lint` → zero no-restricted-imports warnings
+   - `pnpm --filter @safe-global/web test` → 100% pass rate
+   - `pnpm --filter @safe-global/web build` → succeeds, check bundle analysis
    - Manual QA: Test Safe activation flows (pay now, pay later, pending notifications)
 
 6. **Phase 6: Commit & Verify**

@@ -183,7 +183,7 @@ if (!$isReady) return <Skeleton />
 ### Unit Tests
 
 ```bash
-yarn workspace @safe-global/web test --testPathPattern=spending
+pnpm --filter @safe-global/web test --testPathPattern=spending
 ```
 
 ### E2E Tests

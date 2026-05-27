@@ -145,10 +145,10 @@ mcp__figma-remote-mcp__get_screenshot(fileKey, nodeId)
 
 ```bash
 # Run Storybook for visual testing
-yarn workspace @safe-global/web storybook
+pnpm --filter @safe-global/web storybook
 
 # Type-check
-yarn workspace @safe-global/web type-check
+pnpm --filter @safe-global/web type-check
 ```
 
 ## Project Notes

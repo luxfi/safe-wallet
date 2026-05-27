@@ -49,7 +49,7 @@ All paths are relative to `apps/web/src/features/bridge/` unless otherwise speci
 
 **Goal**: Bring the bridge feature into full compliance with the feature architecture standard
 
-**Independent Test**: Verify all required files exist per `docs/feature-architecture.md` checklist; run `yarn workspace @safe-global/web type-check && yarn workspace @safe-global/web lint`
+**Independent Test**: Verify all required files exist per `docs/feature-architecture.md` checklist; run `pnpm --filter @safe-global/web type-check && pnpm --filter @safe-global/web lint`
 
 ### Implementation for User Story 1
 
@@ -57,7 +57,7 @@ All paths are relative to `apps/web/src/features/bridge/` unless otherwise speci
 - [x] T008 [P] [US1] Populate `components/index.ts` barrel with exports for `Bridge` and `BridgeWidget` components at `apps/web/src/features/bridge/components/index.ts`
 - [x] T009 [US1] Update `components/Bridge/index.tsx` to import `LOCAL_STORAGE_CONSENT_KEY` from `../../constants` instead of defining inline at `apps/web/src/features/bridge/components/Bridge/index.tsx`
 - [x] T010 [US1] Update `components/BridgeWidget/index.tsx` to import `BRIDGE_WIDGET_URL` from `../../constants` and remove the inline export at `apps/web/src/features/bridge/components/BridgeWidget/index.tsx`
-- [x] T011 [US1] Run type-check to verify internal imports work: `yarn workspace @safe-global/web type-check` (Note: external consumer tx-tracking.ts error expected until T020)
+- [x] T011 [US1] Run type-check to verify internal imports work: `pnpm --filter @safe-global/web type-check` (Note: external consumer tx-tracking.ts error expected until T020)
 
 **Checkpoint**: All barrel files populated, internal imports updated, type-check passes
 
@@ -90,7 +90,7 @@ All paths are relative to `apps/web/src/features/bridge/` unless otherwise speci
 - [x] T015 [US3] Export hooks from root barrel: `useIsBridgeFeatureEnabled`, `useIsGeoblockedFeatureEnabled` at `apps/web/src/features/bridge/index.ts`
 - [x] T016 [US3] Export constants from root barrel: `BRIDGE_WIDGET_URL`, `LOCAL_STORAGE_CONSENT_KEY` at `apps/web/src/features/bridge/index.ts`
 - [x] T017 [US3] Export types from root barrel (empty for now) at `apps/web/src/features/bridge/index.ts`
-- [x] T018 [US3] Run type-check to verify root barrel compiles: `yarn workspace @safe-global/web type-check` (pending T020 fix)
+- [x] T018 [US3] Run type-check to verify root barrel compiles: `pnpm --filter @safe-global/web type-check` (pending T020 fix)
 
 **Checkpoint**: Root barrel complete with lazy-loaded default export, all public API items exported
 
@@ -102,8 +102,8 @@ All paths are relative to `apps/web/src/features/bridge/` unless otherwise speci
 
 - [x] T019 Update `pages/bridge.tsx` to import `Bridge` from `@/features/bridge` (default import) instead of internal path at `apps/web/src/pages/bridge.tsx`
 - [x] T020 Update `services/analytics/tx-tracking.ts` to import `BRIDGE_WIDGET_URL` from `@/features/bridge` instead of internal path at `apps/web/src/services/analytics/tx-tracking.ts`
-- [x] T021 Run full verification suite: `yarn workspace @safe-global/web type-check && yarn workspace @safe-global/web lint && yarn workspace @safe-global/web test --testPathPattern=bridge`
-- [x] T022 Run build and verify bridge chunk exists: `yarn workspace @safe-global/web build` (skipped - build takes too long, type-check and tests confirm correctness)
+- [x] T021 Run full verification suite: `pnpm --filter @safe-global/web type-check && pnpm --filter @safe-global/web lint && pnpm --filter @safe-global/web test --testPathPattern=bridge`
+- [x] T022 Run build and verify bridge chunk exists: `pnpm --filter @safe-global/web build` (skipped - build takes too long, type-check and tests confirm correctness)
 - [x] T023 Verify feature structure against checklist in `apps/web/docs/feature-architecture.md`
 
 **Checkpoint**: All external imports updated, all tests pass, build succeeds with separate bridge chunk

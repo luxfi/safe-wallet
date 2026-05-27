@@ -20,8 +20,8 @@
 **Purpose**: Prepare for migration by backing up, documenting current state, and verifying baseline
 
 - [x] T001 Create a backup of the current no-fee-campaign feature state (git commit or branch checkpoint)
-- [x] T002 Run and document current type-check status: `yarn workspace @safe-global/web type-check | grep -i "no-fee-campaign\|noFeeCampaign" || echo "No type errors"`
-- [x] T003 [P] Run and document current lint status: `yarn workspace @safe-global/web lint | grep -i "no-fee-campaign\|noFeeCampaign" || echo "No lint warnings"`
+- [x] T002 Run and document current type-check status: `pnpm --filter @safe-global/web type-check | grep -i "no-fee-campaign\|noFeeCampaign" || echo "No type errors"`
+- [x] T003 [P] Run and document current lint status: `pnpm --filter @safe-global/web lint | grep -i "no-fee-campaign\|noFeeCampaign" || echo "No lint warnings"`
 - [x] T004 [P] Document all current external imports (search codebase for `@/features/no-fee-campaign`): `grep -r "@/features/no-fee-campaign" apps/web/src/ --exclude-dir=node_modules`
 - [x] T005 [P] Verify semantic mapping exists: Check that `apps/web/src/features/__core__/createFeatureHandle.ts` contains `'no-fee-campaign': FEATURES.NO_FEE_NOVEMBER` mapping
 
@@ -108,7 +108,7 @@
 
 ### 3.3: Verify Type Safety
 
-- [x] T013 [US1] Run type-check: `yarn workspace @safe-global/web type-check` (must pass with zero errors related to no-fee-campaign)
+- [x] T013 [US1] Run type-check: `pnpm --filter @safe-global/web type-check` (must pass with zero errors related to no-fee-campaign)
 
 **Checkpoint**: Core architecture files created - hooks use named exports, public API exists, type-check passes
 
@@ -122,7 +122,7 @@
 
 ### 4.1: Bundle Analysis
 
-- [ ] T014 [US2] Build the app: `yarn workspace @safe-global/web build`
+- [ ] T014 [US2] Build the app: `pnpm --filter @safe-global/web build`
 - [ ] T015 [US2] Analyze bundle to verify no-fee-campaign is in separate chunk:
   - Look for chunk files containing "no-fee-campaign" or similar in `.next/static/chunks/`
   - Verify no-fee-campaign code is not in main bundle (`main-*.js`)
@@ -204,7 +204,7 @@
 
 ### 5.7: ESLint Verification
 
-- [x] T030 [US3] Run lint: `yarn workspace @safe-global/web lint` (must pass with zero restricted import warnings for no-fee-campaign)
+- [x] T030 [US3] Run lint: `pnpm --filter @safe-global/web lint` (must pass with zero restricted import warnings for no-fee-campaign)
 - [x] T031 [US3] Verify no ESLint warnings about importing from `@/features/no-fee-campaign/components`, `@/features/no-fee-campaign/hooks`, or `@/features/no-fee-campaign/services`
 
 ### 5.8: Architecture Compliance Check
@@ -229,9 +229,9 @@
 
 ### 6.1: Code Quality
 
-- [x] T037 [P] Run prettier auto-fix: `yarn prettier:fix`
-- [x] T038 [P] Final type-check: `yarn workspace @safe-global/web type-check` (must pass)
-- [x] T039 [P] Final lint check: `yarn workspace @safe-global/web lint` (must pass)
+- [x] T037 [P] Run prettier auto-fix: `pnpm prettier:fix`
+- [x] T038 [P] Final type-check: `pnpm --filter @safe-global/web type-check` (must pass)
+- [x] T039 [P] Final lint check: `pnpm --filter @safe-global/web lint` (must pass)
 
 ### 6.2: Functional Testing
 
@@ -255,7 +255,7 @@
 ### 6.3: Bundle Verification
 
 - [ ] T043 Clean build artifacts: `rm -rf apps/web/.next`
-- [ ] T044 Build app: `yarn workspace @safe-global/web build` (must succeed)
+- [ ] T044 Build app: `pnpm --filter @safe-global/web build` (must succeed)
 - [ ] T045 Verify bundle analysis shows no-fee-campaign in separate chunk
 - [ ] T046 Verify main bundle size decreased (no-fee-campaign code removed from main chunk)
 
@@ -268,7 +268,7 @@ Verify all success criteria from spec.md:
 - [ ] T049 ✅ SC-003: ESLint restricted import rules pass with zero warnings (verified in T030-T031)
 - [ ] T050 ✅ SC-004: All TypeScript type checks pass with full type inference (verified in T013, T038)
 - [ ] T051 ✅ SC-005: Bundle size for main chunk decreases when feature disabled (verified in T046)
-- [ ] T052 ✅ SC-006: All existing unit tests and integration tests continue to pass (run: `yarn workspace @safe-global/web test`)
+- [ ] T052 ✅ SC-006: All existing unit tests and integration tests continue to pass (run: `pnpm --filter @safe-global/web test`)
 - [ ] T053 ✅ SC-007: Feature can be disabled per chain without loading any feature code (verified in T016-T018, T041)
 - [ ] T054 ✅ SC-008: Developers can use feature via `useLoadFeature()` pattern with proper autocomplete (verified through TypeScript inference in T038)
 

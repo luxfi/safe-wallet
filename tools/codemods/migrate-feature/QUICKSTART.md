@@ -6,7 +6,7 @@ The tool is already installed as a workspace. From the repository root:
 
 ```bash
 # Build the tool (only needed once or after changes)
-yarn workspace @safe-wallet/migrate-feature-codemod build
+pnpm --filter @safe-wallet/migrate-feature-codemod build
 ```
 
 ## Basic Usage
@@ -84,9 +84,9 @@ return <feature.MyComponent />
 ### 7. Verify
 
 ```bash
-yarn workspace @safe-global/web type-check
-yarn workspace @safe-global/web lint
-yarn workspace @safe-global/web test
+pnpm --filter @safe-global/web type-check
+pnpm --filter @safe-global/web lint
+pnpm --filter @safe-global/web test
 ```
 
 ## Common Scenarios
@@ -134,7 +134,7 @@ This is expected. You need to:
 
 1. Complete the consumer file migrations (replace direct imports with feature handle)
 2. Ensure all imports in `feature.ts` are correct
-3. Run `yarn workspace @safe-global/web type-check` to see all errors
+3. Run `pnpm --filter @safe-global/web type-check` to see all errors
 
 ## What the Tool Does
 

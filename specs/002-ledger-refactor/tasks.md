@@ -82,7 +82,7 @@ description: 'Task list for ledger feature architecture refactoring'
 **Verification:**
 
 - [x] T019 [US1] Verify apps/web/src/features/ledger/ directory structure matches standard pattern (components/, hooks/, store/, types.ts, constants.ts, index.ts)
-- [x] T020 [US1] Run yarn workspace @safe-global/web type-check to verify no type errors
+- [x] T020 [US1] Run pnpm --filter @safe-global/web type-check to verify no type errors
 - [x] T021 [US1] Verify dialog displays correctly when triggered during transaction signing (manual test)
 
 **Checkpoint**: At this point, User Story 1 should be fully functional - directory structure is correct, all files are organized, tests pass
@@ -106,7 +106,7 @@ description: 'Task list for ledger feature architecture refactoring'
 - [x] T025 [US2] Export types from index.ts: export type { TransactionHash, LedgerHashState, ShowHashFunction, HideHashFunction } from './types'
 - [x] T026 [US2] Export store functions from index.ts: export { showLedgerHashComparison, hideLedgerHashComparison } from './store'
 - [x] T027 [US2] Set default export in index.ts to the lazy-loaded LedgerHashComparison component
-- [x] T028 [US2] Run yarn workspace @safe-global/web build to verify build succeeds
+- [x] T028 [US2] Run pnpm --filter @safe-global/web build to verify build succeeds
 - [x] T029 [US2] Verify separate ledger chunk exists in apps/web/.next/static/chunks/ (ls -lh apps/web/.next/static/chunks/ | grep -i ledger)
 - [x] T030 [US2] Verify initial page load does not include ledger code (check network tab in browser dev tools)
 - [x] T031 [US2] Verify ledger feature loads on-demand when transaction signing initiated (manual test with network throttling)
@@ -123,14 +123,14 @@ description: 'Task list for ledger feature architecture refactoring'
 
 ### Tests for User Story 3
 
-- [x] T032 [US3] Add ESLint test: verify no restricted import warnings for ledger feature (yarn workspace @safe-global/web lint | grep ledger)
+- [x] T032 [US3] Add ESLint test: verify no restricted import warnings for ledger feature (pnpm --filter @safe-global/web lint | grep ledger)
 
 ### Implementation for User Story 3
 
 - [x] T033 [US3] Update import in apps/web/src/services/onboard/ledger-module.ts line 166 from '@/features/ledger/store' to '@/features/ledger'
 - [x] T034 [US3] Verify import in apps/web/src/components/tx-flow/TxFlow.tsx line 13 is already correct (import LedgerHashComparison from '@/features/ledger')
-- [x] T035 [US3] Run yarn workspace @safe-global/web lint to verify no ESLint warnings about restricted imports
-- [x] T036 [US3] Run yarn workspace @safe-global/web type-check to verify all imports resolve correctly
+- [x] T035 [US3] Run pnpm --filter @safe-global/web lint to verify no ESLint warnings about restricted imports
+- [x] T036 [US3] Run pnpm --filter @safe-global/web type-check to verify all imports resolve correctly
 - [x] T037 [US3] Verify showLedgerHashComparison and hideLedgerHashComparison functions work correctly after import update (manual test)
 - [x] T038 [US3] Verify dialog state updates correctly when functions called from ledger-module.ts (manual test with Ledger device)
 
@@ -143,9 +143,9 @@ description: 'Task list for ledger feature architecture refactoring'
 **Purpose**: Documentation, Storybook, final verification
 
 - [x] T039 [P] Create Storybook story in apps/web/src/features/ledger/components/LedgerHashComparison/LedgerHashComparison.stories.tsx with Default, ShortHash, and Hidden variants
-- [x] T040 [P] Verify Storybook story renders correctly (yarn workspace @safe-global/web storybook and navigate to Features/Ledger/LedgerHashComparison)
-- [x] T041 Run yarn workspace @safe-global/web prettier to verify code formatting
-- [x] T042 Run all existing tests to verify no regressions (yarn workspace @safe-global/web test)
+- [x] T040 [P] Verify Storybook story renders correctly (pnpm --filter @safe-global/web storybook and navigate to Features/Ledger/LedgerHashComparison)
+- [x] T041 Run pnpm --filter @safe-global/web prettier to verify code formatting
+- [x] T042 Run all existing tests to verify no regressions (pnpm --filter @safe-global/web test)
 - [x] T043 Verify quickstart.md checklist items all pass
 - [x] T044 Manual end-to-end test: Connect Ledger device, sign transaction, verify hash dialog appears and closes correctly
 - [x] T045 Measure bundle size impact: verify initial page load bundle size has not increased (ledger code is split)
@@ -222,8 +222,8 @@ Task: "Create component tests in apps/web/src/features/ledger/components/LedgerH
 ```bash
 # These polish tasks can run together:
 Task: "Create Storybook story in apps/web/src/features/ledger/components/LedgerHashComparison/LedgerHashComparison.stories.tsx"
-Task: "Run yarn workspace @safe-global/web prettier"
-Task: "Run all existing tests (yarn workspace @safe-global/web test)"
+Task: "Run pnpm --filter @safe-global/web prettier"
+Task: "Run all existing tests (pnpm --filter @safe-global/web test)"
 ```
 
 ---

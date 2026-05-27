@@ -45,13 +45,13 @@
 - [x] T010 [P] Implement calculateProtocolPercentage utility at `packages/utils/src/features/positions/utils/calculateProtocolPercentage.ts`
 - [x] T011 [P] Implement transformAppBalancesToProtocols utility at `packages/utils/src/features/positions/utils/transformAppBalancesToProtocols.ts`
 - [x] T012 Export all utilities from `packages/utils/src/features/positions/index.ts`
-- [x] T013 Run tests to verify all shared utilities pass: `yarn workspace @safe-global/utils test`
+- [x] T013 Run tests to verify all shared utilities pass: `pnpm --filter @safe-global/utils test`
 
 ### Web Refactor (Validate Shared Utilities)
 
 - [x] T014 Refactor web `apps/web/src/features/positions/utils.ts` to import getReadablePositionType from `@safe-global/utils`
 - [x] T015 Refactor web `apps/web/src/features/positions/hooks/usePositions.ts` to import transformAppBalancesToProtocols from `@safe-global/utils`
-- [x] T016 Run web tests to verify refactor didn't break anything: `yarn workspace @safe-global/web test`
+- [x] T016 Run web tests to verify refactor didn't break anything: `pnpm --filter @safe-global/web test`
 
 **Checkpoint**: Shared utilities complete and validated via web refactor
 
@@ -101,7 +101,7 @@
 - [x] T031 [P] [US2] Create PositionsError barrel export at `apps/mobile/src/features/Assets/components/Positions/PositionsError/index.ts`
 - [x] T032 [US2] Create Positions.container at `apps/mobile/src/features/Assets/components/Positions/Positions.container.tsx` (uses usePositionsGetPositionsV1Query, handles loading/error/empty/loaded states, renders FlatList with ProtocolSection items)
 - [x] T033 [US2] Add Positions tab to Assets.container at `apps/mobile/src/features/Assets/Assets.container.tsx` (insert between Tokens and NFTs, conditionally render based on useHasFeature(FEATURES.POSITIONS))
-- [x] T034 [US2] Run mobile tests: `yarn workspace @safe-global/mobile test`
+- [x] T034 [US2] Run mobile tests: `pnpm --filter @safe-global/mobile test`
 
 **Checkpoint**: MVP complete - User can view positions with proper loading/error/empty states
 
@@ -122,7 +122,7 @@
 - [x] T036 [US3] Add RefreshControl to FlatList in `apps/mobile/src/features/Assets/components/Positions/Positions.container.tsx`
 - [x] T037 [US3] Implement onRefresh handler with isRefreshing state management in Positions.container.tsx
 - [x] T038 [US3] Handle refresh error case (keep existing data visible, hide refresh indicator)
-- [x] T039 [US3] Run mobile tests to verify pull-to-refresh: `yarn workspace @safe-global/mobile test`
+- [x] T039 [US3] Run mobile tests to verify pull-to-refresh: `pnpm --filter @safe-global/mobile test`
 
 **Checkpoint**: Pull-to-refresh complete
 
@@ -138,7 +138,7 @@
 
 - [x] T047 [US5] Update PositionFiatChange component to wrap percentage in InfoSheet for tap-to-show help
 - [x] T048 [US5] Existing PositionItem tests verify the 24h change content still renders correctly with InfoSheet wrapper
-- [x] T049 [US5] Run mobile tests: `yarn workspace @safe-global/mobile test`
+- [x] T049 [US5] Run mobile tests: `pnpm --filter @safe-global/mobile test`
 
 **Checkpoint**: All user stories complete
 
@@ -148,10 +148,10 @@
 
 **Purpose**: Final validation and cleanup
 
-- [x] T040 Run full type-check: `yarn workspace @safe-global/mobile type-check`
-- [x] T041 Run linting: `yarn workspace @safe-global/mobile lint`
-- [x] T042 Run prettier: `yarn workspace @safe-global/mobile prettier`
-- [x] T043 Verify web still works after shared utils refactor: `yarn workspace @safe-global/web type-check && yarn workspace @safe-global/web test`
+- [x] T040 Run full type-check: `pnpm --filter @safe-global/mobile type-check`
+- [x] T041 Run linting: `pnpm --filter @safe-global/mobile lint`
+- [x] T042 Run prettier: `pnpm --filter @safe-global/mobile prettier`
+- [x] T043 Verify web still works after shared utils refactor: `pnpm --filter @safe-global/web type-check && pnpm --filter @safe-global/web test`
 - [x] T044 Manual test on iOS simulator with Safe containing DeFi positions
 - [ ] T045 Manual test on Android emulator with Safe containing DeFi positions
 - [x] T046 Verify feature flag correctly hides tab when FEATURES.POSITIONS disabled

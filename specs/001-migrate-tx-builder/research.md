@@ -244,7 +244,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/yarn
       - name: Build tx-builder
-        run: yarn workspace @safe-global/tx-builder build
+        run: pnpm --filter @safe-global/tx-builder build
         env:
           VITE_TENDERLY_ORG_NAME: ${{ secrets.TENDERLY_ORG_NAME }}
           # ... other env vars

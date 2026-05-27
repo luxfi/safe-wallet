@@ -80,14 +80,14 @@ Radius scale from 0-12 (0px to 50px)
 
 ```bash
 # Run tests
-yarn test
+pnpm test
 
 # Type check
 yarn type-check
 
 # Lint
-yarn lint
-yarn lint:fix
+pnpm lint
+pnpm lint:fix
 
 # Format
 yarn prettier

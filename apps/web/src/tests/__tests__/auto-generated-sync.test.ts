@@ -15,7 +15,7 @@ describe('AUTO_GENERATED types sync', () => {
     if (result.status !== 0) {
       throw new Error(
         `AUTO_GENERATED files are out of sync with schema.json.\n${output}\n` +
-          'Run `yarn workspace @safe-global/store build:dev` to regenerate.',
+          'Run `pnpm --filter @safe-global/store build:dev` to regenerate.',
       )
     }
 

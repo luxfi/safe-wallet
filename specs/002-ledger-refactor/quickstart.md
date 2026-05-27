@@ -303,25 +303,25 @@ import LedgerHashComparison from '@/features/ledger'
 **1. Type check:**
 
 ```bash
-yarn workspace @safe-global/web type-check
+pnpm --filter @safe-global/web type-check
 ```
 
 **2. Run tests:**
 
 ```bash
-yarn workspace @safe-global/web test ledger
+pnpm --filter @safe-global/web test ledger
 ```
 
 **3. Lint:**
 
 ```bash
-yarn workspace @safe-global/web lint
+pnpm --filter @safe-global/web lint
 ```
 
 **4. Build:**
 
 ```bash
-yarn workspace @safe-global/web build
+pnpm --filter @safe-global/web build
 ```
 
 **5. Verify bundle splitting:**
@@ -333,7 +333,7 @@ ls -lh apps/web/.next/static/chunks/ | grep -i ledger
 
 **6. Manual test:**
 
-- Start dev server: `yarn workspace @safe-global/web dev`
+- Start dev server: `pnpm --filter @safe-global/web dev`
 - Connect Ledger device
 - Initiate transaction signing
 - Verify dialog appears with hash

@@ -89,7 +89,7 @@ Add/update component header comment:
 Run type-check:
 
 ```bash
-yarn workspace @safe-global/web type-check
+pnpm --filter @safe-global/web type-check
 ```
 
 ## Rules

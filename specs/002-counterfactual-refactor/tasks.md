@@ -73,7 +73,7 @@ Breaking down the counterfactual feature refactoring into 84 actionable tasks ac
 
 ### Checkpoint 1: Verify Structure Created
 
-- [x] Run `yarn workspace @safe-global/web type-check`
+- [x] Run `pnpm --filter @safe-global/web type-check`
 - [x] Verify exit code 0 (no errors from new empty files)
 
 **Acceptance**: Type-check passes, structure ready for file moves
@@ -254,7 +254,7 @@ Breaking down the counterfactual feature refactoring into 84 actionable tasks ac
 
 ### Checkpoint 2: Verify Internal Imports
 
-- [x] Run `yarn workspace @safe-global/web type-check | grep counterfactual`
+- [x] Run `pnpm --filter @safe-global/web type-check | grep counterfactual`
 - [x] Fix any remaining internal import errors within counterfactual feature
 - [x] Verify no internal counterfactual errors (only external import errors expected)
 
@@ -356,7 +356,7 @@ Breaking down the counterfactual feature refactoring into 84 actionable tasks ac
 
 ### Checkpoint 3: Verify Public API
 
-- [x] Run `yarn workspace @safe-global/web type-check`
+- [x] Run `pnpm --filter @safe-global/web type-check`
 - [x] Expect many external import errors (49 files not updated yet)
 - [x] Verify feature's public API exports are type-correct
 
@@ -477,7 +477,7 @@ export {
 
 ### Checkpoint 4: Verify Transaction Flows
 
-- [x] Run `yarn workspace @safe-global/web type-check`
+- [x] Run `pnpm --filter @safe-global/web type-check`
 - [x] Verify no errors in tx-flow files
 
 **Acceptance**: Transaction flow imports all resolve
@@ -534,7 +534,7 @@ export {
 
 ### Checkpoint 5: Verify Safe Creation
 
-- [x] Run `yarn workspace @safe-global/web type-check`
+- [x] Run `pnpm --filter @safe-global/web type-check`
 - [x] Verify no errors in new-safe/create files
 
 **Acceptance**: Safe creation imports all resolve
@@ -739,7 +739,7 @@ export {
 
 ### Checkpoint 6: Verify All External Imports
 
-- [x] Run `yarn workspace @safe-global/web type-check`
+- [x] Run `pnpm --filter @safe-global/web type-check`
 - [x] Verify exit code 0 (all imports resolve)
 - [x] No counterfactual-related errors
 
@@ -755,7 +755,7 @@ export {
 
 ### Task 75: Run Type Check
 
-- [x] Execute `yarn workspace @safe-global/web type-check`
+- [x] Execute `pnpm --filter @safe-global/web type-check`
 - [x] Verify exit code 0
 - [x] Verify zero errors
 
@@ -765,7 +765,7 @@ export {
 
 ### Task 76: Run Linting
 
-- [x] Execute `yarn workspace @safe-global/web lint`
+- [x] Execute `pnpm --filter @safe-global/web lint`
 - [x] Verify zero no-restricted-imports warnings for counterfactual
 - [x] Fix any warnings if they exist
 
@@ -775,7 +775,7 @@ export {
 
 ### Task 77: Run Unit Tests
 
-- [x] Execute `yarn workspace @safe-global/web test`
+- [x] Execute `pnpm --filter @safe-global/web test`
 - [x] Verify 100% pass rate
 - [x] All counterfactual tests pass
 - [x] No test modifications needed (except import paths)
@@ -786,7 +786,7 @@ export {
 
 ### Task 78: Build Application
 
-- [x] Execute `yarn workspace @safe-global/web build`
+- [x] Execute `pnpm --filter @safe-global/web build`
 - [x] Verify build succeeds
 - [x] No build errors
 

@@ -30,7 +30,7 @@ Sync CSS variables from Figma plugin [variables2css](https://www.figma.com/commu
 1. Ask user for Figma CSS Variables plugin export
 2. Compare Figma values vs `globals.css` existing variables
 3. Update only values that differ (use direct hex values)
-4. Verify: `yarn workspace @safe-global/web type-check`
+4. Verify: `pnpm --filter @safe-global/web type-check`
 
 ## Variable Mapping
 

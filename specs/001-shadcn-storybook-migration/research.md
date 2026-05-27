@@ -127,7 +127,7 @@ jobs:
         with:
           node-version: 20
           cache: yarn
-      - run: yarn install --frozen-lockfile
+      - run: pnpm install --frozen-lockfile
       - name: Publish to Chromatic
         uses: chromaui/action@latest
         with:
@@ -430,7 +430,7 @@ interface ComponentInventory {
 
 ### Implementation Location
 
-`scripts/storybook/inventory.ts` - Runs as: `yarn workspace @safe-global/web inventory`
+`scripts/storybook/inventory.ts` - Runs as: `pnpm --filter @safe-global/web inventory`
 
 ---
 

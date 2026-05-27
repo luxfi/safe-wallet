@@ -13,7 +13,7 @@ A developer clones the safe-wallet-monorepo and wants to run the tx-builder app 
 
 **Why this priority**: Without local development capability, no other work can proceed. This validates the migration foundation.
 
-**Independent Test**: Can be fully tested by running `yarn workspace @safe-global/tx-builder dev` and verifying the app loads in a browser at localhost.
+**Independent Test**: Can be fully tested by running `pnpm --filter @safe-global/tx-builder dev` and verifying the app loads in a browser at localhost.
 
 **Acceptance Scenarios**:
 

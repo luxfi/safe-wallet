@@ -371,9 +371,9 @@ This is correct and compliant. However, the current `@/features/earn` exports th
 
 After implementation, validate success by:
 
-1. ✅ Running type-check: `yarn workspace @safe-global/web type-check`
-2. ✅ Running tests: `yarn workspace @safe-global/web test`
-3. ✅ Running lint: `yarn workspace @safe-global/web lint`
+1. ✅ Running type-check: `pnpm --filter @safe-global/web type-check`
+2. ✅ Running tests: `pnpm --filter @safe-global/web test`
+3. ✅ Running lint: `pnpm --filter @safe-global/web lint`
 4. ✅ Bundle analysis to confirm code splitting
 5. ✅ Manual testing of earn flows (consent, widget, asset selection)
 6. ✅ Verify external imports use `@/features/earn` (no deep paths)

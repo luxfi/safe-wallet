@@ -20,16 +20,16 @@ Testing guide for the `apps/web/` workspace. Follow these conventions to write c
 
 ```bash
 # Run all tests
-yarn workspace @safe-global/web test
+pnpm --filter @safe-global/web test
 
 # Run a specific test file
-yarn workspace @safe-global/web test -- --testPathPattern=src/features/earn/services/utils
+pnpm --filter @safe-global/web test -- --testPathPattern=src/features/earn/services/utils
 
 # Watch mode
-yarn workspace @safe-global/web test -- --watch --testPathPattern=src/features/earn
+pnpm --filter @safe-global/web test -- --watch --testPathPattern=src/features/earn
 
 # Coverage report
-yarn workspace @safe-global/web test:coverage
+pnpm --filter @safe-global/web test:coverage
 ```
 
 ## File location

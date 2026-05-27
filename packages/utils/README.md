@@ -188,19 +188,19 @@ This package requires the following peer dependencies:
 
 ```bash
 # Run tests
-yarn workspace @safe-global/utils test
+pnpm --filter @safe-global/utils test
 
 # Run tests with coverage
-yarn workspace @safe-global/utils test:coverage
+pnpm --filter @safe-global/utils test:coverage
 
 # Type check
-yarn workspace @safe-global/utils type-check
+pnpm --filter @safe-global/utils type-check
 
 # Lint
-yarn workspace @safe-global/utils lint
+pnpm --filter @safe-global/utils lint
 
 # Format
-yarn workspace @safe-global/utils prettier:fix
+pnpm --filter @safe-global/utils prettier:fix
 ```
 
 ## Contributing

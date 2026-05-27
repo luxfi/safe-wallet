@@ -17,13 +17,13 @@ The snapshot testing setup automatically discovers all `.stories.tsx` files in t
 
 ```bash
 # Run all snapshot tests
-yarn test:storybook
+pnpm test:storybook
 
 # Run in CI mode (no watch, silent)
-yarn test:storybook:ci
+pnpm test:storybook:ci
 
 # Update snapshots when changes are intentional
-yarn test:storybook -u
+pnpm test:storybook -u
 ```
 
 ## Snapshot Files
@@ -54,7 +54,7 @@ Snapshot tests will fail when:
 ### If the changes are intentional:
 
 ```bash
-yarn test:storybook -u
+pnpm test:storybook -u
 ```
 
 Then commit the updated snapshot file.
@@ -85,11 +85,11 @@ Review the diff and fix the component code to match the expected output.
 yarn storybook
 
 # Build static Storybook
-yarn build-storybook
+pnpm build-storybook
 
 # Run regular Jest unit tests
-yarn test
+pnpm test
 
 # Run all tests with coverage
-yarn test:coverage
+pnpm test:coverage
 ```

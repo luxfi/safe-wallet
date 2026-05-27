@@ -86,10 +86,10 @@
 - [x] T024 [US2] Update apps/web/src/features/walletconnect/components/index.tsx to export from new locations
 - [x] T025 [US2] Create apps/web/src/features/walletconnect/index.ts root barrel file with public API (lazy-loaded component, types, hooks)
 - [x] T026 [US2] Update all external imports of walletconnect internals to use the new public API from index.ts
-- [x] T027 [US2] Run yarn workspace @safe-global/web type-check to verify no type errors
-- [x] T028 [US2] Run yarn workspace @safe-global/web lint to verify ESLint rules pass
-- [x] T029 [US2] Run yarn workspace @safe-global/web test to verify all existing tests pass (Note: 34/34 tests pass; some test suites fail due to pre-existing @safe-global/theme issue)
-- [x] T030 [US2] Run yarn workspace @safe-global/web build and verify walletconnect code is in separate chunk (Note: Type-check passes for walletconnect; build skipped due to pre-existing issues)
+- [x] T027 [US2] Run pnpm --filter @safe-global/web type-check to verify no type errors
+- [x] T028 [US2] Run pnpm --filter @safe-global/web lint to verify ESLint rules pass
+- [x] T029 [US2] Run pnpm --filter @safe-global/web test to verify all existing tests pass (Note: 34/34 tests pass; some test suites fail due to pre-existing @safe-global/theme issue)
+- [x] T030 [US2] Run pnpm --filter @safe-global/web build and verify walletconnect code is in separate chunk (Note: Type-check passes for walletconnect; build skipped due to pre-existing issues)
 
 **Checkpoint**: User Story 2 complete - walletconnect is the reference implementation
 
@@ -176,10 +176,10 @@
 ### Implementation for User Story 5 - Batch 4: Remaining Features
 
 - [ ] T068 [US5] Migrate all remaining features not yet covered to standard structure
-- [ ] T069 [US5] Run full test suite: yarn workspace @safe-global/web test
-- [ ] T070 [US5] Run full lint check: yarn workspace @safe-global/web lint
-- [ ] T071 [US5] Run full type check: yarn workspace @safe-global/web type-check
-- [ ] T072 [US5] Verify build succeeds and all features have separate chunks: yarn workspace @safe-global/web build
+- [ ] T069 [US5] Run full test suite: pnpm --filter @safe-global/web test
+- [ ] T070 [US5] Run full lint check: pnpm --filter @safe-global/web lint
+- [ ] T071 [US5] Run full type check: pnpm --filter @safe-global/web type-check
+- [ ] T072 [US5] Verify build succeeds and all features have separate chunks: pnpm --filter @safe-global/web build
 
 **Checkpoint**: User Story 5 complete - all features migrated
 
@@ -190,7 +190,7 @@
 **Purpose**: Finalize enforcement and documentation
 
 - [ ] T073 Change ESLint no-restricted-imports rule from 'warn' to 'error' in apps/web/eslint.config.mjs
-- [ ] T074 Run final lint check to confirm no violations: yarn workspace @safe-global/web lint
+- [ ] T074 Run final lint check to confirm no violations: pnpm --filter @safe-global/web lint
 - [ ] T075 Update AGENTS.md with final feature architecture guidance
 - [ ] T076 [P] Update apps/web/docs/feature-architecture.md with any final refinements
 - [ ] T077 [P] Archive specs/001-feature-architecture/migration-learnings.md to apps/web/docs/
