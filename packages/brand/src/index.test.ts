@@ -1,12 +1,20 @@
-import { brand, type Brand } from './index'
+import { brand, resolveBrand, type Brand } from './index'
 
 describe('brand', () => {
-  it('exposes the upstream Safe defaults when no env vars are set', () => {
-    expect(brand.name).toBe('Safe{Wallet}')
-    expect(brand.shortName).toBe('Safe')
-    expect(brand.domain).toBe('safe.global')
-    expect(brand.email).toBe('support@safe.global')
-    expect(brand.helpUrl).toBe('https://help.safe.global')
+  it('defaults to Lux monochrome when no host matches', () => {
+    // No `location` in the test env → the Lux default.
+    expect(brand.name).toBe('Lux Safe')
+    expect(brand.domain).toBe('safe.lux.network')
+    expect(brand.primaryColor).toBe('#121312')
+    expect(resolveBrand('random.example.com').name).toBe('Lux Safe')
+  })
+
+  it('resolves the brand from the request host', () => {
+    expect(resolveBrand('safe.lux.network').name).toBe('Lux Safe')
+    expect(resolveBrand('app.lux.network').name).toBe('Lux Safe')
+    expect(resolveBrand('safe.zoo.network').name).toBe('Zoo Safe')
+    expect(resolveBrand('safe.pars.network').name).toBe('Pars Safe')
+    expect(resolveBrand('vault.hanzo.ai').name).toBe('Hanzo Vault')
   })
 
   it('matches the Brand interface', () => {
@@ -14,7 +22,6 @@ describe('brand', () => {
     expect(typeof b.name).toBe('string')
     expect(typeof b.shortName).toBe('string')
     expect(typeof b.domain).toBe('string')
-    expect(typeof b.email).toBe('string')
     expect(typeof b.logoUrl).toBe('string')
   })
 

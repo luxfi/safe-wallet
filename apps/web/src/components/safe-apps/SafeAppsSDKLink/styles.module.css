@@ -3,7 +3,7 @@
   padding: var(--space-3);
   padding-top: var(--space-6);
   background-color: var(--color-background-main);
-  border: 1px solid #12ff80;
+  border: 1px solid #121312;
   border-radius: 0 0 12px 12px;
   border-top: 0;
   position: fixed;
@@ -59,7 +59,7 @@
 .container.mini:focus,
 .container.mini:hover {
   transform: translateY(calc(-1 * var(--topbar-height)));
-  border-color: #12ff80;
+  border-color: #121312;
   background-color: var(--color-background-main);
 }
 
