@@ -25,11 +25,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
-        with:
-          platforms: arm64
-
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
         with:
@@ -55,7 +50,11 @@ jobs:
         with:
           context: .
           file: Dockerfile.lux
-          platforms: linux/amd64,linux/arm64
+          # lux-k8s nodes are all amd64 and only an amd64 ARC runner exists;
+          # a Node/Next build cannot cross-compile (unlike the Go CGW), so an
+          # arm64 leg would run under QEMU emulation — slow and OOM-prone.
+          # Build amd64 natively. Revisit if an arm64 runner comes online.
+          platforms: linux/amd64
           push: true
           tags: ghcr.io/luxfi/lux-safe:${{ steps.tag.outputs.value }}
           provenance: false
