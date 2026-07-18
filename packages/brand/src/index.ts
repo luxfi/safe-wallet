@@ -1,105 +1,177 @@
 /**
- * @safe-global/brand — white-label brand tokens
+ * @safe-global/brand — domain-driven white-label brand tokens.
  *
- * One source of truth for the human-facing brand. Every wallet shipped from
- * this monorepo reads these values; no `'Safe'` / `'safe.global'` literal
- * lives in `apps/` or `packages/*` source.
+ * The brand is resolved from the REQUEST HOST at runtime (like getWhiteLabelBrand
+ * across the rest of the Hanzo/Lux shared stack), NOT baked at build time. One
+ * image serves every brand: `safe.lux.network` → Lux, `safe.zoo.network` → Zoo,
+ * `safe.pars.network` → Pars, `vault.hanzo.ai` → Hanzo. No single brand is
+ * hardcoded — when no host matches, the fallback is Lux monochrome.
  *
- * Defaults match upstream Safe values, so an unbranded build is byte-for-byte
- * the same as today. Per-brand builds override via `NEXT_PUBLIC_BRAND_*`
- * (web) or `EXPO_PUBLIC_BRAND_*` (mobile) env vars at build time.
+ * Every `'Safe'` / `'safe.global'` literal in the app reads from this `brand`
+ * object, so swapping the host swaps the whole product identity.
  */
 
 export interface Brand {
-  /** Product name as it appears in chrome, titles, marketing copy. */
   name: string
-  /** Short form for tight UI (sidebar, badges). */
   shortName: string
-  /** Apex domain — `safe.global`, `safe.lux.network`, `vault.hanzo.ai`. */
   domain: string
-  /** App host — `app.safe.global`, `safe.lux.network`. */
   appHost: string
-  /** Full app URL with scheme. */
   appUrl: string
-  /** Support email. */
   email: string
-  /** Help center / docs URL (no trailing slash). */
   helpUrl: string
-  /** Terms of service URL. */
   termsUrl: string
-  /** Privacy policy URL. */
   privacyUrl: string
-  /** Imprint / legal URL. */
   imprintUrl: string
-  /** Cookie policy URL. */
   cookieUrl: string
-  /** Licenses page URL. */
   licensesUrl: string
-  /** Brand logo path (served by the app, swap per brand). */
   logoUrl: string
-  /** Favicon path. */
   faviconUrl: string
-  /** Primary brand color (hex). */
   primaryColor: string
-  /** Status page URL. */
   statusUrl: string
-  /** Developer portal URL. */
   developerUrl: string
-  /** Gateway service URL (CGW — Safe Transaction Service). */
   gatewayUrl: string
-  /** Staging gateway URL. */
   gatewayStagingUrl: string
-  /** Discord / chat invite URL. */
   discordUrl: string
-  /** Twitter / X URL. */
   twitterUrl: string
-  /** Support chat alias domain (Pylon). */
   supportChatAliasDomain: string
-  /** GitHub repo URL. */
   githubUrl: string
-  /** Apple App Store URL (mobile). */
   appStoreUrl: string
-  /** Google Play Store URL (mobile). */
   playStoreUrl: string
-  /** Help article slug prefix (legacy `articles/` path). */
   helpArticlesPath: string
 }
 
-const env = (key: string, fallback: string): string => {
-  // Read NEXT_PUBLIC_* (web) and EXPO_PUBLIC_* (mobile) interchangeably so the
-  // same brand bundle works in both apps.
-  const next = `NEXT_PUBLIC_BRAND_${key}`
-  const expo = `EXPO_PUBLIC_BRAND_${key}`
-  return process.env[next] ?? process.env[expo] ?? fallback
+// The Lux Safe Client Gateway is multi-chain (Lux 96369 / Zoo 200200 /
+// Pars 494949), so every Lux-family brand shares it until each stands up its own.
+const CGW = 'https://safe-cgw.lux.network'
+
+// Lux — the monochrome default. Neutral chrome, black primary.
+const lux: Brand = {
+  name: 'Lux Safe',
+  shortName: 'Safe',
+  domain: 'safe.lux.network',
+  appHost: 'safe.lux.network',
+  appUrl: 'https://safe.lux.network',
+  email: 'support@lux.network',
+  helpUrl: 'https://docs.lux.network/safe',
+  termsUrl: 'https://lux.network/terms',
+  privacyUrl: 'https://lux.network/privacy',
+  imprintUrl: 'https://lux.network/imprint',
+  cookieUrl: 'https://lux.network/cookie',
+  licensesUrl: 'https://lux.network/licenses',
+  logoUrl: '/brand/lux/logo.svg',
+  faviconUrl: '/brand/lux/favicon.ico',
+  primaryColor: '#121312',
+  statusUrl: 'https://status.lux.network',
+  developerUrl: 'https://docs.lux.network',
+  gatewayUrl: CGW,
+  gatewayStagingUrl: CGW,
+  discordUrl: 'https://discord.gg/lux',
+  twitterUrl: 'https://twitter.com/luxdefi',
+  supportChatAliasDomain: 'anon.lux.network',
+  githubUrl: 'https://github.com/luxfi/safe-wallet',
+  appStoreUrl: '',
+  playStoreUrl: '',
+  helpArticlesPath: 'articles',
 }
 
-export const brand: Brand = {
-  name: env('NAME', 'Safe{Wallet}'),
-  shortName: env('SHORT_NAME', 'Safe'),
-  domain: env('DOMAIN', 'safe.global'),
-  appHost: env('APP_HOST', 'app.safe.global'),
-  appUrl: env('APP_URL', 'https://app.safe.global'),
-  email: env('EMAIL', 'support@safe.global'),
-  helpUrl: env('HELP_URL', 'https://help.safe.global'),
-  termsUrl: env('TERMS_URL', 'https://safe.global/terms'),
-  privacyUrl: env('PRIVACY_URL', 'https://safe.global/privacy'),
-  imprintUrl: env('IMPRINT_URL', 'https://safe.global/imprint'),
-  cookieUrl: env('COOKIE_URL', 'https://safe.global/cookie'),
-  licensesUrl: env('LICENSES_URL', 'https://safe.global/licenses'),
-  logoUrl: env('LOGO_URL', '/images/safe-logo-green.png'),
-  faviconUrl: env('FAVICON_URL', '/favicon.ico'),
-  primaryColor: env('PRIMARY_COLOR', '#12FF80'),
-  statusUrl: env('STATUS_URL', 'https://status.safe.global'),
-  developerUrl: env('DEVELOPER_URL', 'https://developer.safe.global'),
-  gatewayUrl: env('GATEWAY_URL', 'https://safe-client.safe.global'),
-  gatewayStagingUrl: env('GATEWAY_STAGING_URL', 'https://safe-client.staging.5afe.dev'),
-  discordUrl: env('DISCORD_URL', 'https://chat.safe.global'),
-  twitterUrl: env('TWITTER_URL', 'https://twitter.com/safe'),
-  supportChatAliasDomain: env('SUPPORT_CHAT_ALIAS_DOMAIN', 'anon.safe.global'),
-  githubUrl: env('GITHUB_URL', 'https://github.com/safe-global/safe-wallet-monorepo'),
-  appStoreUrl: env('APP_STORE_URL', 'https://apps.apple.com/app/id1515759131'),
-  playStoreUrl: env('PLAY_STORE_URL', 'https://play.google.com/store/apps/details?id=io.gnosis.safe'),
-  helpArticlesPath: env('HELP_ARTICLES_PATH', 'articles'),
+const zoo: Brand = {
+  ...lux,
+  name: 'Zoo Safe',
+  domain: 'safe.zoo.network',
+  appHost: 'safe.zoo.network',
+  appUrl: 'https://safe.zoo.network',
+  email: 'support@zoo.network',
+  helpUrl: 'https://docs.zoo.network/safe',
+  termsUrl: 'https://zoo.network/terms',
+  privacyUrl: 'https://zoo.network/privacy',
+  imprintUrl: 'https://zoo.network/imprint',
+  cookieUrl: 'https://zoo.network/cookie',
+  licensesUrl: 'https://zoo.network/licenses',
+  logoUrl: '/brand/zoo/logo.svg',
+  faviconUrl: '/brand/zoo/favicon.ico',
+  statusUrl: 'https://status.zoo.network',
+  developerUrl: 'https://docs.zoo.network',
+  twitterUrl: 'https://twitter.com/zooprotocol',
+  supportChatAliasDomain: 'anon.zoo.network',
+  githubUrl: 'https://github.com/zooai/safe-wallet',
 }
+
+const pars: Brand = {
+  ...lux,
+  name: 'Pars Safe',
+  domain: 'safe.pars.network',
+  appHost: 'safe.pars.network',
+  appUrl: 'https://safe.pars.network',
+  email: 'support@pars.network',
+  helpUrl: 'https://docs.pars.network/safe',
+  termsUrl: 'https://pars.network/terms',
+  privacyUrl: 'https://pars.network/privacy',
+  imprintUrl: 'https://pars.network/imprint',
+  cookieUrl: 'https://pars.network/cookie',
+  licensesUrl: 'https://pars.network/licenses',
+  logoUrl: '/brand/pars/logo.svg',
+  faviconUrl: '/brand/pars/favicon.ico',
+  statusUrl: 'https://status.pars.network',
+  developerUrl: 'https://docs.pars.network',
+  twitterUrl: 'https://twitter.com/parsdao',
+  supportChatAliasDomain: 'anon.pars.network',
+  githubUrl: 'https://github.com/parsdao/safe-wallet',
+}
+
+const hanzo: Brand = {
+  ...lux,
+  name: 'Hanzo Vault',
+  shortName: 'Vault',
+  domain: 'vault.hanzo.ai',
+  appHost: 'vault.hanzo.ai',
+  appUrl: 'https://vault.hanzo.ai',
+  email: 'support@hanzo.ai',
+  helpUrl: 'https://docs.hanzo.ai/vault',
+  termsUrl: 'https://hanzo.ai/terms',
+  privacyUrl: 'https://hanzo.ai/privacy',
+  imprintUrl: 'https://hanzo.ai/imprint',
+  cookieUrl: 'https://hanzo.ai/cookie',
+  licensesUrl: 'https://hanzo.ai/licenses',
+  logoUrl: '/brand/hanzo/logo.svg',
+  faviconUrl: '/brand/hanzo/favicon.ico',
+  statusUrl: 'https://status.hanzo.ai',
+  developerUrl: 'https://docs.hanzo.ai',
+  twitterUrl: 'https://twitter.com/hanzoai',
+  supportChatAliasDomain: 'anon.hanzo.ai',
+  githubUrl: 'https://github.com/hanzoai/safe-wallet',
+}
+
+/** Host suffix → brand. First match wins; Lux monochrome is the fallback. */
+const REGISTRY: ReadonlyArray<readonly [RegExp, Brand]> = [
+  [/(^|\.)lux\.network$/i, lux],
+  [/(^|\.)zoo\.network$/i, zoo],
+  [/(^|\.)pars\.network$/i, pars],
+  [/(^|\.)hanzo\.ai$/i, hanzo],
+]
+
+/** Resolve the brand for a hostname (defaults to the current host on the web). */
+export const resolveBrand = (hostname?: string): Brand => {
+  const host = (
+    hostname ??
+    (typeof globalThis !== 'undefined'
+      ? (globalThis as { location?: { hostname?: string } }).location?.hostname
+      : '') ??
+    ''
+  ).toLowerCase()
+  for (const [re, b] of REGISTRY) if (re.test(host)) return b
+  return lux // Lux monochrome default — never a non-Lux brand.
+}
+
+/**
+ * Live brand: every property access resolves against the current host, so the
+ * same bundle themes per-domain. During SSG/build (no `location`) it resolves
+ * to the Lux default, which is exactly the wanted fallback.
+ */
+export const brand: Brand = new Proxy({} as Brand, {
+  get: (_target, prop) => (resolveBrand() as unknown as Record<string | symbol, unknown>)[prop],
+  has: (_target, prop) => prop in lux,
+  ownKeys: () => Reflect.ownKeys(lux),
+  getOwnPropertyDescriptor: () => ({ enumerable: true, configurable: true }),
+})
 
 export default brand
