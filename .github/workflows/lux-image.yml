@@ -1,0 +1,63 @@
+name: Lux Safe Image
+
+# Builds the Lux-branded Safe{Wallet} web app and pushes it to
+# ghcr.io/luxfi/lux-safe. Canonical luxfi pattern: lux-build ARC pool,
+# multi-arch, semver-only tags, no :latest.
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Image tag to publish, e.g. v2.1.0'
+        required: true
+        type: string
+  push:
+    tags: ['lux-v*']
+
+permissions:
+  contents: read
+  packages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: lux-build
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+        with:
+          platforms: arm64
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+        with:
+          driver: docker-container
+          driver-opts: |
+            network=host
+
+      - name: Login to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Resolve image tag
+        id: tag
+        run: |
+          RAW="${{ github.event.inputs.tag || github.ref_name }}"
+          echo "value=${RAW#lux-}" >> "$GITHUB_OUTPUT"
+
+      - name: Build & push (multi-arch)
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: Dockerfile.lux
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: ghcr.io/luxfi/lux-safe:${{ steps.tag.outputs.value }}
+          provenance: false
+          cache-from: type=registry,ref=ghcr.io/luxfi/lux-safe:buildcache
+          cache-to: type=registry,ref=ghcr.io/luxfi/lux-safe:buildcache,mode=max

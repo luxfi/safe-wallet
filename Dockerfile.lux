@@ -1,0 +1,38 @@
+# Lux Safe — production image for ghcr.io/luxfi/lux-safe.
+#
+# Builds the `@safe-global/web` static export with the `lux` brand at BUILD
+# time (not at container start), then serves the static `out/` directory.
+# Node pinned to the repo .nvmrc (v24).
+#
+# The Lux chain list + Safe state come from the Lux CGW at runtime; the brand
+# env (apps/web/.env.lux) pins NEXT_PUBLIC_GATEWAY_URL_PRODUCTION at the Lux
+# gateway and sets NEXT_PUBLIC_IS_PRODUCTION=true.
+
+# ---- build ---------------------------------------------------------------
+FROM node:24-alpine AS build
+RUN apk add --no-cache libc6-compat git python3 py3-pip make g++ libusb-dev eudev-dev linux-headers bash
+WORKDIR /app
+COPY . .
+RUN corepack enable && yarn config set httpTimeout 600000
+RUN yarn install --immutable
+RUN yarn after-install
+ENV NODE_ENV=production
+ENV NEXT_TELEMETRY_DISABLED=1
+ENV NODE_OPTIONS=--max-old-space-size=8192
+# Select the Lux brand (copies .env.lux -> .env.local, brand assets -> active),
+# export the brand env so the build-time fetch-chains hits the Lux CGW, then
+# build the static export. `next build` itself also loads .env.local.
+RUN bash scripts/select-brand.sh lux \
+ && set -a && . apps/web/.env.local && set +a \
+ && yarn workspace @safe-global/web build
+
+# ---- serve ---------------------------------------------------------------
+FROM node:24-alpine AS serve
+RUN apk add --no-cache ca-certificates && npm i -g serve@14
+WORKDIR /app
+COPY --from=build /app/apps/web/out ./out
+ENV PORT=3000
+EXPOSE 3000
+# Static multi-page export: `serve` clean-URLs map /balances -> balances.html.
+# (No `-s`: that would rewrite every route to index.html and break the pages.)
+CMD ["serve", "out", "-l", "3000"]
