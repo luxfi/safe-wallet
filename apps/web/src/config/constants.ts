@@ -132,8 +132,9 @@ export enum SafeAppsName {
 export const IS_OFFICIAL_HOST = process.env.NEXT_PUBLIC_IS_OFFICIAL_HOST === 'true'
 export const OFFICIAL_HOSTS = /app\.safe\.global|.+\.5afe\.dev|localhost:3000|localhost:4000|localhost:6006/
 export const IPFS_HOSTS = /app\.safe\.eth\.limo|app\.5afedev\.eth\.limo/
-export const BRAND_NAME = IS_OFFICIAL_HOST ? brand.name : process.env.NEXT_PUBLIC_BRAND_NAME || 'Wallet fork'
-export const BRAND_LOGO = process.env.NEXT_PUBLIC_BRAND_LOGO || brand.logoUrl
+// Brand is resolved from the request host at runtime (see @safe-global/brand).
+export const BRAND_NAME = brand.name
+export const BRAND_LOGO = brand.logoUrl
 
 export const CHAINALYSIS_OFAC_CONTRACT = '0x40c57923924b5c5c5455c48d93317139addac8fb'
 
