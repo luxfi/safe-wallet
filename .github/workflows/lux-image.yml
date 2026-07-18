@@ -33,11 +33,14 @@ jobs:
             network=host
 
       - name: Login to GHCR
+        # The ghcr.io/luxfi/lux-safe package predates this repo and is linked to
+        # no repository, so the repo-scoped GITHUB_TOKEN cannot write it. Use the
+        # org-admin GHCR_PAT (write:packages) instead.
         uses: docker/login-action@v3
         with:
           registry: ghcr.io
-          username: ${{ github.repository_owner }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          username: hanzo-dev
+          password: ${{ secrets.GHCR_PAT }}
 
       - name: Resolve image tag
         id: tag
