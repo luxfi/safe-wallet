@@ -15,7 +15,9 @@ WORKDIR /app
 COPY . .
 RUN corepack enable && yarn config set httpTimeout 600000
 RUN yarn install --immutable
-RUN yarn after-install
+# after-install = generate-types (typechain ethers-v6 contract types the build
+# imports). Defined in apps/web, so invoke it workspace-scoped from the root.
+RUN yarn workspace @safe-global/web after-install
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV NODE_OPTIONS=--max-old-space-size=8192
