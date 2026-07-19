@@ -29,7 +29,7 @@ const WidgetFooter = ({ count, text, className, onClick, showLeadingSlot = true 
       {showLeadingSlot && (
         <div className="p-1">
           {count !== undefined ? (
-            <div className="flex size-8 items-center justify-center rounded-full bg-[#f0fdf4] text-xs font-semibold text-[#166534]">
+            <div className="flex size-8 items-center justify-center rounded-full bg-[#f0fdf4] text-xs font-semibold text-[#636669]">
               +{count}
             </div>
           ) : (
