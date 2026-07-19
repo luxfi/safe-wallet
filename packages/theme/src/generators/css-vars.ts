@@ -73,10 +73,10 @@ export function generateCSSVars(): string {
       background: '#FFE6EA',
     },
     success: {
-      dark: '#028D4C',
-      main: '#00B460',
-      light: '#D3F2E4',
-      background: '#EFFAF1',
+      dark: '#636669',
+      main: '#636669',
+      light: '#F4F4F4',
+      background: '#F4F4F4',
     },
     info: {
       dark: '#52BFDC',
@@ -101,9 +101,9 @@ export function generateCSSVars(): string {
       background: '#2F2527',
     },
     success: {
-      dark: '#388E3C',
-      main: '#00B460',
-      light: '#81C784',
+      dark: '#636669',
+      main: '#636669',
+      light: '#DDDEE0',
       background: '#1F2920',
     },
     info: {

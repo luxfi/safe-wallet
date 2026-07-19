@@ -12,8 +12,8 @@
 }
 
 .activeIcon svg {
-  stroke: #22c55e;
-  color: #22c55e;
+  stroke: #636669;
+  color: #636669;
 }
 
 .spaceSelector {
@@ -70,7 +70,7 @@
   width: 14px;
   height: 14px;
   flex-shrink: 0;
-  color: var(--color-success-main, #16a34a);
+  color: var(--color-success-main, #636669);
 }
 
 .addSafeToWorkspaceLabel {
@@ -162,7 +162,7 @@
 }
 
 .transactionsBadgeActive {
-  background-color: var(--accent-secondary, #c4fddd);
+  background-color: var(--accent-secondary, #dddee0);
   color: var(--accent-secondary-foreground, #121312);
 }
 

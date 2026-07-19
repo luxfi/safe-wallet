@@ -38,10 +38,10 @@ const darkPalette: ColorPalette = {
     contrastText: '#FFE0E6',
   },
   success: {
-    dark: '#DEFDEA',
-    main: '#00B460',
-    light: '#3B7A54',
-    background: '#173026',
+    dark: '#DDDEE0',
+    main: '#636669',
+    light: '#636669',
+    background: '#303033',
   },
   info: {
     dark: '#D9F4FB',
