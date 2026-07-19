@@ -139,7 +139,7 @@ export function HeaderNavigation({
 
         {messages > 0 && (
           <span
-            className="absolute z-10 flex items-center justify-center rounded-full bg-[rgba(18,255,128,0.1)] text-[10px] font-medium leading-none text-secondary-foreground min-w-[18px] h-[18px] px-1 -top-[2px] -right-[4px]"
+            className="absolute z-10 flex items-center justify-center rounded-full bg-[rgba(99,102,105,0.15)] text-[10px] font-medium leading-none text-secondary-foreground min-w-[18px] h-[18px] px-1 -top-[2px] -right-[4px]"
             aria-label={`${messages} unread messages`}
           >
             {messages > 99 ? '99+' : messages}
@@ -168,7 +168,7 @@ export function HeaderNavigation({
 
               {batchCount > 0 && (
                 <span
-                  className="absolute z-10 flex items-center justify-center rounded-full bg-[rgba(18,255,128,0.1)] text-[10px] font-medium leading-none text-secondary-foreground min-w-[18px] h-[18px] px-1 -top-[2px] -right-[4px]"
+                  className="absolute z-10 flex items-center justify-center rounded-full bg-[rgba(99,102,105,0.15)] text-[10px] font-medium leading-none text-secondary-foreground min-w-[18px] h-[18px] px-1 -top-[2px] -right-[4px]"
                   aria-label={`${batchCount} batched transactions`}
                 >
                   {batchCount > 99 ? '99+' : batchCount}
