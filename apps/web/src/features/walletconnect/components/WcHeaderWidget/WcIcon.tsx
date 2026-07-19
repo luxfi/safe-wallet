@@ -46,7 +46,7 @@ const WcIcon = ({ sessionCount, sessionIcon, isError, onClick }: WcIconProps): R
 
         {!isError && sessionCount > 1 && (
           <span
-            className="absolute z-10 flex items-center justify-center rounded-full bg-[rgba(18,255,128,0.1)] text-[10px] font-medium leading-none text-secondary-foreground min-w-[18px] h-[18px] px-1 -top-[2px] -right-[4px]"
+            className="absolute z-10 flex items-center justify-center rounded-full bg-[rgba(99,102,105,0.15)] text-[10px] font-medium leading-none text-secondary-foreground min-w-[18px] h-[18px] px-1 -top-[2px] -right-[4px]"
             aria-label={`${sessionCount} WalletConnect sessions`}
           >
             {sessionCount}
