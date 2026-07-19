@@ -32,7 +32,7 @@ export const HnBanner = ({ onHnSignupClick, onDismiss, label }: HnBannerProps) =
       description={
         <>
           Automatically monitor and block risky transactions using advanced, user-defined security policies, powered by{' '}
-          <span style={{ color: '#00B460', fontWeight: 'bold' }}>Hypernative</span>.
+          <span style={{ color: '#636669', fontWeight: 'bold' }}>Hypernative</span>.
         </>
       }
       ctaLabel="Learn more"
