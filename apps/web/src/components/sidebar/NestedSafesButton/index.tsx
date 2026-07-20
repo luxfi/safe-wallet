@@ -55,7 +55,7 @@ export function NestedSafesButton({
             sx={{
               width: 'auto !important',
               minWidth: '32px !important',
-              backgroundColor: anchorEl ? '#f2fecd !important' : undefined,
+              backgroundColor: anchorEl ? '#f5f5f5 !important' : undefined,
             }}
             onClick={onClick}
           >

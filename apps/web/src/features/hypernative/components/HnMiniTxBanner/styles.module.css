@@ -1,7 +1,7 @@
 .banner {
   position: relative;
   padding: var(--space-1);
-  background: linear-gradient(90deg, #1c5538 0%, #1c1c1c 54.327%, #1c1c1c 100%) !important;
+  background: linear-gradient(90deg, #303033 0%, #1c1c1c 54.327%, #1c1c1c 100%) !important;
   border: 0;
   border-radius: 8px !important;
   cursor: pointer;

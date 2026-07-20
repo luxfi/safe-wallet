@@ -72,7 +72,7 @@
 }
 
 .earnCard:hover {
-  background-color: #e5f5ea;
+  background-color: #f5f5f5;
 }
 
 .earnCard .title,
@@ -86,7 +86,7 @@
 }
 
 [data-theme='dark'] .earnCard:hover {
-  background-color: #2a3f31;
+  background-color: #303033;
 }
 
 [data-theme='dark'] .earnCard:hover .title,

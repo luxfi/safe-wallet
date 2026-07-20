@@ -63,7 +63,7 @@
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  background-color: var(--color-success-background, #dcfce7);
+  background-color: var(--color-success-background, #f5f5f5);
 }
 
 .addSafeToWorkspacePlusIcon {
@@ -157,7 +157,7 @@
   font-weight: 700;
   line-height: 16px;
   color: var(--sidebar-foreground);
-  background-color: var(--color-success-background, #dcfce7);
+  background-color: var(--color-success-background, #f5f5f5);
   border-radius: var(--rounded-lg, 12px);
 }
 
@@ -236,7 +236,7 @@
   top: 50%;
   transform: translateY(-50%);
   height: 18px;
-  background-color: var(--color-success-background, #dcfce7) !important;
+  background-color: var(--color-success-background, #f5f5f5) !important;
   color: var(--accent-secondary-foreground) !important;
 }
 
