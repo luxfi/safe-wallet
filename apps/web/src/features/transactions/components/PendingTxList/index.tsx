@@ -24,7 +24,7 @@ interface TxIconProps {
 }
 
 export const TxIcon = ({ tx }: TxIconProps): ReactElement => (
-  <div className="flex size-10 shrink-0 items-center justify-center rounded-md bg-[#f0fdf4]">
+  <div className="flex size-10 shrink-0 items-center justify-center rounded-md bg-[#f5f5f5]">
     <TxTypeIcon tx={tx.transaction} />
   </div>
 )
