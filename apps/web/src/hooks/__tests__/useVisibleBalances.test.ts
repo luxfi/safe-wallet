@@ -384,4 +384,68 @@ describe('useVisibleBalances', () => {
 
     expect(result.current.balances.items).toHaveLength(2)
   })
+
+  test('keeps tokens with unknown price (no oracle) even when hideDust is enabled', () => {
+    // On chains with no fiat price oracle the CGW returns fiatConversion "0" and
+    // fiatBalance "0" for every token (Lux/Zoo/Pars C-Chains). Such a token's fiat
+    // value is unknown, not zero, so it must not be filtered as dust — this is the
+    // Lux Foundation treasury case (~994.7B LUX, fiatConversion "0").
+    const nativeAddress = toBeHex('0x0', 20)
+    const balance: Balances = {
+      fiatTotal: '0',
+      items: [
+        {
+          balance: '994729897350342903214765220166',
+          fiatBalance: '0',
+          fiatConversion: '0',
+          tokenInfo: {
+            address: nativeAddress,
+            decimals: 18,
+            logoUri: '',
+            name: 'Lux',
+            symbol: 'LUX',
+            type: TokenType.NATIVE_TOKEN,
+          },
+        },
+        {
+          balance: '5000',
+          fiatBalance: '0',
+          fiatConversion: '0',
+          tokenInfo: {
+            address: visibleTokenAddress,
+            decimals: 18,
+            logoUri: '',
+            name: 'Unpriced ERC20',
+            symbol: 'UNP',
+            type: TokenType.ERC20,
+          },
+        },
+      ],
+    }
+
+    jest.spyOn(useBalancesHooks, 'default').mockImplementation(() => ({
+      balances: balance,
+      error: undefined,
+      loading: false,
+      loaded: true,
+    }))
+
+    jest.spyOn(store, 'useAppSelector').mockImplementation((selector) =>
+      selector({
+        settings: {
+          currency: 'USD',
+          shortName: { copy: true, qr: true, show: true },
+          theme: { darkMode: false },
+          hiddenTokens: { ['4']: [] },
+          hideDust: true,
+        },
+        chains: { data: [], error: undefined, loading: false, loaded: true },
+      } as unknown as store.RootState),
+    )
+
+    const { result } = renderHook(() => useVisibleBalances())
+
+    expect(result.current.balances.items).toHaveLength(2)
+    expect(result.current.balances.items.map((i) => i.tokenInfo.symbol)).toEqual(['LUX', 'UNP'])
+  })
 })
