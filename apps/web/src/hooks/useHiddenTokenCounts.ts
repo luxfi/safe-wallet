@@ -5,18 +5,13 @@ import { useHasFeature } from './useChains'
 import useSafeInfo from './useSafeInfo'
 import { useBalancesGetBalancesV1Query } from '@safe-global/store/gateway/AUTO_GENERATED/balances'
 import { FEATURES } from '@safe-global/utils/utils/chains'
-import { DUST_THRESHOLD } from '@/config/constants'
+import { filterDustTokens } from '@/utils/balances'
 import useBalances from './useBalances'
 import useHiddenTokens from './useHiddenTokens'
 
 export interface HiddenTokenCounts {
   hiddenByTokenList: number
   hiddenByDustFilter: number
-}
-
-const filterDustTokens = (items: ReturnType<typeof useBalances>['balances']['items'], hideDust: boolean) => {
-  if (!hideDust) return items
-  return items.filter((balanceItem) => Number(balanceItem.fiatBalance) >= DUST_THRESHOLD)
 }
 
 export const useHiddenTokenCounts = (): HiddenTokenCounts => {
