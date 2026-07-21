@@ -5,7 +5,7 @@ import useHiddenTokens from './useHiddenTokens'
 import type { PortfolioBalances } from './loadables/useLoadBalances'
 import { useAppSelector } from '@/store'
 import { selectHideDust } from '@/store/settingsSlice'
-import { DUST_THRESHOLD } from '@/config/constants'
+import { filterDustTokens } from '@/utils/balances'
 import useSafeInfo from './useSafeInfo'
 import { useNativeTokenDisplay } from './useNativeTokenDisplay'
 import { TokenType } from '@safe-global/store/gateway/types'
@@ -28,11 +28,6 @@ const truncateNumber = (balance: string): string => {
 
 const filterHiddenTokens = (items: PortfolioBalances['items'], hiddenAssets: string[]) =>
   items.filter((balanceItem) => !hiddenAssets.includes(balanceItem.tokenInfo.address))
-
-const filterDustTokens = (items: PortfolioBalances['items'], hideDust: boolean) => {
-  if (!hideDust) return items
-  return items.filter((balanceItem) => Number(balanceItem.fiatBalance) >= DUST_THRESHOLD)
-}
 
 const getVisibleFiatTotal = (balances: PortfolioBalances, hiddenAssets: string[]): string => {
   return safeFormatUnits(
