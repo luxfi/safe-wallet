@@ -14,6 +14,8 @@
 export interface Brand {
   name: string
   shortName: string
+  /** One factual sentence. Feeds meta tags, the PWA manifest and wallet metadata. */
+  description: string
   domain: string
   appHost: string
   appUrl: string
@@ -24,7 +26,10 @@ export interface Brand {
   imprintUrl: string
   cookieUrl: string
   licensesUrl: string
+  /** Wordmark — the horizontal lockup used in the header and on the login page. */
   logoUrl: string
+  /** Square mark — the app icon used wherever the wordmark does not fit. */
+  markUrl: string
   faviconUrl: string
   primaryColor: string
   statusUrl: string
@@ -47,7 +52,8 @@ const CGW = 'https://safe-cgw.lux.network'
 // Lux — the monochrome default. Neutral chrome, black primary.
 const lux: Brand = {
   name: 'Lux Safe',
-  shortName: 'Safe',
+  shortName: 'Lux Safe',
+  description: 'Lux Safe is the multi-signature smart account wallet for the Lux Network.',
   domain: 'safe.lux.network',
   appHost: 'safe.lux.network',
   appUrl: 'https://safe.lux.network',
@@ -59,14 +65,15 @@ const lux: Brand = {
   cookieUrl: 'https://lux.network/cookie',
   licensesUrl: 'https://lux.network/licenses',
   logoUrl: '/brand/lux/logo.svg',
+  markUrl: '/brand/lux/mark.svg',
   faviconUrl: '/brand/lux/favicon.ico',
-  primaryColor: '#121312',
+  primaryColor: '#000000',
   statusUrl: 'https://status.lux.network',
   developerUrl: 'https://docs.lux.network',
   gatewayUrl: CGW,
   gatewayStagingUrl: CGW,
   discordUrl: 'https://discord.gg/lux',
-  twitterUrl: 'https://twitter.com/luxdefi',
+  twitterUrl: 'https://x.com/luxfi',
   supportChatAliasDomain: 'anon.lux.network',
   githubUrl: 'https://github.com/luxfi/safe-wallet',
   appStoreUrl: '',
@@ -77,6 +84,8 @@ const lux: Brand = {
 const zoo: Brand = {
   ...lux,
   name: 'Zoo Safe',
+  shortName: 'Zoo Safe',
+  description: 'Zoo Safe is the multi-signature smart account wallet for the Zoo Network.',
   domain: 'safe.zoo.network',
   appHost: 'safe.zoo.network',
   appUrl: 'https://safe.zoo.network',
@@ -88,10 +97,13 @@ const zoo: Brand = {
   cookieUrl: 'https://zoo.network/cookie',
   licensesUrl: 'https://zoo.network/licenses',
   logoUrl: '/brand/zoo/logo.svg',
+  markUrl: '/brand/zoo/mark.svg',
   faviconUrl: '/brand/zoo/favicon.ico',
+  primaryColor: '#FCF006',
   statusUrl: 'https://status.zoo.network',
   developerUrl: 'https://docs.zoo.network',
-  twitterUrl: 'https://twitter.com/zooprotocol',
+  discordUrl: 'https://discord.gg/edmZPTZjH9',
+  twitterUrl: 'https://x.com/zoo_labs',
   supportChatAliasDomain: 'anon.zoo.network',
   githubUrl: 'https://github.com/zooai/safe-wallet',
 }
@@ -99,6 +111,8 @@ const zoo: Brand = {
 const pars: Brand = {
   ...lux,
   name: 'Pars Safe',
+  shortName: 'Pars Safe',
+  description: 'Pars Safe is the multi-signature smart account wallet for the Pars Network.',
   domain: 'safe.pars.network',
   appHost: 'safe.pars.network',
   appUrl: 'https://safe.pars.network',
@@ -110,10 +124,13 @@ const pars: Brand = {
   cookieUrl: 'https://pars.network/cookie',
   licensesUrl: 'https://pars.network/licenses',
   logoUrl: '/brand/pars/logo.svg',
+  markUrl: '/brand/pars/mark.svg',
   faviconUrl: '/brand/pars/favicon.ico',
+  primaryColor: '#6366F1',
   statusUrl: 'https://status.pars.network',
   developerUrl: 'https://docs.pars.network',
-  twitterUrl: 'https://twitter.com/parsdao',
+  discordUrl: 'https://discord.gg/pars',
+  twitterUrl: 'https://x.com/parsdao',
   supportChatAliasDomain: 'anon.pars.network',
   githubUrl: 'https://github.com/parsdao/safe-wallet',
 }
@@ -122,6 +139,7 @@ const hanzo: Brand = {
   ...lux,
   name: 'Hanzo Vault',
   shortName: 'Vault',
+  description: 'Hanzo Vault is the multi-signature smart account wallet for the Hanzo network.',
   domain: 'vault.hanzo.ai',
   appHost: 'vault.hanzo.ai',
   appUrl: 'https://vault.hanzo.ai',
@@ -133,10 +151,13 @@ const hanzo: Brand = {
   cookieUrl: 'https://hanzo.ai/cookie',
   licensesUrl: 'https://hanzo.ai/licenses',
   logoUrl: '/brand/hanzo/logo.svg',
+  markUrl: '/brand/hanzo/mark.svg',
   faviconUrl: '/brand/hanzo/favicon.ico',
+  primaryColor: '#FFFFFF',
   statusUrl: 'https://status.hanzo.ai',
   developerUrl: 'https://docs.hanzo.ai',
-  twitterUrl: 'https://twitter.com/hanzoai',
+  discordUrl: 'https://discord.gg/CJCyAsm9Vr',
+  twitterUrl: 'https://x.com/hanzoai',
   supportChatAliasDomain: 'anon.hanzo.ai',
   githubUrl: 'https://github.com/hanzoai/safe-wallet',
 }
