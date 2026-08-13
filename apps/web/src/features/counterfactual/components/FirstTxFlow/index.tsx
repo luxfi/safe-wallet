@@ -14,7 +14,7 @@ import AssetsIcon from '@/public/images/sidebar/assets.svg'
 import SaveAddressIcon from '@/public/images/common/save-address.svg'
 import RecoveryPlus from '@/public/images/common/recovery-plus.svg'
 import SwapIcon from '@/public/images/common/swap.svg'
-import SafeLogo from '@/public/images/logo-no-text.svg'
+import { Mark } from '@/components/common/Logo'
 import { Wrench } from 'lucide-react'
 import { useIsSwapFeatureEnabled } from '@/features/swap'
 
@@ -76,7 +76,7 @@ const FirstTxFlow = ({ open, onClose }: { open: boolean; onClose: () => void }) 
           <ChoiceButton
             title="Activate Safe now"
             description="Pay a one-time network fee to deploy your safe onchain"
-            icon={SafeLogo}
+            icon={Mark}
             onClick={() => handleClick(onActivateSafe)}
           />
         </div>

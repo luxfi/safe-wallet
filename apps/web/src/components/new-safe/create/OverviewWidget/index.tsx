@@ -3,7 +3,7 @@ import useWallet from '@/hooks/wallets/useWallet'
 import { Card } from '@/components/ui/card'
 import { Typography } from '@/components/ui/typography'
 import type { ReactElement } from 'react'
-import SafeLogo from '@/public/images/logo-no-text.svg'
+import { Mark } from '@/components/common/Logo'
 
 import css from '@/components/new-safe/create/OverviewWidget/styles.module.css'
 import ConnectWalletButton from '@/components/common/ConnectWallet/ConnectWalletButton'
@@ -31,7 +31,7 @@ const OverviewWidget = ({ safeName, networks }: { safeName: string; networks: Ch
     <div className="col-span-12">
       <Card className="w-full">
         <div className={css.header}>
-          <SafeLogo alt="Safe logo" width={LOGO_DIMENSIONS} height={LOGO_DIMENSIONS} />
+          <Mark width={LOGO_DIMENSIONS} height={LOGO_DIMENSIONS} />
           <Typography variant="h4">Your Safe account preview</Typography>
         </div>
         {wallet ? (
