@@ -23,7 +23,7 @@ const useSafeActionMapper = ({ onReceiveComplete }: UseSafeActionMapperOptions):
   const router = useRouter()
   const { setTxFlow } = useContext(TxModalContext)
   const { configs: chains } = useChains()
-  const { link: txBuilderLink } = useTxBuilderApp()
+  const txBuilderLink = useTxBuilderApp()?.link
 
   const getShortName = useCallback(
     (chainId: string) => chains.find((c) => c.chainId === chainId)?.shortName ?? '',
@@ -80,6 +80,7 @@ const useSafeActionMapper = ({ onReceiveComplete }: UseSafeActionMapperOptions):
       },
 
       [ESafeAction.BuildTransaction]: async (safe) => {
+        if (!txBuilderLink) return
         const safeParam = getSafeQueryParam(safe)
         await router.push({
           pathname: txBuilderLink.pathname,

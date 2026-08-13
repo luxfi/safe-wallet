@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
-import { SAFE_APPS_THIRD_PARTY_COOKIES_CHECK_URL } from '@/config/constants'
+import { brand } from '@safe-global/brand'
 import { Errors, logError } from '@/services/exceptions'
 
 const SHOW_ALERT_TIMEOUT = 10000
@@ -23,42 +23,47 @@ type ThirdPartyCookiesType = {
   setThirdPartyCookiesDisabled: (value: boolean) => void
 }
 
-const COOKIE_CHECK_ORIGIN = new URL(SAFE_APPS_THIRD_PARTY_COOKIES_CHECK_URL).origin
-
 const useThirdPartyCookies = (): ThirdPartyCookiesType => {
   const iframeRef = useRef<HTMLIFrameElement>(null)
   const [thirdPartyCookiesDisabled, setThirdPartyCookiesDisabled] = useState<boolean>(false)
+  const checkUrl = brand.cookieCheckUrl
+  const checkOrigin = checkUrl ? new URL(checkUrl).origin : ''
 
-  const messageHandler = useCallback((event: MessageEvent) => {
-    if (event.origin !== COOKIE_CHECK_ORIGIN) return
+  const messageHandler = useCallback(
+    (event: MessageEvent) => {
+      if (event.origin !== checkOrigin) return
 
-    const data = event.data
+      const data = event.data
 
-    try {
-      if (data.hasOwnProperty('isCookieEnabled')) {
-        setThirdPartyCookiesDisabled(!data.isCookieEnabled)
-        window.removeEventListener('message', messageHandler)
-        document.body.removeChild(iframeRef.current as Node)
+      try {
+        if (data.hasOwnProperty('isCookieEnabled')) {
+          setThirdPartyCookiesDisabled(!data.isCookieEnabled)
+          window.removeEventListener('message', messageHandler)
+          document.body.removeChild(iframeRef.current as Node)
+        }
+      } catch (error) {
+        logError(Errors._905, error)
       }
-    } catch (error) {
-      logError(Errors._905, error)
-    }
-  }, [])
+    },
+    [checkOrigin],
+  )
 
   useEffect(() => {
-    if (isSafari()) {
+    // Safari answers the question by blocking the probe, and a brand without a
+    // probe of its own would be asking a stranger's frame on our users' behalf.
+    if (isSafari() || !checkUrl) {
       return
     }
 
     window.addEventListener('message', messageHandler)
 
-    const iframeElement: HTMLIFrameElement = createIframe(SAFE_APPS_THIRD_PARTY_COOKIES_CHECK_URL, () =>
-      iframeElement?.contentWindow?.postMessage({ test: 'cookie' }, COOKIE_CHECK_ORIGIN),
+    const iframeElement: HTMLIFrameElement = createIframe(checkUrl, () =>
+      iframeElement?.contentWindow?.postMessage({ test: 'cookie' }, checkOrigin),
     )
 
     iframeRef.current = iframeElement
     document.body.appendChild(iframeElement)
-  }, [messageHandler])
+  }, [messageHandler, checkUrl, checkOrigin])
 
   useEffect(() => {
     let id: ReturnType<typeof setTimeout>

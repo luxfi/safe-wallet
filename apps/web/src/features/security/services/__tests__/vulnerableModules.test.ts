@@ -6,6 +6,10 @@ jest.mock('@/services/exceptions', () => ({
   logError: (...args: unknown[]) => mockLogError(...args),
 }))
 
+jest.mock('@safe-global/brand', () => ({ brand: { zodiacUrl: '' } }))
+const mockBrand = jest.requireMock('@safe-global/brand').brand as { zodiacUrl: string }
+
+const ZODIAC_URL = 'https://zodiac.example/public/api/security-check'
 const CHAIN = '1'
 const SAFE = '0x1F334f5947ca5170C3E31c044E718369B62E5CB5'
 
@@ -19,6 +23,7 @@ const mockFetch = (response: unknown, ok = true) => {
 
 beforeEach(() => {
   mockLogError.mockClear()
+  mockBrand.zodiacUrl = ZODIAC_URL
 })
 
 describe('isSafeAffectedByZodiacVulnerability', () => {
@@ -59,15 +64,21 @@ describe('isSafeAffectedByZodiacVulnerability', () => {
   it('queries the right URL with an encoded chainId:address pair', async () => {
     mockFetch({ status: 'safe', checkedVaultCount: 1, erroredVaultCount: 0, affectedSafes: [] })
     await isSafeAffectedByZodiacVulnerability(CHAIN, SAFE)
-    expect(global.fetch).toHaveBeenCalledWith(
-      `https://zodiac-check.safe.global/public/api/security-check?safes=${encodeURIComponent(`${CHAIN}:${SAFE}`)}`,
-    )
+    expect(global.fetch).toHaveBeenCalledWith(`${ZODIAC_URL}?safes=${encodeURIComponent(`${CHAIN}:${SAFE}`)}`)
   })
 
   it('returns false and logs on a non-OK response', async () => {
     mockFetch({}, false)
     expect(await isSafeAffectedByZodiacVulnerability(CHAIN, SAFE)).toBe(false)
     expect(mockLogError).toHaveBeenCalledTimes(1)
+  })
+
+  it('asks nobody, and logs nothing, when the brand publishes no check', async () => {
+    mockBrand.zodiacUrl = ''
+    mockFetch({ status: 'affected', checkedVaultCount: 1, erroredVaultCount: 0, affectedSafes: [] })
+    expect(await isSafeAffectedByZodiacVulnerability(CHAIN, SAFE)).toBe(false)
+    expect(global.fetch).not.toHaveBeenCalled()
+    expect(mockLogError).not.toHaveBeenCalled()
   })
 
   it('returns false and logs when the request throws', async () => {

@@ -21116,7 +21116,7 @@ __metadata:
 
 "@web3-onboard/core@patch:@web3-onboard/core@npm%3A2.24.1#~/.yarn/patches/@web3-onboard-core-npm-2.24.1-56d6bba493.patch":
   version: 2.24.1
-  resolution: "@web3-onboard/core@patch:@web3-onboard/core@npm%3A2.24.1#~/.yarn/patches/@web3-onboard-core-npm-2.24.1-56d6bba493.patch::version=2.24.1&hash=5071c5"
+  resolution: "@web3-onboard/core@patch:@web3-onboard/core@npm%3A2.24.1#~/.yarn/patches/@web3-onboard-core-npm-2.24.1-56d6bba493.patch::version=2.24.1&hash=5b0ebb"
   dependencies:
     "@web3-onboard/common": "npm:^2.4.1"
     bnc-sdk: "npm:^4.6.7"
@@ -21130,7 +21130,7 @@ __metadata:
     svelte: "npm:^3.49.0"
     svelte-i18n: "npm:^4.0.1"
     viem: "npm:2.12.0"
-  checksum: 10/b10439fd2bc951dd8bb5ecffe00611cedd8bf50034bfc6983b0c7cb72d993256c7c41f7844bd81ee23377de79f16ec588f4c444f9400c10ee785051b18755bc1
+  checksum: 10/10896f546e0f3120cd4cddf9fcb69e777a192bf5594dfdcb2c91bdfa98f47ef3e98717fc1780b4f9eb46b1df9ff2eb31234ddf7a0c17749121db2d6a09b81691
   languageName: node
   linkType: hard
 

@@ -41,7 +41,7 @@ const ActionsTray = ({ noAssets, variant = 'safe' }: ActionsTrayProps): ReactEle
   const dispatch = useAppDispatch()
   const hasNativeSwapFeature = useHasFeature(FEATURES.NATIVE_SWAPS)
   const isBlockedCountry = Boolean(useContext(GeoblockingContext))
-  const { link: txBuilderLink } = useTxBuilderApp()
+  const txBuilderLink = useTxBuilderApp()?.link
   const isDarkMode = useDarkMode()
 
   const spaceId = useCurrentSpaceId()
@@ -205,7 +205,7 @@ const ActionsTray = ({ noAssets, variant = 'safe' }: ActionsTrayProps): ReactEle
                 variant={secondaryVariant}
                 size="icon"
                 disabled={!isOk}
-                render={isOk ? <Link href={txBuilderLink} /> : undefined}
+                render={isOk && txBuilderLink ? <Link href={txBuilderLink} /> : undefined}
                 aria-label="Transaction builder"
               >
                 <SquareDashedBottomCode className="size-5 text-muted-foreground" strokeWidth={1.5} />

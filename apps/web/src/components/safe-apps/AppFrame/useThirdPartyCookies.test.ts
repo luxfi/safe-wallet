@@ -4,15 +4,15 @@ import useThirdPartyCookies from './useThirdPartyCookies'
 const COOKIE_CHECK_URL = 'https://third-party-cookies-check.gnosis-safe.com'
 const COOKIE_CHECK_ORIGIN = new URL(COOKIE_CHECK_URL).origin
 
-jest.mock('@/config/constants', () => ({
-  SAFE_APPS_THIRD_PARTY_COOKIES_CHECK_URL: 'https://third-party-cookies-check.gnosis-safe.com',
-}))
+jest.mock('@safe-global/brand', () => ({ brand: { cookieCheckUrl: '' } }))
+const mockBrand = jest.requireMock('@safe-global/brand').brand as { cookieCheckUrl: string }
 
 describe('useThirdPartyCookies', () => {
   let appendChildSpy: jest.SpyInstance
   let removeChildSpy: jest.SpyInstance
 
   beforeEach(() => {
+    mockBrand.cookieCheckUrl = COOKIE_CHECK_URL
     appendChildSpy = jest.spyOn(document.body, 'appendChild').mockImplementation((node) => node)
     removeChildSpy = jest.spyOn(document.body, 'removeChild').mockImplementation((node) => node)
   })
@@ -83,5 +83,15 @@ describe('useThirdPartyCookies', () => {
     expect(mockPostMessage).not.toHaveBeenCalledWith(expect.anything(), '*')
 
     createElementSpy.mockRestore()
+  })
+
+  it('asks nobody when the brand publishes no cookie check', () => {
+    mockBrand.cookieCheckUrl = ''
+
+    const { result } = renderHook(() => useThirdPartyCookies())
+
+    const appended = appendChildSpy.mock.calls.map(([node]) => (node as Node).nodeName)
+    expect(appended).not.toContain('IFRAME')
+    expect(result.current.thirdPartyCookiesDisabled).toBe(false)
   })
 })

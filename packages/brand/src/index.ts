@@ -58,6 +58,14 @@ export interface Brand {
   appStoreUrl: string
   playStoreUrl: string
   helpArticlesPath: string
+  /**
+   * Services the app reaches for but no brand here runs. Empty is the answer,
+   * not a placeholder: the app skips the call rather than sending our origin to
+   * a host that will refuse it. Fill one in when a brand stands its own up.
+   */
+  zodiacUrl: string
+  txBuilderUrl: string
+  cookieCheckUrl: string
 }
 
 // The Lux Safe Client Gateway is multi-chain (Lux 96369 / Zoo 200200 /
@@ -95,6 +103,9 @@ const lux: Brand = {
   appStoreUrl: '',
   playStoreUrl: '',
   helpArticlesPath: 'articles',
+  zodiacUrl: '',
+  txBuilderUrl: '',
+  cookieCheckUrl: '',
 }
 
 const zoo: Brand = {

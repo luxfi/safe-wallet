@@ -25,7 +25,7 @@ const AggregatedBalance = ({
 }) => {
   const currency = useAppSelector(selectCurrency)
   const router = useRouter()
-  const { link: txBuilderLink } = useTxBuilderApp()
+  const txBuilderLink = useTxBuilderApp()?.link
   const { setTxFlow } = useContext(TxModalContext)
   const firstSafe = safeItems[0]
   const chain = useChain(firstSafe?.chainId ?? '')
@@ -67,7 +67,7 @@ const AggregatedBalance = ({
   }
 
   const handleBuildTransaction = () => {
-    if (!safeQueryParam) return
+    if (!safeQueryParam || !txBuilderLink) return
     const query = typeof txBuilderLink.query === 'object' ? txBuilderLink.query : {}
     router.push({ ...txBuilderLink, query: { ...query, safe: safeQueryParam } })
   }

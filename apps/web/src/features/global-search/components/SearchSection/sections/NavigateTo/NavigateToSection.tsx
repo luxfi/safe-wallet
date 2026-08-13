@@ -38,7 +38,7 @@ const NavigateToSection = ({ query, label }: SectionItemProps) => {
   const router = useRouter()
   const dispatch = useAppDispatch()
   const { setTxFlow } = useContext(TxModalContext)
-  const { link: txBuilderLink } = useTxBuilderApp()
+  const txBuilderLink = useTxBuilderApp()?.link
   const wallet = useWallet()
   const isSwapEnabled = useIsSwapFeatureEnabled()
   const isSpaceRoute = useIsSpaceRoute()
@@ -104,6 +104,7 @@ const NavigateToSection = ({ query, label }: SectionItemProps) => {
           router.push({ pathname: AppRoutes.swap, query: router.query })
           break
         case 'Transaction builder': {
+          if (!txBuilderLink) break
           const txBuilderQuery = typeof txBuilderLink.query === 'object' ? txBuilderLink.query : {}
           router.push({
             ...txBuilderLink,
