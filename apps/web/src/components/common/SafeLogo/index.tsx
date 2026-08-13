@@ -1,31 +1,26 @@
 import type { ReactElement } from 'react'
 import Link from 'next/link'
 import { AppRoutes } from '@/config/routes'
-import { BRAND_LOGO, BRAND_NAME, IS_OFFICIAL_HOST } from '@/config/constants'
+import { BRAND_NAME, IS_OFFICIAL_HOST } from '@/config/constants'
+import { markUrl } from '@/components/common/Logo'
 import { cn } from '@/utils/cn'
 import css from './SafeLogo.module.css'
 
 const MARK_SIZE = 'size-6 group-data-[collapsible=icon]:size-4.5'
 
+// This slot is square, so it takes the square mark rather than the wordmark.
 // The Safe mark is drawn twice: an SVG for light mode and a filled span that
-// picks up the primary colour in dark mode. A white-label ships one logo that
+// picks up the primary colour in dark mode. A white-label ships one mark that
 // reads on both, so it renders as a single image.
 const LogoMark = (): ReactElement =>
-  IS_OFFICIAL_HOST || !BRAND_LOGO ? (
+  IS_OFFICIAL_HOST ? (
     <>
-      <img
-        src="/images/logo-no-text.svg"
-        alt="Safe"
-        width={24}
-        height={24}
-        className={`${MARK_SIZE} dark:hidden`}
-        data-testid="logo-image"
-      />
+      <img src={markUrl} alt="Safe" width={24} height={24} className={`${MARK_SIZE} dark:hidden`} data-testid="logo-image" />
       <span className={`hidden dark:block ${MARK_SIZE} shrink-0 rounded-[2px] ${css.logoPrimaryFill}`} />
     </>
   ) : (
     <img
-      src={BRAND_LOGO}
+      src={markUrl}
       alt={BRAND_NAME}
       width={24}
       height={24}
