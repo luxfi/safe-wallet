@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 # select-brand.sh — switch the active brand for a local build.
 #
-# Usage:   scripts/select-brand.sh <slug>
-# Slugs:   safe | lux | hanzo
+# Usage:   scripts/select-brand.sh <slug>       (any apps/web/.env.<slug>)
 #
 # Copies apps/web/.env.<slug> -> apps/web/.env.local (overridden each run).
 #
@@ -18,10 +17,11 @@ slug="${1:-}"
 if [[ -z "$slug" ]]; then
   echo "usage: scripts/select-brand.sh <slug>"
   echo "available brands:"
-  for d in apps/web/public/brand/*/; do
-    name="$(basename "$d")"
-    [[ "$name" == "active" ]] && continue
-    echo "  - $name"
+  for f in apps/web/.env.*; do
+    name="${f##*/.env.}"
+    if [[ "$name" != "example" && "$name" != "local" ]]; then
+      echo "  - $name"
+    fi
   done
   exit 1
 fi
