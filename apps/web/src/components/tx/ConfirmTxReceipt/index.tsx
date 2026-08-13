@@ -1,6 +1,6 @@
 import TxCard from '@/components/tx-flow/common/TxCard'
-import { Grid2 as Grid, Stack, StepIcon, Typography } from '@mui/material'
-import { brand } from '@safe-global/brand'
+import { Typography } from '@/components/ui/typography'
+import { Spinner } from '@/components/ui/spinner'
 import ExternalLink from '@/components/common/ExternalLink'
 import { type PropsWithChildren, useContext } from 'react'
 import { SafeTxContext } from '@/components/tx-flow/SafeTxProvider'
@@ -13,6 +13,7 @@ import { TxFlowStep } from '@/components/tx-flow/TxFlowStep'
 import { Receipt } from '../ConfirmTxDetails/Receipt'
 import { Slot, SlotName } from '@/components/tx-flow/slots'
 import { Sign } from '@/components/tx-flow/actions/Sign'
+import { brand } from '@safe-global/brand'
 
 const InfoSteps = [
   {
@@ -75,31 +76,43 @@ export const ConfirmTxReceipt = ({ children, onSubmit }: PropsWithChildren<{ onS
   const showHashes = wallet ? isHardwareWallet(wallet) || isLedgerLive(wallet) : false
   const steps = showHashes ? HardwareWalletStep : InfoSteps
 
+  // Render inside TxFlowStep (rather than bailing with `false`) so the step title still updates and
+  // the user sees a loading state instead of an empty card with the previous step's stale title.
   if (!safeTx) {
-    return false
+    return (
+      <TxFlowStep title="Review details" fixedNonce>
+        <TxCard>
+          <div className="flex items-center justify-center py-10">
+            <Spinner className="size-6" />
+          </div>
+        </TxCard>
+      </TxFlowStep>
+    )
   }
 
   return (
     <TxFlowStep title="Review details" fixedNonce>
       <TxCard>
-        <Grid container spacing={2}>
-          <Grid size={{ xs: 12, sm: 6 }}>
-            <Stack px={1} gap={6}>
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          <div>
+            <div className="flex flex-col gap-6 px-1">
               {steps.map(({ label, description }, index) => (
-                <Stack key={index} spacing={2} direction="row">
-                  <StepIcon icon={index + 1} active />
-                  <Stack spacing={1}>
-                    <Typography fontWeight="bold">{label}</Typography>
+                <div key={index} className="flex flex-row gap-4">
+                  <div className="bg-primary text-primary-foreground flex size-6 shrink-0 items-center justify-center rounded-full text-xs font-medium">
+                    {index + 1}
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <Typography className="font-bold">{label}</Typography>
                     {description}
-                  </Stack>
-                </Stack>
+                  </div>
+                </div>
               ))}
-            </Stack>
-          </Grid>
-          <Grid size={{ xs: 12, sm: 6 }}>
+            </div>
+          </div>
+          <div>
             <Receipt safeTxData={safeTx?.data} txData={txPreview?.txData} txInfo={txPreview?.txInfo} />
-          </Grid>
-        </Grid>
+          </div>
+        </div>
 
         {children}
 

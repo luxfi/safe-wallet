@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Card, Stack, Typography } from '@mui/material'
+import { Typography } from '@/components/ui/typography'
 import Image from 'next/image'
 import css from './styles.module.css'
 import Link from 'next/link'
@@ -19,16 +19,9 @@ const NoFeeCampaignTransactionCard = () => {
 
   if (blockedAddress) {
     return (
-      <Stack
-        direction="column"
-        sx={{
-          alignItems: 'center',
-          justifyContent: 'center',
-          flex: 1,
-        }}
-      >
+      <div className="flex flex-1 flex-col items-center justify-center">
         <BlockedAddress address={blockedAddress} featureTitle="Free January" />
-      </Stack>
+      </div>
     )
   }
 
@@ -36,15 +29,15 @@ const NoFeeCampaignTransactionCard = () => {
   if (isLoading) {
     return (
       <div className={dark ? css.dark : undefined}>
-        <Card className={css.card}>
-          <Stack direction="row" alignItems="center" spacing={3}>
-            <Box className={css.skeletonIcon} />
-            <Box flex={1}>
-              <Box className={`${css.skeletonBox} ${css.skeletonTitle}`} />
-              <Box className={`${css.skeletonBox} ${css.skeletonSubtitle}`} />
-            </Box>
-          </Stack>
-        </Card>
+        <div className={css.card}>
+          <div className="flex flex-row items-center gap-6">
+            <div className={css.skeletonIcon} />
+            <div className="flex-1">
+              <div className={`${css.skeletonBox} ${css.skeletonTitle}`} />
+              <div className={`${css.skeletonBox} ${css.skeletonSubtitle}`} />
+            </div>
+          </div>
+        </div>
       </div>
     )
   }
@@ -53,9 +46,9 @@ const NoFeeCampaignTransactionCard = () => {
   if (error) {
     return (
       <div className={dark ? css.dark : undefined}>
-        <Card className={css.card}>
-          <Stack direction="row" alignItems="center" spacing={3}>
-            <Box className={css.iconContainer}>
+        <div className={css.card}>
+          <div className="flex flex-row items-center gap-6">
+            <div className={css.iconContainer}>
               <Image
                 src="/images/common/no-fee-campaign/Cards_USDe.svg"
                 alt="USDe Logo"
@@ -63,12 +56,12 @@ const NoFeeCampaignTransactionCard = () => {
                 height={48}
                 className={css.cardsImage}
               />
-            </Box>
-            <Box flex={1}>
-              <Typography variant="subtitle2" fontWeight="bold" color="static.main" className={css.title}>
+            </div>
+            <div className="flex flex-1 flex-col">
+              <Typography variant="paragraph-small-bold" className={css.title}>
                 Enjoy Free January: No Fee on Ethereum Mainnet
               </Typography>
-              <Typography variant="body2" color="static.light" className={css.description}>
+              <Typography variant="paragraph-small" className={css.description}>
                 USDe holders enjoy gasless transactions on Ethereum Mainnet this January.{' '}
                 <Link
                   href={`${brand.helpUrl}/articles/9605526657-no-fee-january-campaign`}
@@ -79,9 +72,9 @@ const NoFeeCampaignTransactionCard = () => {
                   Learn more
                 </Link>
               </Typography>
-            </Box>
-          </Stack>
-        </Card>
+            </div>
+          </div>
+        </div>
       </div>
     )
   }
@@ -90,16 +83,16 @@ const NoFeeCampaignTransactionCard = () => {
   if (isEligible === true) {
     return (
       <div className={dark ? css.dark : undefined}>
-        <Card className={css.card}>
-          <Box className={css.cardContent}>
+        <div className={css.card}>
+          <div className={css.cardContent}>
             {/* Main content */}
-            <Box className={css.mainContent}>
+            <div className={css.mainContent}>
               {/* Title and eligibility tag inline */}
-              <Box className={css.titleRow}>
-                <Typography variant="subtitle2" fontWeight="bold" className={css.title}>
+              <div className={css.titleRow}>
+                <Typography variant="paragraph-small-bold" className={css.title}>
                   Enjoy Free January
                 </Typography>
-                <Box className={css.eligibilityTag}>
+                <div className={css.eligibilityTag}>
                   <Image
                     src="/images/common/no-fee-campaign/check-icon.svg"
                     alt="Eligible"
@@ -107,14 +100,14 @@ const NoFeeCampaignTransactionCard = () => {
                     height={16}
                     className={css.tagIcon}
                   />
-                  <Typography variant="caption" className={css.tagText}>
+                  <Typography variant="paragraph-mini" className={css.tagText}>
                     You are eligible
                   </Typography>
-                </Box>
-              </Box>
+                </div>
+              </div>
 
               {/* Description */}
-              <Typography variant="body2" className={css.description}>
+              <Typography variant="paragraph-small" className={css.description}>
                 USDe holders enjoy gasless transactions on Ethereum Mainnet this January.{' '}
                 <Link
                   href={`${brand.helpUrl}/articles/9605526657-no-fee-january-campaign`}
@@ -125,10 +118,10 @@ const NoFeeCampaignTransactionCard = () => {
                   Learn more
                 </Link>
               </Typography>
-            </Box>
+            </div>
 
             {/* Coins illustration */}
-            <Box className={css.coinsContainer}>
+            <div className={css.coinsContainer}>
               <Image
                 src="/images/common/no-fee-campaign/Cards_USDe.svg"
                 alt="USDe Logo"
@@ -136,9 +129,9 @@ const NoFeeCampaignTransactionCard = () => {
                 height={58}
                 className={css.coinsImage}
               />
-            </Box>
-          </Box>
-        </Card>
+            </div>
+          </div>
+        </div>
       </div>
     )
   }

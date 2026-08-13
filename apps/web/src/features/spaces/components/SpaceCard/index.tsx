@@ -1,13 +1,12 @@
 import { AppRoutes } from '@/config/routes'
-import { Box, Card, Stack, Typography } from '@mui/material'
+import { Typography } from '@/components/ui/typography'
 import Link from 'next/link'
 
 import css from './styles.module.css'
 import type { GetSpaceResponse } from '@safe-global/store/gateway/AUTO_GENERATED/spaces'
 import classNames from 'classnames'
 import { isUserActiveAdmin } from '@/features/spaces/utils'
-import { MemberStatus } from '@/features/spaces'
-import InitialsAvatar from '../InitialsAvatar'
+import InitialsAvatar from '@/components/common/InitialsAvatar'
 import SpaceContextMenu from './SpaceContextMenu'
 import { maybePlural } from '@safe-global/utils/utils/formatters'
 import { trackEvent } from '@/services/analytics'
@@ -25,23 +24,23 @@ export const SpaceSummary = ({
   isCompact?: boolean
 }) => {
   return (
-    <Box className={css.spaceInfo}>
-      <Typography variant="body2" fontWeight="bold" data-testid="org-name">
+    <div className={css.spaceInfo}>
+      <Typography variant="paragraph-bold" data-testid="org-name">
         {name}
       </Typography>
 
-      <Stack direction="row" spacing={1} alignItems="center" mt={isCompact ? 0 : 0.5}>
-        <Typography variant="caption" color="text.secondary">
+      <div className={classNames('flex flex-row items-center gap-2', isCompact ? 'mt-0' : 'mt-0.5')}>
+        <Typography variant="paragraph-mini" color="muted">
           {numberOfAccounts} Account{maybePlural(numberOfAccounts)}
         </Typography>
 
         <div className={css.dot} />
 
-        <Typography variant="caption" color="text.secondary">
+        <Typography variant="paragraph-mini" color="muted">
           {numberOfMembers} Member{maybePlural(numberOfMembers)}
         </Typography>
-      </Stack>
-    </Box>
+      </div>
+    </div>
   )
 }
 
@@ -56,16 +55,15 @@ const SpaceCard = ({
   isLink?: boolean
   currentUserId?: number
 }) => {
-  const { id, name, members, safeCount } = space
-  const numberOfMembers = members.filter((member) => member.status === MemberStatus.ACTIVE).length
+  const { uuid, name, members, safeCount, memberCount } = space
   const isAdmin = isUserActiveAdmin(members, currentUserId)
 
   const handleClick = () => {
     trackEvent(
-      { ...SPACE_EVENTS.WORKSPACE_SWITCHED, label: String(id) },
+      { ...SPACE_EVENTS.WORKSPACE_SWITCHED, label: uuid },
       {
         from_workspace_id: undefined,
-        to_workspace_id: String(id),
+        to_workspace_id: uuid,
         source: 'space_selector',
         safe_count: safeCount,
       },
@@ -73,19 +71,21 @@ const SpaceCard = ({
   }
 
   return (
-    <Card
+    <div
       data-testid="space-card"
-      className={classNames(css.card, { [css.compact]: isCompact })}
+      className={classNames('rounded-lg border border-border bg-card', css.card, { [css.compact]: isCompact })}
       onClick={isLink ? handleClick : undefined}
     >
-      {isLink && <Link className={css.cardLink} href={{ pathname: AppRoutes.spaces.index, query: { spaceId: id } }} />}
+      {isLink && (
+        <Link className={css.cardLink} href={{ pathname: AppRoutes.spaces.index, query: { spaceId: uuid } }} />
+      )}
 
       <InitialsAvatar name={name} size={isCompact ? 'medium' : 'large'} />
 
-      <SpaceSummary name={name} numberOfAccounts={safeCount} numberOfMembers={numberOfMembers} isCompact={isCompact} />
+      <SpaceSummary name={name} numberOfAccounts={safeCount} numberOfMembers={memberCount} isCompact={isCompact} />
 
       {isAdmin && <SpaceContextMenu space={space} />}
-    </Card>
+    </div>
   )
 }
 

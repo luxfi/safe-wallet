@@ -1,5 +1,4 @@
 import {
-  House,
   ArrowRightLeft,
   WalletCards,
   BookUser,
@@ -16,14 +15,16 @@ import {
   ChevronLeft,
   PanelRight,
   EllipsisVertical,
+  Shield,
+  History,
 } from 'lucide-react'
 import { AppRoutes } from '@/config/routes'
 import type { SidebarItemConfig, SidebarGroupConfig } from '../types'
 
 export const spacesMainNavigation: SidebarItemConfig[] = [
   {
-    icon: House,
-    label: 'Home',
+    icon: LayoutGrid,
+    label: 'Dashboard',
     href: AppRoutes.spaces.index,
   },
   // TODO: Activate when Spaces Transactions page is ready
@@ -34,13 +35,19 @@ export const spacesMainNavigation: SidebarItemConfig[] = [
   // },
   {
     icon: WalletCards,
-    label: 'Accounts',
+    label: 'Safe accounts',
     href: AppRoutes.spaces.safeAccounts,
   },
   {
     icon: BookUser,
     label: 'Address book',
     href: AppRoutes.spaces.addressBook,
+  },
+  {
+    icon: History,
+    label: 'Activity',
+    href: AppRoutes.spaces.activity,
+    activeMemberOnly: true,
   },
 ]
 
@@ -52,13 +59,12 @@ export const spacesSetupGroup: SidebarGroupConfig = {
       label: 'Team',
       href: AppRoutes.spaces.members,
     },
-    // TODO: Activate when Spaces Security page is ready
-    // {
-    //   icon: Shield,
-    //   label: 'Security',
-    //   href: AppRoutes.spaces.security,
-    //   activeMemberOnly: true,
-    // },
+    {
+      icon: Shield,
+      label: 'Security hub',
+      href: AppRoutes.spaces.security,
+      activeMemberOnly: true,
+    },
     {
       icon: Settings,
       label: 'Settings',

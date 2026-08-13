@@ -1,6 +1,5 @@
 import { useEffect, type ReactElement } from 'react'
 import classnames from 'classnames'
-import { Grid, Paper } from '@mui/material'
 import { useForm } from 'react-hook-form'
 import * as metadata from '@/markdown/terms/version'
 
@@ -14,9 +13,7 @@ import {
 import { selectCookieBanner, openCookieBanner, closeCookieBanner } from '@/store/popupSlice'
 
 import css from './styles.module.css'
-import { AppRoutes } from '@/config/routes'
-import { useRouter } from 'next/router'
-import { COOKIE_AND_TERM_WARNING, styles } from './constants'
+import { COOKIE_AND_TERM_WARNING } from './constants'
 import WarningMessage from './WarningMessage'
 import IntroText from './IntroText'
 import CookieOptionsList from './CookieOptionsList'
@@ -61,33 +58,30 @@ export const CookieAndTermBanner = ({
   }
 
   return (
-    <Paper data-testid="cookies-popup" className={classnames(css.container, { [css.inverted]: inverted })}>
+    <div data-testid="cookies-popup" className={classnames(css.container, { [css.inverted]: inverted })}>
       {warning && <WarningMessage message={warning} />}
       <form>
-        <Grid container sx={{ alignItems: 'center' }}>
-          <Grid item xs>
+        <div className="flex items-center">
+          <div className="flex-1">
             <IntroText lastUpdated={metadata.lastUpdated} />
 
-            <Grid container sx={styles.optionsGrid}>
+            <div className="flex items-center gap-8">
               <CookieOptionsList control={control} />
-            </Grid>
+            </div>
 
             <CookieBannerActions onAccept={handleAccept} onAcceptAll={handleAcceptAll} />
-          </Grid>
-        </Grid>
+          </div>
+        </div>
       </form>
-    </Paper>
+    </div>
   )
 }
 
 const CookieBannerPopup = (): ReactElement | null => {
   const cookiePopup = useAppSelector(selectCookieBanner)
   const dispatch = useAppDispatch()
-  const router = useRouter()
-  const exceptionPages = [AppRoutes.safeLabsTerms]
-
   const hasAccepted = useAppSelector(hasAcceptedTerms)
-  const shouldOpen = !hasAccepted && !exceptionPages.includes(router.pathname)
+  const shouldOpen = !hasAccepted
 
   useEffect(() => {
     if (shouldOpen) {

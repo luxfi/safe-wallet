@@ -104,7 +104,7 @@ export function generateCSSVars(): string {
       dark: '#636669',
       main: '#636669',
       light: '#DDDEE0',
-      background: '#1F2920',
+      background: '#303033',
     },
     info: {
       dark: '#52BFDC',

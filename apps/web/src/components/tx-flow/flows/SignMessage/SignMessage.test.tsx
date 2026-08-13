@@ -30,7 +30,7 @@ import { SafeTxContext } from '@/components/tx-flow/SafeTxProvider'
 import type { SafeTxContextParams } from '@/components/tx-flow/SafeTxProvider'
 
 import * as useIsPinnedSafeHook from '@/hooks/useIsPinnedSafe'
-import * as useTrustSafeHook from '@/features/myAccounts/hooks/useTrustSafe'
+import * as useTrustSafeHook from '@/features/myAccounts'
 
 const renderWithSafeShield = (ui: ReactElement) => {
   return render(<SafeShieldProvider>{ui}</SafeShieldProvider>)
@@ -138,20 +138,25 @@ describe('SignMessage', () => {
       expect(getByText(EXAMPLE_MESSAGE)).toBeInTheDocument()
     })
 
-    it('displays the SafeMessage message', () => {
-      const { getByText } = renderWithSafeShield(
+    it('displays the SafeMessage message', async () => {
+      const { getByTestId, findByText } = renderWithSafeShield(
         <SignMessage logoUri="www.fake.com/test.png" name="Test App" message={EXAMPLE_MESSAGE} requestId="123" />,
       )
 
-      expect(getByText('0xaa05af77f274774b8bdc7b61d98bc40da523dc2821fdea555f4d6aa413199bcc')).toBeInTheDocument()
+      // Hash details live inside a collapsed accordion that unmounts its content; expand it first
+      fireEvent.click(getByTestId('message-details'))
+
+      expect(await findByText('0xaa05af77f274774b8bdc7b61d98bc40da523dc2821fdea555f4d6aa413199bcc')).toBeInTheDocument()
     })
 
-    it('generates the SafeMessage hash if not provided', () => {
-      const { getByText } = renderWithSafeShield(
+    it('generates the SafeMessage hash if not provided', async () => {
+      const { getByTestId, findByText } = renderWithSafeShield(
         <SignMessage logoUri="www.fake.com/test.png" name="Test App" message={EXAMPLE_MESSAGE} requestId="123" />,
       )
 
-      expect(getByText('0x73d0948ac608c5d00a6dd26dd396cce79b459307ea365f5a5bd5d3119c2d9708')).toBeInTheDocument()
+      fireEvent.click(getByTestId('message-details'))
+
+      expect(await findByText('0x73d0948ac608c5d00a6dd26dd396cce79b459307ea365f5a5bd5d3119c2d9708')).toBeInTheDocument()
     })
   })
 
@@ -206,20 +211,25 @@ describe('SignMessage', () => {
       expect(getByText('Hello EIP-1271!', { exact: false })).toBeInTheDocument()
     })
 
-    it('displays the SafeMessage message', () => {
-      const { getByText } = renderWithSafeShield(
+    it('displays the SafeMessage message', async () => {
+      const { getByTestId, findByText } = renderWithSafeShield(
         <SignMessage logoUri="www.fake.com/test.png" name="Test App" message={EXAMPLE_MESSAGE} requestId="123" />,
       )
 
-      expect(getByText('0xd5ffe9f6faa9cc9294673fb161b1c7b3e0c98241e90a38fc6c451941f577fb19')).toBeInTheDocument()
+      // Hash details live inside a collapsed accordion that unmounts its content; expand it first
+      fireEvent.click(getByTestId('message-details'))
+
+      expect(await findByText('0xd5ffe9f6faa9cc9294673fb161b1c7b3e0c98241e90a38fc6c451941f577fb19')).toBeInTheDocument()
     })
 
-    it('generates the SafeMessage hash if not provided', () => {
-      const { getByText } = renderWithSafeShield(
+    it('generates the SafeMessage hash if not provided', async () => {
+      const { getByTestId, findByText } = renderWithSafeShield(
         <SignMessage logoUri="www.fake.com/test.png" name="Test App" message={EXAMPLE_MESSAGE} requestId="123" />,
       )
 
-      expect(getByText('0x10c926c4f417e445de3fddc7ad8c864f81b9c81881b88eba646015de10d21613')).toBeInTheDocument()
+      fireEvent.click(getByTestId('message-details'))
+
+      expect(await findByText('0x10c926c4f417e445de3fddc7ad8c864f81b9c81881b88eba646015de10d21613')).toBeInTheDocument()
     })
   })
 
@@ -450,7 +460,7 @@ describe('SignMessage', () => {
     )
 
     expect(
-      getByText("You are currently not a signer of this Safe Account and won't be able to confirm this message."),
+      getByText("You are currently not a signer of this Safe account and won't be able to confirm this message."),
     ).toBeInTheDocument()
 
     expect(getByText('Sign')).toBeDisabled()
@@ -738,6 +748,10 @@ describe('SignMessage', () => {
         txOrigin: undefined,
         setTxOrigin: jest.fn(),
         isReadOnly: false,
+        gtfPaymentMode: 'safe',
+        setGtfPaymentMode: jest.fn(),
+        gtfSelectedGasToken: undefined,
+        setGtfSelectedGasToken: jest.fn(),
       }
     })
 
