@@ -5,7 +5,7 @@ describe('brand', () => {
     // No `location` in the test env → the Lux default.
     expect(brand.name).toBe('Lux Safe')
     expect(brand.domain).toBe('safe.lux.network')
-    expect(brand.primaryColor).toBe('#121312')
+    expect(brand.primaryColor).toBe('#000000')
     expect(resolveBrand('random.example.com').name).toBe('Lux Safe')
   })
 
@@ -23,6 +23,18 @@ describe('brand', () => {
     expect(typeof b.shortName).toBe('string')
     expect(typeof b.domain).toBe('string')
     expect(typeof b.logoUrl).toBe('string')
+  })
+
+  it('gives every brand its own identity', () => {
+    const brands = ['safe.lux.network', 'safe.zoo.network', 'safe.pars.network', 'vault.hanzo.ai'].map(resolveBrand)
+    const distinct = (key: keyof Brand) => new Set(brands.map((b) => b[key])).size
+
+    expect(distinct('shortName')).toBe(brands.length)
+    expect(distinct('description')).toBe(brands.length)
+    expect(distinct('discordUrl')).toBe(brands.length)
+    expect(distinct('twitterUrl')).toBe(brands.length)
+    expect(distinct('primaryColor')).toBe(brands.length)
+    expect(distinct('markUrl')).toBe(brands.length)
   })
 
   it('exposes every documented URL', () => {
