@@ -8,7 +8,7 @@ interface SignInOptionsProps {
 }
 
 const SignInOptions = ({ afterSignIn, redirectLoading = false }: SignInOptionsProps) => {
-  const { EmailSignInButton, GoogleSignInButton, $isDisabled, $isReady } = useLoadFeature(OidcAuthFeature)
+  const { IdSignInButton, $isDisabled, $isReady } = useLoadFeature(OidcAuthFeature)
   const showOidc = !$isDisabled && $isReady
 
   return (
@@ -28,8 +28,7 @@ const SignInOptions = ({ afterSignIn, redirectLoading = false }: SignInOptionsPr
             <span className="h-px flex-1 bg-border" />
           </div>
 
-          <GoogleSignInButton />
-          <EmailSignInButton />
+          <IdSignInButton />
         </>
       )}
     </div>

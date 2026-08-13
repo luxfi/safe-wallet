@@ -1,7 +1,12 @@
 import { renderHook, act } from '@testing-library/react'
-import { GATEWAY_URL } from '@/config/gateway'
+import { startLogin } from '@hanzo/iam/browser'
 import { useOidcLogin } from '../useOidcLogin'
-import { OIDC_AUTH_PENDING_KEY, OidcConnection } from '../../constants'
+import { OIDC_AUTH_PENDING_KEY } from '../../constants'
+
+jest.mock('@hanzo/iam/browser', () => ({
+  configureIam: jest.fn(() => ({})),
+  startLogin: jest.fn(() => Promise.resolve()),
+}))
 
 describe('useOidcLogin', () => {
   const originalLocation = window.location
@@ -12,7 +17,7 @@ describe('useOidcLogin', () => {
 
     Object.defineProperty(window, 'location', {
       writable: true,
-      value: { ...originalLocation, href: 'https://app.safe.global/welcome/spaces' },
+      value: { ...originalLocation, href: 'https://safe.lux.network/welcome/spaces' },
     })
   })
 
@@ -23,64 +28,23 @@ describe('useOidcLogin', () => {
     })
   })
 
-  it('should set sessionStorage flag on loginWithRedirect', () => {
+  it('flags the sign-in as pending so the expiry guard holds its probe', async () => {
     const { result } = renderHook(() => useOidcLogin())
 
-    act(() => {
-      result.current.loginWithRedirect(OidcConnection.EMAIL)
+    await act(async () => {
+      await result.current.login()
     })
 
     expect(sessionStorage.getItem(OIDC_AUTH_PENDING_KEY)).toBe('1')
   })
 
-  it('should redirect to CGW authorize endpoint with connection and default redirect_url', () => {
+  it('starts the PKCE flow and returns to the page the user signed in from', async () => {
     const { result } = renderHook(() => useOidcLogin())
 
-    act(() => {
-      result.current.loginWithRedirect(OidcConnection.EMAIL)
+    await act(async () => {
+      await result.current.login()
     })
 
-    const redirectUrl = new URL(window.location.href)
-    expect(redirectUrl.origin + redirectUrl.pathname).toBe(`${GATEWAY_URL}/v1/auth/oidc/authorize`)
-    expect(redirectUrl.searchParams.get('redirect_url')).toBe('https://app.safe.global/welcome/spaces')
-    expect(redirectUrl.searchParams.get('connection')).toBe(OidcConnection.EMAIL)
-  })
-
-  it('should set connection=google-oauth2 for Google login', () => {
-    const { result } = renderHook(() => useOidcLogin())
-
-    act(() => {
-      result.current.loginWithRedirect(OidcConnection.GOOGLE)
-    })
-
-    const redirectUrl = new URL(window.location.href)
-    expect(redirectUrl.searchParams.get('connection')).toBe(OidcConnection.GOOGLE)
-  })
-
-  it('should use explicit redirect_url when provided', () => {
-    const customUrl = 'https://app.safe.global/home'
-    const { result } = renderHook(() => useOidcLogin())
-
-    act(() => {
-      result.current.loginWithRedirect(OidcConnection.EMAIL, customUrl)
-    })
-
-    const redirectUrl = new URL(window.location.href)
-    expect(redirectUrl.searchParams.get('redirect_url')).toBe(customUrl)
-  })
-
-  it('should strip stale error param from redirect_url', () => {
-    window.location.href = 'https://app.safe.global/welcome/spaces?error=previous_failure&chain=eth'
-    const { result } = renderHook(() => useOidcLogin())
-
-    act(() => {
-      result.current.loginWithRedirect(OidcConnection.EMAIL)
-    })
-
-    const redirectUrl = new URL(window.location.href)
-    const returnUrl = redirectUrl.searchParams.get('redirect_url')!
-
-    expect(returnUrl).not.toContain('error=')
-    expect(returnUrl).toContain('chain=eth')
+    expect(startLogin).toHaveBeenCalledWith({ redirect: 'https://safe.lux.network/welcome/spaces' })
   })
 })

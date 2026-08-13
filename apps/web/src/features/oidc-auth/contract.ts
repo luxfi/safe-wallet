@@ -8,10 +8,8 @@
  * - PascalCase → Component (stub renders null when not ready)
  */
 
-import type EmailSignInButton from './components/EmailSignInButton'
-import type GoogleSignInButton from './components/GoogleSignInButton'
+import type IdSignInButton from './components/IdSignInButton'
 
 export interface OidcAuthContract {
-  EmailSignInButton: typeof EmailSignInButton
-  GoogleSignInButton: typeof GoogleSignInButton
+  IdSignInButton: typeof IdSignInButton
 }

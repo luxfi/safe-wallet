@@ -115,6 +115,30 @@ never leaks into commits.
 
 That's the entire surface area. No source file changes needed.
 
+## Identity
+
+Sign-in is Hanzo IAM — one OIDC client per brand, declared in
+`packages/brand/src/index.ts` and resolved by host like every other brand
+token. The client is public: Authorization Code + PKCE-S256, no secret in the
+browser, so nothing below is a credential.
+
+| Brand | Issuer                 | `client_id`   | Redirect URI                              |
+| ----- | ---------------------- | ------------- | ----------------------------------------- |
+| Lux   | `https://lux.id`       | `lux-safe`    | `https://safe.lux.network/auth/callback`  |
+| Zoo   | `https://zoolabs.id`   | `zoo-safe`    | `https://safe.zoo.network/auth/callback`  |
+| Pars  | `https://pars.id`      | `pars-safe`   | `https://safe.pars.network/auth/callback` |
+| Hanzo | `https://iam.hanzo.ai` | `hanzo-vault` | `https://vault.hanzo.ai/auth/callback`    |
+
+Each application has to exist on its IAM carrying that exact `redirectUris`
+entry (plus `http://localhost:3000/auth/callback` for local dev) and the
+`authorization_code` + `refresh_token` grants. Set `expireInHours` and
+`refreshExpireInHours`: an unset refresh lifetime falls back to the access
+lifetime, which expires the refresh token at the same instant as the token it
+renews, so the session cannot be extended.
+
+The wallet path is untouched. A user signs in with either, and the Safe
+transaction signer is always the wallet — IAM carries identity, never a key.
+
 ## Status
 
 | Phase | Status | Commit prefix                                                                 |
