@@ -1,0 +1,21 @@
+# Platform-native CI/CD — the ONE build path for this repo.
+#
+# A v* git tag push → the platform GitHub App webhook → platform BuildKit
+# builds ghcr.io/luxfi/safe in-cluster. NO GitHub Actions, NO ARC runners: the
+# luxfi GitHub org has zero registered runners, so .github/workflows here has
+# no scheduler at all.
+#
+# Tags are v* (not lux-v*): upstream tags this monorepo web-v*, so the bare v*
+# namespace is ours and needs no prefix to stay clear of it.
+#
+# amd64 only — every lux-k8s node is amd64, and a Next build cannot
+# cross-compile, so an arm64 leg would run under QEMU: slow and OOM-prone.
+#
+# Schema: hanzoai/platform docs/PLATFORM_CI.md
+build:
+  matrix:
+    - { os: linux, arch: amd64 }
+  dockerfile: ./Dockerfile.lux
+  context: .
+  image: ghcr.io/luxfi/safe
+  tag-pattern: '{{git.tag}}'
