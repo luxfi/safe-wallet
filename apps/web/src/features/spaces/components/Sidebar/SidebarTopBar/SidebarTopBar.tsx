@@ -24,6 +24,11 @@ export const SidebarTopBar = (): ReactElement => {
   // dev's state+effect, without the extra render.
   const isInSafeOrSpace = Boolean(safeAddress) || isSpaceRoute
   const showHomeLabel = isHydrated && isInSafeOrSpace && !isCollapsed
+  // The open rail is a wide slot, so it gets the horizontal lockup at the height
+  // the rest of the fleet uses. Only the icon rail is square, and only there does
+  // the mark stand in. Gated on hydration for the reason above: the variant is a
+  // different element, not a different class, so a first-pass guess would tear.
+  const showWordmark = isHydrated && !isCollapsed && !showHomeLabel
   const logoHref = AppRoutes.welcome.accounts
 
   return (
@@ -35,6 +40,7 @@ export const SidebarTopBar = (): ReactElement => {
       <SafeLogo
         href={logoHref}
         showHomeLabel={showHomeLabel}
+        wordmark={showWordmark}
         data-testid="logo-container"
         className={cn(
           'absolute z-10 top-1/2 -translate-y-1/2',
