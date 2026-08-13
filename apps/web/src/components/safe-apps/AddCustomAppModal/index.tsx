@@ -24,7 +24,8 @@ import { Field, FieldLabel } from '@/components/ui/field'
 
 import css from './styles.module.css'
 import ExternalLink from '@/components/common/ExternalLink'
-import { BRAND_NAME } from '@/config/constants'
+import { BRAND_NAME, IS_OFFICIAL_HOST } from '@/config/constants'
+import { brand } from '@safe-global/brand'
 
 type Props = {
   open: boolean
@@ -40,7 +41,7 @@ type CustomAppFormData = {
   safeApp: SafeAppData
 }
 
-const HELP_LINK = 'https://docs.safe.global/apps-sdk-overview'
+const HELP_LINK = IS_OFFICIAL_HOST ? 'https://docs.safe.global/apps-sdk-overview' : brand.developerUrl
 const APP_ALREADY_IN_THE_LIST_ERROR = 'This Safe App is already in the list'
 const MANIFEST_ERROR = "The app doesn't support Safe App functionality"
 const INVALID_URL_ERROR = 'The url is invalid'

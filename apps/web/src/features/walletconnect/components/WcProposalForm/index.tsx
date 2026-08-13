@@ -127,7 +127,7 @@ const WcProposalForm = ({ proposal, onApprove, onReject }: ProposalFormProps): R
       )}
 
       {isSafePass && sanctionedAddress && (
-        <BlockedAddress address={sanctionedAddress} featureTitle="Safe{Pass}" onClose={onReject} />
+        <BlockedAddress address={sanctionedAddress} featureTitle="WalletConnect connection" onClose={onReject} />
       )}
 
       <Separator className={css.divider} />

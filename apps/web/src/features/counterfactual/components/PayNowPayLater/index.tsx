@@ -9,6 +9,7 @@ import { Label } from '@/components/ui/label'
 import { Typography } from '@/components/ui/typography'
 
 import css from './styles.module.css'
+import { BRAND_NAME } from '@/config/constants'
 import ErrorMessage from '@/components/tx/ErrorMessage'
 import { PayMethod } from '@safe-global/utils/features/counterfactual/types'
 import { useSiwe } from '@/services/siwe/useSiwe'
@@ -102,7 +103,7 @@ const PayNowPayLater = ({
           <div className={classnames(css.listItem, 'flex items-center')}>
             <Check className="size-5" />
           </div>
-          <Typography variant="paragraph-small">Safe doesn&apos;t profit from the fees.</Typography>
+          <Typography variant="paragraph-small">{BRAND_NAME} doesn&apos;t profit from the fees.</Typography>
         </div>
       </div>
       <div className="w-full">
