@@ -18,7 +18,7 @@ describe('LaunchScreen', () => {
 
     expect(screen.getByRole('status')).toBeInTheDocument()
     expect(screen.getByTestId('launch-screen')).toHaveAttribute('aria-busy', 'true')
-    expect(screen.getByAltText('Safe')).toBeInTheDocument()
+    expect(screen.getByAltText(BRAND_NAME)).toBeInTheDocument()
     expect(screen.getByText(`Loading ${BRAND_NAME}…`)).toBeInTheDocument()
     expect(screen.getByTestId('launch-progress-bar')).toHaveStyle({ width: '30%' })
   })
