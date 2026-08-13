@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/button'
 import { Typography } from '@/components/ui/typography'
 import ModalDialog from '@/components/common/ModalDialog'
-import SafeLogo from '@/public/images/logo-no-text.svg'
+import { Mark } from '@/components/common/Logo'
 
 interface CaptchaModalProps {
   open: boolean
@@ -20,7 +20,7 @@ const CaptchaModal = ({ open, onWidgetContainerReady, error, onRetry }: CaptchaM
     >
       <div className="p-6">
         <div className="flex flex-col items-center gap-6 pt-8 pb-6">
-          <SafeLogo alt="Safe logo" width={56} height={56} />
+          <Mark width={56} height={56} />
 
           <div className="text-center">
             <Typography variant="h4" align="center" className="mb-2 font-bold">

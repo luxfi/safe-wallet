@@ -4,6 +4,8 @@ import { getAllWallets } from '@/hooks/wallets/wallets'
 import { getRpcServiceUrl } from '@/hooks/wallets/web3'
 import { numberToHex } from '@/utils/hex'
 import { BRAND_NAME } from '@/config/constants'
+import { markUrl } from '@/components/common/Logo'
+import { brand } from '@safe-global/brand'
 import type { EnvState } from '@safe-global/store/settingsSlice'
 
 let onboard: OnboardAPI | null = null
@@ -44,8 +46,8 @@ export const createOnboard = (
 
     appMetadata: {
       name: BRAND_NAME,
-      icon: location.origin + '/images/logo-round.svg',
-      description: `${BRAND_NAME} – smart contract wallet for Ethereum (ex-Gnosis Safe multisig)`,
+      icon: location.origin + markUrl,
+      description: brand.description,
     },
 
     connect: {

@@ -2,7 +2,7 @@ import classNames from 'classnames'
 import type { CoreTypes } from '@walletconnect/types'
 import { Typography } from '@/components/ui/typography'
 import SafeAppIconCard from '@/components/safe-apps/SafeAppIconCard'
-import SafeLogo from '@/public/images/logo-no-text.svg'
+import { Mark } from '@/components/common/Logo'
 import ConnectionDots from '@/public/images/common/connection-dots.svg'
 import css from './styles.module.css'
 
@@ -13,7 +13,7 @@ const WcConnectionState = ({ metadata, isDelete }: { metadata?: CoreTypes.Metada
   return (
     <div data-testid="wc-connection-state" className={css.container}>
       <div>
-        <SafeLogo alt="Safe logo" width="28px" height="28px" />
+        <Mark width="28px" height="28px" />
 
         <ConnectionDots
           data-testid="connection-dots"

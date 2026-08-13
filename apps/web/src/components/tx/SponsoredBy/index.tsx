@@ -1,4 +1,6 @@
 import chains from '@safe-global/utils/config/chains'
+import { markUrl } from '@/components/common/Logo'
+import { BRAND_NAME } from '@/config/constants'
 import css from './styles.module.css'
 
 export const RELAY_SPONSORS = {
@@ -7,8 +9,8 @@ export const RELAY_SPONSORS = {
     logo: '/images/common/gnosis-chain-logo.png',
   },
   default: {
-    name: 'Safe',
-    logo: '/images/logo-no-text.svg',
+    name: BRAND_NAME,
+    logo: markUrl,
   },
 }
 

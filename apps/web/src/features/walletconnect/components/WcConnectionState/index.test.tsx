@@ -1,8 +1,9 @@
 import { render, screen } from '@testing-library/react'
 import WcConnectionState from '.'
+import { BRAND_NAME } from '@/config/constants'
 
 describe('WcConnectionState component tests', () => {
-  const SAFE_LOGO_ALT = 'Safe logo'
+  const BRAND_LOGO_ALT = BRAND_NAME
   const DAPP_NAME = 'Test dApp'
   const DAPP_LOGO_ALT = `${DAPP_NAME} logo`
   const ICON_URL = 'test-icon-url'
@@ -29,7 +30,7 @@ describe('WcConnectionState component tests', () => {
   it('Verify successful connection state is rendered correctly', () => {
     render(<WcConnectionState metadata={mockMetadata} isDelete={false} />)
 
-    expect(screen.getByAltText(SAFE_LOGO_ALT)).toBeVisible()
+    expect(screen.getByAltText(BRAND_LOGO_ALT)).toBeVisible()
     expect(screen.getByTestId('connection-dots')).toBeVisible()
     expect(screen.getByAltText(DAPP_LOGO_ALT)).toBeVisible()
     expect(screen.getByText(SUCCESS_MESSAGE)).toBeVisible()
@@ -38,7 +39,7 @@ describe('WcConnectionState component tests', () => {
   it('Verify disconnection state is rendered correctly', () => {
     render(<WcConnectionState metadata={mockMetadata} isDelete={true} />)
 
-    expect(screen.getByAltText(SAFE_LOGO_ALT)).toBeVisible()
+    expect(screen.getByAltText(BRAND_LOGO_ALT)).toBeVisible()
     const dots = screen.getByTestId('connection-dots')
     expect(dots).toBeVisible()
     expect(dots).toHaveClass('errorDots')
@@ -64,7 +65,7 @@ describe('WcConnectionState component tests', () => {
     const container = screen.getByTestId('wc-connection-state')
     expect(container).toHaveClass('container')
 
-    expect(screen.getByAltText(SAFE_LOGO_ALT)).toBeInTheDocument()
+    expect(screen.getByAltText(BRAND_LOGO_ALT)).toBeInTheDocument()
     expect(screen.getByTestId('connection-dots')).toBeInTheDocument()
     expect(screen.getByAltText(DAPP_LOGO_ALT)).toBeInTheDocument()
   })
