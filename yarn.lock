@@ -9753,6 +9753,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@luxfi/logo@npm:^1.0.9":
+  version: 1.0.9
+  resolution: "@luxfi/logo@npm:1.0.9"
+  dependencies:
+    sharp: "npm:^0.34.4"
+  peerDependencies:
+    react: ">=16.8.0"
+  peerDependenciesMeta:
+    react:
+      optional: true
+  bin:
+    lux-icons: dist/icons.js
+  checksum: 10/c87a0084f6588312b93ef6f06dfb98f689eb6f8e887226667e851757d156104bb7baf1a8b36dd29f6d220ff05b597d1490049beae1ed305d84bb3b3b43865d58
+  languageName: node
+  linkType: hard
+
 "@mdx-js/loader@npm:^3.0.1":
   version: 3.1.0
   resolution: "@mdx-js/loader@npm:3.1.0"
@@ -13816,6 +13832,7 @@ __metadata:
     "@ledgerhq/device-management-kit": "npm:^0.9.1"
     "@ledgerhq/device-signer-kit-ethereum": "npm:^1.8.0"
     "@ledgerhq/device-transport-kit-web-hid": "npm:^1.2.0"
+    "@luxfi/logo": "npm:^1.0.9"
     "@mdx-js/loader": "npm:^3.0.1"
     "@mdx-js/react": "npm:^3.0.1"
     "@next/bundle-analyzer": "npm:^15.0.4"
@@ -42064,7 +42081,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sharp@npm:^0.34.3, sharp@npm:^0.34.5":
+"sharp@npm:^0.34.3, sharp@npm:^0.34.4, sharp@npm:^0.34.5":
   version: 0.34.5
   resolution: "sharp@npm:0.34.5"
   dependencies:

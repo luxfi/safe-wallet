@@ -151,7 +151,7 @@ const Topbar = ({ onMenuToggle, onBatchToggle }: TopbarProps): ReactElement => {
             and how tall its slot is. */}
         <div className={cn('shrink-0 flex items-center', contextHeight, contextWrap)}>
           {showLogo ? (
-            <SafeLogo />
+            <SafeLogo wordmark />
           ) : showSpaceSafeBar ? (
             <SpaceSafeBar />
           ) : (
