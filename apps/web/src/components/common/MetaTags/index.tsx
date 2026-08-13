@@ -3,11 +3,15 @@ import { ContentSecurityPolicy, StrictTransportSecurity } from '@/config/securit
 import { lightPalette, darkPalette } from '@safe-global/theme/palettes'
 import { brand } from '@safe-global/brand'
 
-const descriptionText = `${BRAND_NAME} is the most trusted smart account wallet on Ethereum with over $100B secured.`
+const descriptionText = IS_OFFICIAL_HOST
+  ? 'Safe is the most trusted smart account wallet on Ethereum with over $100B secured.'
+  : brand.description
 const titleText = BRAND_NAME
-const socialShareImage = `${brand.appUrl}/images/social-share.png`
-// A brand keeps its icon set beside its favicon.
+// A brand keeps its icon set, its manifest and its social card beside its favicon.
 const brandIcons = brand.faviconUrl.replace(/\/[^/]*$/, '')
+const socialShareImage = IS_OFFICIAL_HOST
+  ? `${brand.appUrl}/images/social-share.png`
+  : `${brand.appUrl}${brandIcons}/android-chrome-512x512.png`
 
 const MetaTags = ({ prefetchUrl }: { prefetchUrl: string }) => (
   <>
@@ -18,7 +22,7 @@ const MetaTags = ({ prefetchUrl }: { prefetchUrl: string }) => (
     <meta name="og:image" content={socialShareImage} />
     <meta name="og:description" content={descriptionText} />
     <meta name="og:title" content={titleText} />
-    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:card" content={IS_OFFICIAL_HOST ? 'summary_large_image' : 'summary'} />
     <meta name="twitter:site" content={brand.twitterUrl} />
     <meta name="twitter:title" content={titleText} />
     <meta name="twitter:description" content={descriptionText} />
@@ -39,7 +43,12 @@ const MetaTags = ({ prefetchUrl }: { prefetchUrl: string }) => (
     {/* PWA primary color and manifest */}
     <meta name="theme-color" content={lightPalette.background.main} media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content={darkPalette.background.main} media="(prefers-color-scheme: dark)" />
-    <link rel="manifest" href="/safe.webmanifest" {...(IS_BEHIND_IAP && { crossOrigin: 'use-credentials' })} />
+    {/* The installed app carries the brand's own name and icons. */}
+    <link
+      rel="manifest"
+      href={IS_OFFICIAL_HOST ? '/safe.webmanifest' : `${brandIcons}/manifest.json`}
+      {...(IS_BEHIND_IAP && { crossOrigin: 'use-credentials' })}
+    />
 
     {/* Favicons — the brand's own, resolved from the request host like the rest
         of its identity. Every brand declares faviconUrl and ships an icon set

@@ -4,9 +4,10 @@
 # Usage:   scripts/select-brand.sh <slug>
 # Slugs:   safe | lux | hanzo
 #
-# What it does:
-#   1) Copies apps/web/.env.<slug> -> apps/web/.env.local         (overridden each run)
-#   2) Mirrors apps/web/public/brand/<slug>/ -> apps/web/public/brand/active/
+# Copies apps/web/.env.<slug> -> apps/web/.env.local (overridden each run).
+#
+# Nothing else is baked in: name, logo, icons and manifest are served from
+# apps/web/public/brand/<slug>/ and picked by request host at runtime.
 #
 # After this runs, `yarn workspace @safe-global/web build` produces the branded build.
 
@@ -40,16 +41,6 @@ fi
 
 cp "$env_file" "$repo_root/apps/web/.env.local"
 
-rm -rf "$repo_root/apps/web/public/brand/active"
-mkdir -p "$repo_root/apps/web/public/brand/active"
-cp -R "$brand_dir/." "$repo_root/apps/web/public/brand/active/"
-
-# Per-brand manifest replaces the default safe.webmanifest at build time.
-if [[ -f "$brand_dir/manifest.json" ]]; then
-  cp "$brand_dir/manifest.json" "$repo_root/apps/web/public/safe.webmanifest"
-fi
-
 echo "brand '$slug' selected"
-echo "  env       -> apps/web/.env.local"
-echo "  assets    -> apps/web/public/brand/active/"
-echo "  manifest  -> apps/web/public/safe.webmanifest"
+echo "  env    -> apps/web/.env.local"
+echo "  assets -> apps/web/public/brand/$slug/ (served as-is, resolved by host)"

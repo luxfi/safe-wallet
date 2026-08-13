@@ -1,0 +1,19 @@
+{
+  "name": "Pars Safe",
+  "short_name": "Pars Safe",
+  "description": "Pars Safe is the multi-signature smart account wallet for the Pars Network.",
+  "icons": [
+    {
+      "src": "/brand/pars/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/brand/pars/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone"
+}
