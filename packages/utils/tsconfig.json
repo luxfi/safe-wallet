@@ -2,9 +2,7 @@
   "extends": "../../config/tsconfig/confs/base.json",
   "compilerOptions": {
     "paths": {
-      "*": [
-        "./*"
-      ]
+      "*": ["./*"]
     }
   }
 }
