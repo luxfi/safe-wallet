@@ -1,10 +1,12 @@
 import { useEffect, useState, type ReactElement } from 'react'
 import { cn } from '@/utils/cn'
+import { BRAND_NAME, IS_OFFICIAL_HOST } from '@/config/constants'
+import { markUrl } from '@/components/common/Logo'
 import { useLaunchScreen } from './useLaunchScreen'
 import css from './LaunchScreen.module.css'
 
 const LAUNCH_STEPS = [
-  { progress: 30, caption: 'Loading Safe{Wallet}…' },
+  { progress: 30, caption: `Loading ${BRAND_NAME}…` },
   { progress: 65, caption: 'Fetching your accounts…' },
   { progress: 90, caption: 'Almost there…' },
 ] as const
@@ -47,7 +49,7 @@ function LaunchScreen(): ReactElement | null {
       role="status"
       aria-busy={!exiting}
       aria-live="polite"
-      aria-label="Loading Safe{Wallet}"
+      aria-label={`Loading ${BRAND_NAME}`}
       data-testid="launch-screen"
       className={cn(
         'fixed inset-0 z-[1401] flex flex-col items-center justify-center gap-8 bg-background transition-opacity duration-300',
@@ -57,8 +59,17 @@ function LaunchScreen(): ReactElement | null {
       <div className="relative flex items-center justify-center">
         <span aria-hidden className={cn('absolute size-40 rounded-full', css.halo)} />
         <div className={css.breathe}>
-          <img src="/images/logo-no-text.svg" alt="Safe" width={72} height={72} className="size-[72px] dark:hidden" />
-          <span aria-hidden className={cn('hidden size-[72px] dark:block', css.logoDarkFill)} />
+          {/* The Safe mark needs a separate dark-mode fill; a white-label mark reads on both. */}
+          <img
+            src={markUrl}
+            alt={BRAND_NAME}
+            width={72}
+            height={72}
+            className={cn('size-[72px]', IS_OFFICIAL_HOST && 'dark:hidden')}
+          />
+          {IS_OFFICIAL_HOST && (
+            <span aria-hidden className={cn('hidden size-[72px] dark:block', css.logoDarkFill)} />
+          )}
         </div>
       </div>
 
