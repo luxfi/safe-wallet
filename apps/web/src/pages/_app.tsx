@@ -90,7 +90,6 @@ import useMixpanel from '@/services/analytics/useMixpanel'
 import { AddressBookSourceProvider } from '@/components/common/AddressBookSourceProvider'
 import { CaptchaProvider } from '@/components/common/Captcha'
 import { HnQueueAssessmentProvider } from '@/features/hypernative'
-import { useOidcLoginCallback } from '@/features/oidc-auth'
 import { useLogoutCallback } from '@/hooks/useLogoutCallback'
 import { useSessionExpiryGuard } from '@/services/sessionExpiry/useSessionExpiryGuard'
 import ObservabilityErrorBoundary from '@/components/common/ObservabilityErrorBoundary'
@@ -138,7 +137,6 @@ const InitApp = (): ReactElement | null => {
   useInitWeb3()
   useBeamer()
   useVisitedSafes()
-  useOidcLoginCallback()
   useLogoutCallback()
   useSessionExpiryGuard()
   useUnlockBodyScroll()

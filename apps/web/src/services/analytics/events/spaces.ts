@@ -7,12 +7,8 @@ export const SPACE_EVENTS = {
     action: 'Open sign in message',
     category: SPACE_CATEGORY,
   },
-  EMAIL_SIGN_IN: {
-    action: 'Sign in with email',
-    category: SPACE_CATEGORY,
-  },
-  GOOGLE_SIGN_IN: {
-    action: 'Sign in with Google',
+  ID_SIGN_IN: {
+    action: 'Sign in with ID',
     category: SPACE_CATEGORY,
   },
   INFO_MODAL: {

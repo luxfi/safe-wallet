@@ -65,6 +65,7 @@
     "@datadog/browser-rum": "^6.24.1",
     "@ducanh2912/next-pwa": "^10.2.9",
     "@gnosis.pm/zodiac": "^4.0.3",
+    "@hanzo/iam": "^0.21.9",
     "@hello-pangea/dnd": "^18.0.1",
     "@ledgerhq/context-module": "^1.8.0",
     "@ledgerhq/device-management-kit": "^0.9.1",

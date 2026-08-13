@@ -16,8 +16,7 @@ jest.mock('@/features/spaces', () => ({
   useCurrentSpaceId: () => null,
 }))
 
-const MockEmailSignInButton = () => <button data-testid="email-login-btn">Continue with email</button>
-const MockGoogleSignInButton = () => <button data-testid="google-login-btn">Continue with Google</button>
+const MockIdSignInButton = () => <button data-testid="id-login-btn">Continue with Lux ID</button>
 
 const mockUseLoadFeature = jest.fn()
 
@@ -28,8 +27,7 @@ jest.mock('@/features/__core__', () => ({
 
 const mockOidcAuthFeature = (isDisabled: boolean, isReady = !isDisabled) =>
   mockUseLoadFeature.mockReturnValue({
-    EmailSignInButton: isDisabled ? () => null : MockEmailSignInButton,
-    GoogleSignInButton: isDisabled ? () => null : MockGoogleSignInButton,
+    IdSignInButton: isDisabled ? () => null : MockIdSignInButton,
     $isDisabled: isDisabled,
     $isReady: isReady,
   })
@@ -39,30 +37,27 @@ describe('SignInOptions', () => {
     jest.clearAllMocks()
   })
 
-  it('should render wallet, divider, Google, and email buttons when OIDC auth is enabled', () => {
+  it('should render wallet, divider and ID buttons when OIDC auth is enabled', () => {
     mockOidcAuthFeature(false)
 
     render(<SignInOptions afterSignIn={mockAfterSignIn} />)
 
     expect(screen.getByTestId('connect-wallet-btn')).toBeInTheDocument()
     expect(screen.getByText('OR')).toBeInTheDocument()
-    expect(screen.getByTestId('google-login-btn')).toBeInTheDocument()
-    expect(screen.getByTestId('email-login-btn')).toBeInTheDocument()
+    expect(screen.getByTestId('id-login-btn')).toBeInTheDocument()
   })
 
-  it('should render the wallet button first, above the divider and OIDC options', () => {
+  it('should render the wallet button first, above the divider and the ID option', () => {
     mockOidcAuthFeature(false)
 
     render(<SignInOptions afterSignIn={mockAfterSignIn} />)
 
     const wallet = screen.getByTestId('connect-wallet-btn')
     const divider = screen.getByText('OR')
-    const google = screen.getByTestId('google-login-btn')
-    const email = screen.getByTestId('email-login-btn')
+    const id = screen.getByTestId('id-login-btn')
 
     expect(wallet.compareDocumentPosition(divider) & Node.DOCUMENT_POSITION_FOLLOWING).not.toBe(0)
-    expect(divider.compareDocumentPosition(google) & Node.DOCUMENT_POSITION_FOLLOWING).not.toBe(0)
-    expect(google.compareDocumentPosition(email) & Node.DOCUMENT_POSITION_FOLLOWING).not.toBe(0)
+    expect(divider.compareDocumentPosition(id) & Node.DOCUMENT_POSITION_FOLLOWING).not.toBe(0)
   })
 
   it('should render only wallet button when OIDC auth is disabled', () => {
@@ -70,8 +65,7 @@ describe('SignInOptions', () => {
 
     render(<SignInOptions afterSignIn={mockAfterSignIn} />)
 
-    expect(screen.queryByTestId('email-login-btn')).not.toBeInTheDocument()
-    expect(screen.queryByTestId('google-login-btn')).not.toBeInTheDocument()
+    expect(screen.queryByTestId('id-login-btn')).not.toBeInTheDocument()
     expect(screen.queryByText('OR')).not.toBeInTheDocument()
     expect(screen.getByTestId('connect-wallet-btn')).toBeInTheDocument()
   })
@@ -81,8 +75,7 @@ describe('SignInOptions', () => {
 
     render(<SignInOptions afterSignIn={mockAfterSignIn} />)
 
-    expect(screen.queryByTestId('email-login-btn')).not.toBeInTheDocument()
-    expect(screen.queryByTestId('google-login-btn')).not.toBeInTheDocument()
+    expect(screen.queryByTestId('id-login-btn')).not.toBeInTheDocument()
     expect(screen.queryByText('OR')).not.toBeInTheDocument()
     expect(screen.getByTestId('connect-wallet-btn')).toBeInTheDocument()
   })
