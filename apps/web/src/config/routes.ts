@@ -25,6 +25,9 @@ export const AppRoutes = {
     custom: '/apps/custom',
     bookmarked: '/apps/bookmarked',
   },
+  auth: {
+    callback: '/auth/callback',
+  },
   balances: {
     positions: '/balances/positions',
     nfts: '/balances/nfts',

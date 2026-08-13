@@ -134,8 +134,7 @@ export enum MixpanelEventParams {
 
 export enum AuthLoginMethod {
   SIWE = 'siwe',
-  EMAIL_OTP = 'email_otp',
-  EMAIL_GOOGLE = 'email_google',
+  OIDC = 'oidc',
 }
 
 export enum SafeAppLaunchLocation {

@@ -10,8 +10,14 @@ jest.mock('@/config/gateway', () => ({
   GATEWAY_URL: 'https://safe-client.safe.global',
 }))
 
+jest.mock('@/features/oidc-auth', () => ({
+  iam: () => ({ logout: mockIamLogout }),
+}))
+
 jest.mock('@/hooks/wallets/useOnboard')
 jest.mock('@/hooks/wallets/useWallet')
+
+const mockIamLogout = jest.fn().mockResolvedValue(undefined)
 
 const mockUseOnboard = useOnboard as jest.MockedFunction<typeof useOnboard>
 const mockUseWallet = useWallet as jest.MockedFunction<typeof useWallet>
@@ -55,22 +61,22 @@ describe('useLogout', () => {
     Object.defineProperty(window, 'location', { writable: true, value: originalLocation })
   })
 
-  it('should write logging_out flag to sessionStorage before submitting', () => {
+  it('should write logging_out flag to sessionStorage before submitting', async () => {
     const { result } = renderHook(() => useLogout())
 
-    act(() => {
-      result.current.logout()
+    await act(async () => {
+      await result.current.logout()
     })
 
     expect(sessionStorage.getItem(LOGGING_OUT_KEY)).toBe('1')
     expect(submitSpy).toHaveBeenCalled()
   })
 
-  it('should submit a form POST to the logout redirect endpoint', () => {
+  it('should submit a form POST to the logout redirect endpoint', async () => {
     const { result } = renderHook(() => useLogout())
 
-    act(() => {
-      result.current.logout()
+    await act(async () => {
+      await result.current.logout()
     })
 
     expect(capturedForm).not.toBeNull()
@@ -84,11 +90,11 @@ describe('useLogout', () => {
     expect(submitSpy).toHaveBeenCalled()
   })
 
-  it('should remove the form from the DOM after submitting', () => {
+  it('should remove the form from the DOM after submitting', async () => {
     const { result } = renderHook(() => useLogout())
 
-    act(() => {
-      result.current.logout()
+    await act(async () => {
+      await result.current.logout()
     })
 
     expect(removeChildSpy).toHaveBeenCalledWith(capturedForm)
@@ -107,6 +113,17 @@ describe('useLogout', () => {
     expect(disconnectWalletSpy.mock.invocationCallOrder[0]).toBeLessThan(submitSpy.mock.invocationCallOrder[0])
     expect(submitSpy).toHaveBeenCalled()
     expect(sessionStorage.getItem(LOGGING_OUT_KEY)).toBe('1')
+  })
+
+  it('should end the IAM session before submitting the logout form', async () => {
+    const { result } = renderHook(() => useLogout())
+
+    await act(async () => {
+      await result.current.logout()
+    })
+
+    expect(mockIamLogout).toHaveBeenCalled()
+    expect(mockIamLogout.mock.invocationCallOrder[0]).toBeLessThan(submitSpy.mock.invocationCallOrder[0])
   })
 
   it('should not attempt to disconnect when no wallet is connected', async () => {

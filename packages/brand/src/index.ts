@@ -11,11 +11,26 @@
  * object, so swapping the host swaps the whole product identity.
  */
 
+/**
+ * The brand's Hanzo IAM registration. Public by nature — an OAuth client id and
+ * an issuer origin are sent to the browser on every authorize request. The
+ * client is public/PKCE, so there is no secret here and none is ever shipped.
+ */
+export interface Identity {
+  /** IAM origin serving this brand. */
+  issuer: string
+  /** OAuth client id, `<org>-<app>`. */
+  clientId: string
+  /** What the brand calls its identity, e.g. on the sign-in button. */
+  name: string
+}
+
 export interface Brand {
   name: string
   shortName: string
   /** One factual sentence. Feeds meta tags, the PWA manifest and wallet metadata. */
   description: string
+  identity: Identity
   domain: string
   appHost: string
   appUrl: string
@@ -54,6 +69,7 @@ const lux: Brand = {
   name: 'Lux Safe',
   shortName: 'Lux Safe',
   description: 'Lux Safe is the multi-signature smart account wallet for the Lux Network.',
+  identity: { issuer: 'https://lux.id', clientId: 'lux-safe', name: 'Lux ID' },
   domain: 'safe.lux.network',
   appHost: 'safe.lux.network',
   appUrl: 'https://safe.lux.network',
@@ -86,6 +102,7 @@ const zoo: Brand = {
   name: 'Zoo Safe',
   shortName: 'Zoo Safe',
   description: 'Zoo Safe is the multi-signature smart account wallet for the Zoo Network.',
+  identity: { issuer: 'https://zoolabs.id', clientId: 'zoo-safe', name: 'Zoo ID' },
   domain: 'safe.zoo.network',
   appHost: 'safe.zoo.network',
   appUrl: 'https://safe.zoo.network',
@@ -113,6 +130,7 @@ const pars: Brand = {
   name: 'Pars Safe',
   shortName: 'Pars Safe',
   description: 'Pars Safe is the multi-signature smart account wallet for the Pars Network.',
+  identity: { issuer: 'https://pars.id', clientId: 'pars-safe', name: 'Pars ID' },
   domain: 'safe.pars.network',
   appHost: 'safe.pars.network',
   appUrl: 'https://safe.pars.network',
@@ -140,6 +158,7 @@ const hanzo: Brand = {
   name: 'Hanzo Vault',
   shortName: 'Vault',
   description: 'Hanzo Vault is the multi-signature smart account wallet for the Hanzo network.',
+  identity: { issuer: 'https://iam.hanzo.ai', clientId: 'hanzo-vault', name: 'Hanzo ID' },
   domain: 'vault.hanzo.ai',
   appHost: 'vault.hanzo.ai',
   appUrl: 'https://vault.hanzo.ai',

@@ -1,34 +1,24 @@
 import { useCallback } from 'react'
-import { GATEWAY_URL } from '@/config/gateway'
-import { OIDC_AUTH_PENDING_KEY, OIDC_AUTH_CONNECTION_KEY, OidcConnection } from '../constants'
-import { AuthLoginMethod } from '@/services/analytics/mixpanel-events'
-
-const AUTHORIZE_PATH = '/v1/auth/oidc/authorize'
+import { startLogin } from '@hanzo/iam/browser'
+import { iam } from '../iam'
+import { OIDC_AUTH_PENDING_KEY } from '../constants'
 
 /**
- * Hook for initiating the OIDC login flow via CGW.
+ * Starts the OIDC Authorization Code + PKCE flow at Hanzo IAM.
  *
- * The CGW /v1/auth/oidc/authorize endpoint returns a 302 redirect to the OIDC provider,
- * so we use window.location.href instead of RTK Query (fetch follows redirects
- * automatically and would fail trying to parse the provider's HTML as JSON).
+ * IAM owns the credential interaction: its login page offers whatever the
+ * application is configured for — password, one-time code, passkey, wallet,
+ * social — so this app renders one entry point and never a button per method.
+ *
+ * The current URL is stashed as the post-login destination; IAM returns to
+ * `/auth/callback`, which completes the exchange and lands the user back here.
  */
 export const useOidcLogin = () => {
-  const loginWithRedirect = useCallback((connection: OidcConnection, redirectUrl?: string) => {
-    const method = connection === OidcConnection.GOOGLE ? AuthLoginMethod.EMAIL_GOOGLE : AuthLoginMethod.EMAIL_OTP
+  const login = useCallback(async () => {
+    iam()
     sessionStorage.setItem(OIDC_AUTH_PENDING_KEY, '1')
-    sessionStorage.setItem(OIDC_AUTH_CONNECTION_KEY, method)
-
-    // Strip any stale `error` param so the callback can trust that an `error`
-    // in the return URL genuinely came from the OIDC provider, not from a
-    // previous failed attempt still present in the URL.
-    const cleanRedirectUrl = new URL(redirectUrl ?? window.location.href)
-    cleanRedirectUrl.searchParams.delete('error')
-
-    const url = new URL(AUTHORIZE_PATH, GATEWAY_URL)
-    url.searchParams.set('redirect_url', cleanRedirectUrl.toString())
-    url.searchParams.set('connection', connection)
-    window.location.href = url.toString()
+    await startLogin({ redirect: window.location.href })
   }, [])
 
-  return { loginWithRedirect }
+  return { login }
 }
