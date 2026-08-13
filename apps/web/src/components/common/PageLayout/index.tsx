@@ -79,7 +79,7 @@ const PageLayout = ({ pathname, children }: { pathname: string; children: ReactE
     <>
       {isStaticPage && (
         <div className="px-6 py-4">
-          <SafeLogo />
+          <SafeLogo wordmark />
         </div>
       )}
 

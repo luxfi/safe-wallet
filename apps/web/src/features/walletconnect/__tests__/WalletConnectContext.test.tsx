@@ -1,3 +1,4 @@
+import { brand } from '@safe-global/brand'
 import { faker } from '@faker-js/faker'
 import { addressExBuilder, extendedSafeInfoBuilder } from '@/tests/builders/safe'
 import { useContext } from 'react'
@@ -635,7 +636,7 @@ describe('WalletConnectProvider', () => {
         expect(mockRequest).toHaveBeenCalledWith(
           authId,
           { method: 'personal_sign', params: [siweMessage, testSafeAddress] },
-          expect.objectContaining({ name: appName, url: 'https://apps-portal.safe.global/wallet-connect' }),
+          expect.objectContaining({ name: appName, url: `${brand.appUrl}/wallet-connect` }),
         )
         expect(approveSessionAuthSpy).toHaveBeenCalledWith(
           authId,
@@ -980,7 +981,7 @@ describe('WalletConnectProvider', () => {
             metadata: {
               name: requestAppName,
               description: peerDescription,
-              url: 'https://apps-portal.safe.global/wallet-connect',
+              url: `${brand.appUrl}/wallet-connect`,
               icons: [peerIcon],
             },
           },
@@ -1027,7 +1028,7 @@ describe('WalletConnectProvider', () => {
         {
           name: requestAppName,
           description: peerDescription,
-          url: 'https://apps-portal.safe.global/wallet-connect',
+          url: `${brand.appUrl}/wallet-connect`,
           iconUrl: peerIcon,
         },
       )
@@ -1100,7 +1101,7 @@ describe('WalletConnectProvider', () => {
             metadata: {
               name: requestAppName,
               description: faker.lorem.sentence(),
-              url: 'https://apps-portal.safe.global/wallet-connect',
+              url: `${brand.appUrl}/wallet-connect`,
               icons: [faker.image.url()],
             },
           },

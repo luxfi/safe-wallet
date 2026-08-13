@@ -67,9 +67,7 @@ function LaunchScreen(): ReactElement | null {
             height={72}
             className={cn('size-[72px]', IS_OFFICIAL_HOST && 'dark:hidden')}
           />
-          {IS_OFFICIAL_HOST && (
-            <span aria-hidden className={cn('hidden size-[72px] dark:block', css.logoDarkFill)} />
-          )}
+          {IS_OFFICIAL_HOST && <span aria-hidden className={cn('hidden size-[72px] dark:block', css.logoDarkFill)} />}
         </div>
       </div>
 

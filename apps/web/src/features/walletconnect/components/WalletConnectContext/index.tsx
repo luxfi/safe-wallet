@@ -1,3 +1,4 @@
+import { brand } from '@safe-global/brand'
 import { createContext, useEffect, useState, useCallback, type ReactNode } from 'react'
 import { getSdkError } from '@walletconnect/utils'
 import { formatJsonRpcError } from '@walletconnect/jsonrpc-utils'
@@ -24,9 +25,9 @@ const WC_AUTO_APPROVE_KEY = 'wcAutoApprove'
 
 const FALLBACK_PEER_NAME = 'WalletConnect'
 
-// The URL of the former WalletConnect Safe App
-// This is still used to differentiate these txs from Safe App txs in the analytics
-const LEGACY_WC_APP_URL = 'https://apps-portal.safe.global/wallet-connect'
+// Stamped on the request so the gateway can tell a WalletConnect session apart
+// from a Safe App. It names this deployment, which is what the record is about.
+const LEGACY_WC_APP_URL = `${brand.appUrl}/wallet-connect`
 
 const getWrongChainError = (dappName: string): Error => {
   const message = Errors.WRONG_CHAIN.replace('%%dappName%%', dappName)

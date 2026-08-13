@@ -3,6 +3,7 @@
 import { get as getFromIndexedDb } from 'idb-keyval'
 import type { MessagePayload } from 'firebase/messaging'
 
+import { brand } from '@safe-global/brand' // Resolves from the host, no internal imports
 import { AppRoutes } from '@/config/routes' // Has no internal imports
 import { FIREBASE_IS_PRODUCTION } from '@/services/push-notifications/firebase'
 import {
@@ -15,8 +16,8 @@ import { getChainsConfig, setBaseUrl } from './gateway-utils'
 import { isWebhookEvent } from './webhook-types'
 import type { WebhookEvent } from './webhook-types'
 
-const GATEWAY_URL_PRODUCTION = process.env.NEXT_PUBLIC_GATEWAY_URL_PRODUCTION || 'https://safe-client.safe.global'
-const GATEWAY_URL_STAGING = process.env.NEXT_PUBLIC_GATEWAY_URL_STAGING || 'https://safe-client.staging.5afe.dev'
+const GATEWAY_URL_PRODUCTION = process.env.NEXT_PUBLIC_GATEWAY_URL_PRODUCTION || brand.gatewayUrl
+const GATEWAY_URL_STAGING = process.env.NEXT_PUBLIC_GATEWAY_URL_STAGING || brand.gatewayStagingUrl
 const CONFIG_SERVICE_KEY = process.env.NEXT_PUBLIC_CONFIG_SERVICE_KEY || 'WALLET_WEB'
 
 // localStorage cannot be accessed in service workers so we reference the flag from the environment

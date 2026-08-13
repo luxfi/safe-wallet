@@ -93,7 +93,6 @@ export const SAFE_TOKEN_ADDRESSES: { [chainId: string]: string } = {
 
 export const DEVELOPER_PORTAL_URL = process.env.NEXT_PUBLIC_DEVELOPER_PORTAL_URL || `${brand.developerUrl}/login`
 
-export const SAFE_APPS_THIRD_PARTY_COOKIES_CHECK_URL = 'https://third-party-cookies-check.gnosis-safe.com'
 export const SAFE_APPS_DEMO_SAFE_MAINNET = 'eth:0xfF501B324DC6d78dC9F983f140B9211c3EdB4dc7'
 export const SAFE_APPS_SDK_DOCS_URL = `${brand.helpUrl}/articles/6872363437-How-to-create-a-Safe-App-with-Safe-Apps-SDK-and-list-it`
 
@@ -111,10 +110,9 @@ export const MIXPANEL_TOKEN = IS_PRODUCTION ? PROD_MIXPANEL_TOKEN : STAGING_MIXP
 // Support chat (Pylon)
 export const SUPPORT_CHAT_ALIAS_DOMAIN =
   process.env.NEXT_PUBLIC_SUPPORT_CHAT_ALIAS_DOMAIN || brand.supportChatAliasDomain
-export const SUPPORT_CHAT_URL = process.env.NEXT_PUBLIC_PYLON_CHAT_URL || 'https://safe-support.vercel.app/chat'
+export const SUPPORT_CHAT_URL = process.env.NEXT_PUBLIC_PYLON_CHAT_URL || ''
 export const SUPPORT_CHAT_ALLOWED_PARENTS =
-  process.env.NEXT_PUBLIC_SUPPORT_CHAT_ALLOWED_PARENTS ||
-  `http://localhost ${brand.appUrl} https://safe-support.vercel.app/`
+  process.env.NEXT_PUBLIC_SUPPORT_CHAT_ALLOWED_PARENTS || `http://localhost ${brand.appUrl}`
 export const SUPPORT_CHAT_APP_ID = process.env.NEXT_PUBLIC_PYLON_APP_ID || ''
 
 // Safe Apps tags

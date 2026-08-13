@@ -33,8 +33,10 @@ export const TxBuilderButton = () => {
   const router = useRouter()
   const { setTxFlow } = useContext(TxModalContext)
 
-  const isTxBuilder = typeof txBuilder.link.query === 'object' && router.query.appUrl === txBuilder.link.query?.appUrl
+  const isTxBuilder = typeof txBuilder?.link.query === 'object' && router.query.appUrl === txBuilder.link.query?.appUrl
   const onClick = isTxBuilder ? () => setTxFlow(undefined) : undefined
+
+  if (!txBuilder) return null
 
   return (
     <Track {...MODALS_EVENTS.CONTRACT_INTERACTION}>

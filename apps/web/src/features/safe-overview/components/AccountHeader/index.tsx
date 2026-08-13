@@ -27,7 +27,7 @@ const AccountHeader = (): ReactElement => {
   const router = useRouter()
   const currency = useAppSelector(selectCurrency)
   const isSwapFeatureEnabled = useIsSwapFeatureEnabled()
-  const { link: txBuilderLink } = useTxBuilderApp()
+  const txBuilderLink = useTxBuilderApp()?.link
   const [qrModalOpen, setQrModalOpen] = useState(false)
 
   const isInitialState = !safeLoaded && !safeLoading
@@ -57,6 +57,7 @@ const AccountHeader = (): ReactElement => {
   }, [])
 
   const handleBuildTransaction = useCallback(() => {
+    if (!txBuilderLink) return
     const query = typeof txBuilderLink.query === 'object' ? txBuilderLink.query : {}
     router.push({ ...txBuilderLink, query: { ...query, ...router.query } })
   }, [router, txBuilderLink])
