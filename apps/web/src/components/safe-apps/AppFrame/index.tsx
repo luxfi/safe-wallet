@@ -120,7 +120,7 @@ const AppFrame = ({ appUrl, allowedFeaturesList, safeAppFromManifest, isNativeEm
           <title>{`Safe Apps - Viewer - ${remoteApp ? remoteApp.name : UNKNOWN_APP_NAME}`}</title>
         </Head>
         <div className="p-4">
-          <BlockedAddress address={sanctionedAddress} featureTitle="Safe{Pass} Safe app" />
+          <BlockedAddress address={sanctionedAddress} featureTitle="Safe App" />
         </div>
       </>
     )
