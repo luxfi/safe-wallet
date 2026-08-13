@@ -1,7 +1,7 @@
 name: Lux Safe Image
 
 # Builds the Lux-branded Safe{Wallet} web app and pushes it to
-# ghcr.io/luxfi/lux-safe. Canonical luxfi pattern: lux-build ARC pool,
+# ghcr.io/luxfi/safe. Canonical luxfi pattern: lux-build ARC pool,
 # multi-arch, semver-only tags, no :latest.
 
 on:
@@ -33,9 +33,8 @@ jobs:
             network=host
 
       - name: Login to GHCR
-        # The ghcr.io/luxfi/lux-safe package predates this repo and is linked to
-        # no repository, so the repo-scoped GITHUB_TOKEN cannot write it. Use the
-        # org-admin GHCR_PAT (write:packages) instead.
+        # ghcr.io/luxfi/safe is linked to no repository, so the repo-scoped
+        # GITHUB_TOKEN cannot write it — the org-admin GHCR_PAT can.
         uses: docker/login-action@v3
         with:
           registry: ghcr.io
@@ -59,7 +58,7 @@ jobs:
           # Build amd64 natively. Revisit if an arm64 runner comes online.
           platforms: linux/amd64
           push: true
-          tags: ghcr.io/luxfi/lux-safe:${{ steps.tag.outputs.value }}
+          tags: ghcr.io/luxfi/safe:${{ steps.tag.outputs.value }}
           provenance: false
-          cache-from: type=registry,ref=ghcr.io/luxfi/lux-safe:buildcache
-          cache-to: type=registry,ref=ghcr.io/luxfi/lux-safe:buildcache,mode=max
+          cache-from: type=registry,ref=ghcr.io/luxfi/safe:buildcache
+          cache-to: type=registry,ref=ghcr.io/luxfi/safe:buildcache,mode=max
