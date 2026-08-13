@@ -10,7 +10,8 @@ import ExternalLink from '../ExternalLink'
 import MUILink from '@mui/material/Link'
 import { useIsOfficialHost } from '@/hooks/useIsOfficialHost'
 import { HELP_CENTER_URL } from '@safe-global/utils/config/constants'
-import { IS_PRODUCTION, COMMIT_HASH } from '@/config/constants'
+import { IS_PRODUCTION, COMMIT_HASH, BRAND_NAME } from '@/config/constants'
+import { brand } from '@safe-global/brand'
 import type { FooterProps } from './footer.type'
 
 const footerPages = [
@@ -90,7 +91,31 @@ const Footer: React.FC<FooterProps> = ({
             )}
           </>
         ) : (
-          <li>This is an unofficial distribution of the app</li>
+          // A white-label is not an unofficial distribution of someone else's
+          // app — it is its own product, and it has its own legal pages. Name
+          // the brand and link them.
+          <>
+            <li>
+              <Typography variant="caption">
+                &copy;{copyrightYear} {BRAND_NAME}
+              </Typography>
+            </li>
+            <li>
+              <ExternalLink href={brand.termsUrl} noIcon sx={{ span: { textDecoration: 'underline' } }}>
+                Terms
+              </ExternalLink>
+            </li>
+            <li>
+              <ExternalLink href={brand.privacyUrl} noIcon sx={{ span: { textDecoration: 'underline' } }}>
+                Privacy
+              </ExternalLink>
+            </li>
+            {preferences && (
+              <li>
+                <FooterLink href={getHref(AppRoutes.settings.index)}>Preferences</FooterLink>
+              </li>
+            )}
+          </>
         )}
 
         <li>
