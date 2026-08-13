@@ -1,3 +1,4 @@
+import { brand } from '@safe-global/brand'
 import css from '../Dashboard/styles.module.css'
 import SignInOptions from '../SignInOptions'
 import { OidcAuthFeature } from '@/features/oidc-auth'
@@ -27,7 +28,7 @@ const SignedOutState = ({ afterSignIn, redirectLoading = false }: SignedOutState
             <Typography color="muted" className="mb-4">
               To view and interact with workspaces, you need to sign in with the wallet, that is a member of the
               workspace
-              {!$isDisabled && ', or sign in with email'}. Sign in to continue.
+              {!$isDisabled && `, or sign in with ${brand.identity.name}`}. Sign in to continue.
             </Typography>
 
             <SignInOptions afterSignIn={afterSignIn ?? (() => {})} redirectLoading={redirectLoading} />
