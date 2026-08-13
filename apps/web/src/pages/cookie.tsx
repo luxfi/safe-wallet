@@ -1,8 +1,7 @@
 import type { ComponentProps } from 'react'
 import type { NextPage } from 'next'
-import Head from 'next/head'
-import { useIsOfficialHost } from '@/hooks/useIsOfficialHost'
-import { BRAND_NAME } from '@/config/constants'
+import Legal from '@/components/common/Legal'
+import { brand } from '@safe-global/brand'
 import SafeCookiePolicy from '@/markdown/cookie/cookie.md'
 import type { MDXComponents } from 'mdx/types'
 import CustomLink from '@/components/common/CustomLink'
@@ -28,24 +27,12 @@ const overrideComponents: MDXComponents = {
   td: Td,
 }
 
-const CookiePolicy: NextPage = () => {
-  const isOfficialHost = useIsOfficialHost()
-
-  return (
-    <>
-      <Head>
-        <title>{`${BRAND_NAME} – Cookie policy`}</title>
-      </Head>
-
-      <main style={{ lineHeight: '1.5' }}>
-        {isOfficialHost && (
-          <MarkdownContent>
-            <SafeCookiePolicy components={overrideComponents} />
-          </MarkdownContent>
-        )}
-      </main>
-    </>
-  )
-}
+const CookiePolicy: NextPage = () => (
+  <Legal title="Cookie policy" href={brand.cookieUrl}>
+    <MarkdownContent>
+      <SafeCookiePolicy components={overrideComponents} />
+    </MarkdownContent>
+  </Legal>
+)
 
 export default CookiePolicy

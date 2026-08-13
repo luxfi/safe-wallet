@@ -1,9 +1,9 @@
 import type { NextPage } from 'next'
-import Head from 'next/head'
 import { Typography } from '@/components/ui/typography'
 import { Table, TableBody, TableRow, TableCell, TableHeader, TableHead } from '@/components/ui/table'
 import ExternalLink from '@/components/common/ExternalLink'
-import { useIsOfficialHost } from '@/hooks/useIsOfficialHost'
+import Legal from '@/components/common/Legal'
+import { brand } from '@safe-global/brand'
 import { BRAND_NAME } from '@/config/constants'
 
 const SafeLicenses = () => (
@@ -476,18 +476,10 @@ const SafeLicenses = () => (
   </>
 )
 
-const Licenses: NextPage = () => {
-  const isOfficialHost = useIsOfficialHost()
-
-  return (
-    <>
-      <Head>
-        <title>{`${BRAND_NAME} – Licenses`}</title>
-      </Head>
-
-      <main>{isOfficialHost && <SafeLicenses />}</main>
-    </>
-  )
-}
+const Licenses: NextPage = () => (
+  <Legal title="Licenses" href={brand.licensesUrl}>
+    <SafeLicenses />
+  </Legal>
+)
 
 export default Licenses
