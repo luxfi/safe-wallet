@@ -1,10 +1,9 @@
 import type { NextPage } from 'next'
-import Head from 'next/head'
 import { Typography } from '@/components/ui/typography'
 import NextLink from 'next/link'
 import { Link } from '@/components/ui/link'
-import { useIsOfficialHost } from '@/hooks/useIsOfficialHost'
-import { BRAND_NAME } from '@/config/constants'
+import Legal from '@/components/common/Legal'
+import { brand } from '@safe-global/brand'
 
 const SafeImprint = () => (
   <div>
@@ -75,18 +74,10 @@ const SafeImprint = () => (
   </div>
 )
 
-const Imprint: NextPage = () => {
-  const isOfficialHost = useIsOfficialHost()
-
-  return (
-    <>
-      <Head>
-        <title>{`${BRAND_NAME} – Imprint`}</title>
-      </Head>
-
-      <main>{isOfficialHost && <SafeImprint />}</main>
-    </>
-  )
-}
+const Imprint: NextPage = () => (
+  <Legal title="Imprint" href={brand.imprintUrl}>
+    <SafeImprint />
+  </Legal>
+)
 
 export default Imprint
