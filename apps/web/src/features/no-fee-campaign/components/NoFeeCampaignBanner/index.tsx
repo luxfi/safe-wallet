@@ -5,7 +5,7 @@ import PromoBanner from '@/components/common/PromoBanner/PromoBanner'
 import useWallet from '@/hooks/wallets/useWallet'
 import useIsSafeOwner from '@/hooks/useIsSafeOwner'
 import { useSafeSDK } from '@/hooks/coreSDK/safeCoreSDK'
-import { Link } from '@mui/material'
+import { Link } from '@/components/ui/link'
 import { brand } from '@safe-global/brand'
 
 const NoFeeCampaignBanner = ({ onDismiss }: { onDismiss: () => void }) => {
@@ -29,7 +29,8 @@ const NoFeeCampaignBanner = ({ onDismiss }: { onDismiss: () => void }) => {
             href={`${brand.helpUrl}/articles/9605526657-no-fee-january-campaign`}
             target="_blank"
             rel="noopener noreferrer"
-            sx={{ color: 'inherit', textDecoration: 'underline', fontWeight: 'bold' }}
+            variant="inherit"
+            className="font-bold underline"
           >
             Learn more
           </Link>

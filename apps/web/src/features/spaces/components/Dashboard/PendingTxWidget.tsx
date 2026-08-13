@@ -1,6 +1,6 @@
 import type { ReactElement } from 'react'
 import { Users } from 'lucide-react'
-import SafeWidget from '@/features/spaces/components/SafeWidget'
+import SafeWidget from '../SafeWidget'
 import { Badge } from '@/components/ui/badge'
 import { getTxStatus } from '@/features/transactions/utils'
 import { formatTimeInWords } from '@safe-global/utils/utils/date'
@@ -19,9 +19,7 @@ type SpacePendingTxItem = TransactionQueuedItem & { safeAddress?: string; chainI
 interface PendingTxWidgetProps {
   transactions: SpacePendingTxItem[]
   loading?: boolean
-  remainingCount?: number
   error?: string
-  onViewAll?: () => void
   onRefresh?: () => void
   onItemClick?: (safeAddress: string, txId: string) => void
 }
@@ -78,6 +76,7 @@ const PendingTxWidget = ({
               href={href}
               onClick={tx.safeAddress ? () => onItemClick?.(tx.safeAddress!, tx.transaction.id) : undefined}
               className={css.widgetItem}
+              fixedActionWidth
               label={
                 <div className={css.widgetItemLabel}>
                   <TxTypeText tx={tx.transaction} /> <TxInfo info={tx.transaction.txInfo} />

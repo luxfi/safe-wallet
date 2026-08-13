@@ -11,7 +11,7 @@ import { chainsAdapter, chainsInitialState } from '@safe-global/store/gateway'
 import { CONFIG_SERVICE_KEY, DEFAULT_CHAIN_ID } from '@/config/constants'
 import chains from '@safe-global/utils/config/chains'
 import type { RootState } from '@/store'
-import type { ResolvedSidebarItem, ResolvedSidebarGroup, SpaceItem } from './types'
+import type { ResolvedSidebarNavItem, ResolvedSidebarGroup, SpaceItem } from './types'
 import { AppRoutes } from '@/config/routes'
 import { Wallet, Coins, ArrowRightLeft, BookUser, LayoutGrid, Repeat2, Orbit, Database, TrendingUp } from 'lucide-react'
 
@@ -19,12 +19,12 @@ const defaultChainShortName =
   (Object.entries(chains) as [string, string][]).find(([, id]) => id === String(DEFAULT_CHAIN_ID))?.[0] ?? 'sep'
 
 const SAFE_SIDEBAR_ROUTER_QUERY = {
-  spaceId: '1',
+  spaceId: 'uuid-1',
   chain: defaultChainShortName,
   safe: '0x1234567890123456789012345678901234567890',
 }
 
-const STORY_SELECTED_SPACE: SpaceItem = { id: 1, name: 'Company Space', safeCount: 0 }
+const STORY_SELECTED_SPACE: SpaceItem = { uuid: 'uuid-1', name: 'Company Space', safeCount: 0 }
 
 const storyChain = (() => {
   const base = createChainData()
@@ -195,7 +195,7 @@ const VARIANT_SAFE_ADDRESS = '0x1234567890123456789012345678901234567890'
 const VARIANT_CHAIN_ID = '11155111'
 const variantQuery = { safe: `eth:${VARIANT_SAFE_ADDRESS}`, spaceId: '1' }
 
-const variantMainNavItems: ResolvedSidebarItem[] = [
+const variantMainNavItems: ResolvedSidebarNavItem[] = [
   {
     icon: Wallet,
     label: 'Overview',
@@ -335,8 +335,8 @@ export const VariantAddToWorkspace: Story = {
         workspaceHeader={{
           variant: 'addToWorkspace',
           spaces: [
-            { id: 1, name: 'Company Space', safeCount: 2 },
-            { id: 2, name: 'Treasury', safeCount: 5 },
+            { uuid: 'uuid-1', name: 'Company Space', safeCount: 2 },
+            { uuid: 'uuid-2', name: 'Treasury', safeCount: 5 },
           ],
         }}
         mainNavItems={variantMainNavItems}

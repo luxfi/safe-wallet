@@ -1,15 +1,15 @@
-import { Typography } from '@mui/material'
+import { Typography } from '@/components/ui/typography'
 import { useMemo } from 'react'
 import type { ReactElement } from 'react'
 
 import EthHashInfo from '@/components/common/EthHashInfo'
 import { InfoDetails } from '@/components/transactions/InfoDetails'
 import ErrorMessage from '@/components/tx/ErrorMessage'
-import { useIsRecoverer } from '@/features/recovery/hooks/useIsRecoverer'
+import { useIsRecoverer } from '../../hooks/useIsRecoverer'
 import useSafeInfo from '@/hooks/useSafeInfo'
 import { logError, Errors } from '@/services/exceptions'
-import { getRecoveredSafeInfo } from '@/features/recovery/services/transaction-list'
-import type { RecoveryQueueItem } from '@/features/recovery/services/recovery-state'
+import { getRecoveredSafeInfo } from '../../services/transaction-list'
+import type { RecoveryQueueItem } from '../../services/recovery-state'
 
 export default function RecoveryDescription({ item }: { item: RecoveryQueueItem }): ReactElement {
   const { args, isMalicious } = item
@@ -53,7 +53,7 @@ export default function RecoveryDescription({ item }: { item: RecoveryQueueItem 
       ))}
 
       <div>
-        <Typography fontWeight={700} gutterBottom>
+        <Typography variant="paragraph-bold" className="mb-2">
           Required confirmations for new transactions:
         </Typography>
         <Typography>

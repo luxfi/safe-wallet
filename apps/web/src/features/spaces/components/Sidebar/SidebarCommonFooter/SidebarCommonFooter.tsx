@@ -74,14 +74,28 @@ export const SidebarCommonFooter = ({ isSafeSidebar = false }: { isSafeSidebar?:
       <SidebarMenu className="gap-0.5">
         <ApiCtaSidebar />
 
-        <SidebarMenuItem className={css.footerHelpRow}>
+        <SidebarMenuItem
+          className={cn(
+            css.footerHelpRow,
+            'group-data-[collapsible=icon]:flex-col group-data-[collapsible=icon]:gap-0.5',
+          )}
+        >
           <SidebarMenuButton
-            className={cn('h-9 min-w-0 flex-1 gap-3', css.sidebarInteractive, css.sidebarNavItem)}
+            className={cn(
+              'h-9 min-w-0 flex-1 gap-3 group-data-[collapsible=icon]:flex-none',
+              css.sidebarInteractive,
+              css.sidebarNavItem,
+            )}
             data-testid="list-item-need-help"
             onClick={handleHelpClick}
           >
-            <icons.CircleHelp />
-            <span>Help</span>
+            <Tooltip>
+              <TooltipTrigger render={<div />} className="flex min-w-0 cursor-pointer items-center gap-3">
+                <icons.CircleHelp />
+                <span className="truncate group-data-[collapsible=icon]:hidden">Help</span>
+              </TooltipTrigger>
+              <TooltipContent side="right">Help center</TooltipContent>
+            </Tooltip>
           </SidebarMenuButton>
           <Tooltip>
             <TooltipTrigger
@@ -106,7 +120,7 @@ export const SidebarCommonFooter = ({ isSafeSidebar = false }: { isSafeSidebar?:
             <TooltipContent side="top">What&apos;s new</TooltipContent>
           </Tooltip>
           <div className={css.footerHelpStatus}>
-            <SidebarIndexingStatus />
+            <SidebarIndexingStatus isSafeSidebar={isSafeSidebar} />
           </div>
         </SidebarMenuItem>
       </SidebarMenu>

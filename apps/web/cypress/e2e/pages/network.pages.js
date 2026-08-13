@@ -5,27 +5,36 @@ const addChainDialog = '[data-testid="add-chain-dialog"]'
 const addedNetwork = '[data-testid="added-network"]'
 const modalAddNetworkBtn = '[data-testid="modal-add-network-btn"]'
 const allNetworksAccordion = '[data-testid="all-networks-accordion"]'
+const allNetworksAccordionTrigger = '[data-testid="all-networks-accordion-trigger"]'
 const chainNavigationButton = '[data-testid="space-chain-navigation-button"]'
+const chainSelectorLoading = '[data-testid="chain-selector-loading"]'
 
 export const createSafeMsg = (network) => `Successfully added your account on ${network}`
 
 export function clickChainNavigationButton() {
+  cy.wait(1000)
   cy.get(chainNavigationButton).should('be.visible').click()
   cy.get(allNetworksAccordion).should('be.visible')
 }
 
 export function clickAllNetworksAccordion() {
-  cy.get(allNetworksAccordion).should('be.visible').click()
+  cy.get(allNetworksAccordion).should('be.visible')
+  cy.get(chainSelectorLoading).should('not.exist')
+  cy.get(allNetworksAccordionTrigger).then(($trigger) => $trigger[0].click())
+  cy.get(allNetworksAccordionTrigger).should('have.attr', 'aria-expanded', 'true')
   cy.get(addNetworkBtn).should('be.visible')
 }
 
 export function clickAddNetworkBtn(chainName) {
-  cy.get(addNetworkBtn).filter(`[aria-label="Add ${chainName}"]`).click()
+  // Same Base UI popup quirk as the accordion above: re-query and bare DOM click.
+  cy.get(addNetworkBtn)
+    .filter(`[aria-label="Add ${chainName}"]`)
+    .then(($btn) => $btn[0].click())
   cy.get(addChainDialog).should('be.visible')
 }
 
 export function clickModalAddNetworkBtn() {
-  cy.get(modalAddNetworkBtn).should('be.visible').click()
+  cy.get(modalAddNetworkBtn).should('be.visible').and('not.be.disabled').click()
 }
 
 export function verifyModalAddNetworkBtnDisabled() {

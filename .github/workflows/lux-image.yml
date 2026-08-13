@@ -39,7 +39,7 @@ jobs:
         uses: docker/login-action@v3
         with:
           registry: ghcr.io
-          username: hanzo-dev
+          username: zeekay
           password: ${{ secrets.GHCR_PAT }}
 
       - name: Resolve image tag

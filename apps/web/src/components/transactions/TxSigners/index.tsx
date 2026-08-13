@@ -1,9 +1,11 @@
 import type { TransactionDetails, Transaction } from '@safe-global/store/gateway/AUTO_GENERATED/transactions'
 import { type ReactElement } from 'react'
-import { Alert, Box, IconButton, SvgIcon, Tooltip } from '@mui/material'
-import CopyIcon from '@mui/icons-material/ContentCopy'
+import { Copy } from 'lucide-react'
+import { Alert } from '@/components/ui/alert'
+import { Button } from '@/components/ui/button'
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
 import TxConfirmations from '@/components/transactions/TxConfirmations'
-import { AuditRow, AuditLogHeader } from '@/components/common/AuditLog'
+import { AuditRow, AuditLogHeader, useCopyToClipboard } from '@/components/common/AuditLog'
 
 import useWallet from '@/hooks/wallets/useWallet'
 import useIsPending from '@/hooks/useIsPending'
@@ -14,6 +16,7 @@ import {
   isMultisigDetailedExecutionInfo,
 } from '@/utils/transaction-guards'
 import ExplorerFallbackIcon from '@/public/images/common/link.svg'
+import HashIcon from '@/public/images/common/hash.svg'
 
 import useSafeInfo from '@/hooks/useSafeInfo'
 import useTransactionStatus from '@/hooks/useTransactionStatus'
@@ -42,30 +45,96 @@ type TxSignersProps = {
   isExpired?: boolean
 }
 
+const CopyTxHashButton = ({ txHash }: { txHash?: string | null }) => {
+  const [copied, handleCopy] = useCopyToClipboard(txHash)
+
+  if (!txHash) {
+    return (
+      <Tooltip>
+        {/* A disabled button receives neither pointer nor focus events, so the tooltip has to hang
+            off a wrapper or the hint is unreachable by every input method. */}
+        <TooltipTrigger
+          render={
+            <span tabIndex={0}>
+              <Button
+                variant="ghost"
+                size="icon-sm"
+                className="text-inherit"
+                disabled
+                aria-label="Copy transaction hash"
+              >
+                <HashIcon className="size-5" />
+              </Button>
+            </span>
+          }
+        />
+        <TooltipContent side="top">Available after execution</TooltipContent>
+      </Tooltip>
+    )
+  }
+
+  return (
+    <Tooltip>
+      <TooltipTrigger
+        render={
+          <Button
+            data-testid="copy-tx-hash-btn"
+            variant="ghost"
+            size="icon-sm"
+            className="text-inherit"
+            onClick={handleCopy}
+            // MUI's Tooltip put its `title` on the child as an aria-label; Base UI's wires no ARIA at
+            // all, so an icon-only trigger needs its own name or it announces as just "button".
+            aria-label="Copy transaction hash"
+          >
+            <HashIcon className="size-5" />
+          </Button>
+        }
+      />
+      <TooltipContent side="top">{copied ? 'Copied' : 'Copy transaction hash'}</TooltipContent>
+    </Tooltip>
+  )
+}
+
 const TxAuditLogActions = ({
   txId,
+  txHash,
   explorerLink,
 }: {
   txId: string
+  txHash?: string | null
   explorerLink?: { title: string; href: string }
 }) => (
   <>
+    <CopyTxHashButton txHash={txHash} />
+    {/* No Tooltip of its own: TxShareLinkWrapper wraps this in CopyTooltip, which already supplies a
+        TooltipTrigger and its own "Copy the transaction URL" content. A second one nested inside
+        opened two tooltips at once on hover. The aria-label carries the accessible name. */}
     <TxShareLinkWrapper id={txId} eventLabel={CopyDeeplinkLabels.shareBlock}>
-      <Tooltip title="Copy transaction link" placement="top">
-        <IconButton size="small" sx={{ color: 'inherit' }}>
-          <CopyIcon fontSize="small" />
-        </IconButton>
-      </Tooltip>
+      <Button
+        data-testid="share-tx-link-btn"
+        variant="ghost"
+        size="icon-sm"
+        className="text-inherit"
+        aria-label="Copy transaction link"
+      >
+        <Copy className="size-5" />
+      </Button>
     </TxShareLinkWrapper>
     {explorerLink ? (
       <ExplorerButton {...explorerLink} isCompact />
     ) : (
-      <Tooltip title="Available after execution" placement="top">
-        <span>
-          <IconButton size="small" disabled>
-            <SvgIcon component={ExplorerFallbackIcon} inheritViewBox fontSize="small" />
-          </IconButton>
-        </span>
+      <Tooltip>
+        <TooltipTrigger
+          render={
+            <span tabIndex={0}>
+              <Button variant="ghost" size="icon-sm" disabled aria-label="View on block explorer">
+                <ExplorerFallbackIcon className="size-5" />
+              </Button>
+            </span>
+          }
+        />
+        <TooltipContent side="top">Available after execution</TooltipContent>
       </Tooltip>
     )}
   </>
@@ -106,8 +175,10 @@ const TxSigners = ({
     if (!txDetails.executedAt) return null
 
     return (
-      <Box data-testid="transaction-actions-list">
-        <AuditLogHeader actions={<TxAuditLogActions txId={txId} explorerLink={explorerLink} />} />
+      <div data-testid="transaction-actions-list">
+        <AuditLogHeader
+          actions={<TxAuditLogActions txId={txId} txHash={txDetails.txHash} explorerLink={explorerLink} />}
+        />
         <AuditRow
           label="Executed"
           actionType="executed"
@@ -116,7 +187,7 @@ const TxSigners = ({
           timestamp={txDetails.executedAt}
           isLast
         />
-      </Box>
+      </div>
     )
   }
 
@@ -127,8 +198,10 @@ const TxSigners = ({
     const moduleName = detailedExecutionInfo.address.name?.replace(/([a-z])([A-Z])/g, '$1 $2')
 
     return (
-      <Box data-testid="transaction-actions-list">
-        <AuditLogHeader actions={<TxAuditLogActions txId={txId} explorerLink={explorerLink} />} />
+      <div data-testid="transaction-actions-list">
+        <AuditLogHeader
+          actions={<TxAuditLogActions txId={txId} txHash={txDetails.txHash} explorerLink={explorerLink} />}
+        />
 
         <AuditRow
           label="Created"
@@ -146,7 +219,7 @@ const TxSigners = ({
           timestamp={txDetails.executedAt}
           isLast
         />
-      </Box>
+      </div>
     )
   }
 
@@ -173,7 +246,7 @@ const TxSigners = ({
   const showExecutionRow = isConfirmed || !!executor || txDetails.txStatus !== 'AWAITING_CONFIRMATIONS'
 
   return (
-    <Box data-testid="transaction-actions-list">
+    <div data-testid="transaction-actions-list">
       <AuditLogHeader
         chip={
           <TxConfirmations
@@ -181,7 +254,7 @@ const TxSigners = ({
             requiredConfirmations={confirmationsRequired}
           />
         }
-        actions={<TxAuditLogActions txId={txId} explorerLink={explorerLink} />}
+        actions={<TxAuditLogActions txId={txId} txHash={txDetails.txHash} explorerLink={explorerLink} />}
       />
 
       <AuditRow
@@ -217,7 +290,7 @@ const TxSigners = ({
       )}
 
       {confirmationsNeeded > 0 && !executor && !isExpired && (
-        <Alert severity="info" sx={{ mt: 2, py: 0.5 }}>
+        <Alert className="mt-4 py-1">
           {isCancellation
             ? 'Cancellation can be executed once the required approvals are collected.'
             : 'Can be executed once the threshold is reached.'}
@@ -225,19 +298,19 @@ const TxSigners = ({
       )}
 
       {isTxFromProposer && !executor && !isExpired && (
-        <Alert severity="info" sx={{ mt: 2, py: 0.5 }}>
+        <Alert className="mt-4 py-1">
           {isCancellation
             ? 'This on-chain rejection was initiated by a proposer. Please review and approve or dismiss it.'
             : 'This transaction was created by a proposer. Please review and either confirm or reject it.'}
         </Alert>
       )}
 
-      {isExpired && (
-        <Alert severity="warning" sx={{ mt: 2, py: 0.5 }}>
+      {isExpired && !executor && (
+        <Alert variant="warning" className="mt-4 py-1">
           This order has expired. Reject this transaction and try again.
         </Alert>
       )}
-    </Box>
+    </div>
   )
 }
 
