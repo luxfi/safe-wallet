@@ -8227,6 +8227,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@hanzo/logo@npm:^1.0.17":
+  version: 1.0.17
+  resolution: "@hanzo/logo@npm:1.0.17"
+  peerDependencies:
+    react: ">=16.8.0"
+  peerDependenciesMeta:
+    react:
+      optional: true
+  checksum: 10/4bd900d30e20d380847b9ec1ab654642813be336fc7357d12169f9380dac5281703f6d9a2667e1066ec475af68462e506dd6633b010d409cf870787ee39e58d7
+  languageName: node
+  linkType: hard
+
 "@hapi/address@npm:^5.1.1":
   version: 5.1.1
   resolution: "@hapi/address@npm:5.1.1"
@@ -11381,6 +11393,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@parsdao/brand@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "@parsdao/brand@npm:1.0.1"
+  peerDependencies:
+    react: ">=18.0.0"
+  checksum: 10/979d2a3ec275b373413043bd9f490433b5e3a74d224f7d32493297ebff91daf9277a25ce9ed8131ca0ca5f1ecf9610457bdfa2ff2ff1623b4c16446518133635
+  languageName: node
+  linkType: hard
+
 "@peculiar/asn1-schema@npm:^2.3.13":
   version: 2.3.13
   resolution: "@peculiar/asn1-schema@npm:2.3.13"
@@ -13827,6 +13848,7 @@ __metadata:
     "@faker-js/faker": "npm:^9.0.3"
     "@gnosis.pm/zodiac": "npm:^4.0.3"
     "@hanzo/iam": "npm:^0.21.9"
+    "@hanzo/logo": "npm:^1.0.17"
     "@hello-pangea/dnd": "npm:^18.0.1"
     "@ledgerhq/context-module": "npm:^1.8.0"
     "@ledgerhq/device-management-kit": "npm:^0.9.1"
@@ -13839,6 +13861,7 @@ __metadata:
     "@next/mdx": "npm:^15.0.4"
     "@next/third-parties": "npm:^15.2.0"
     "@openzeppelin/contracts": "npm:^4.9.6"
+    "@parsdao/brand": "npm:^1.0.1"
     "@playwright/test": "npm:^1.57.0"
     "@reduxjs/toolkit": "npm:^2.11.0"
     "@reown/walletkit": "npm:^1.2.7"
@@ -13893,6 +13916,7 @@ __metadata:
     "@web3-onboard/hw-common": "npm:^2.3.3"
     "@web3-onboard/injected-wallets": "npm:^2.11.3"
     "@web3-onboard/walletconnect": "npm:2.6.2"
+    "@zooai/logo": "npm:^1.0.5"
     blo: "npm:^1.1.1"
     cheerio: "npm:^1.0.0"
     class-variance-authority: "npm:^0.7.1"
@@ -21401,6 +21425,20 @@ __metadata:
   dependencies:
     tslib: "npm:^2.4.0"
   checksum: 10/f391763cd955356e9aad551b29e8de7bbf68a6c8992af7cdc950ccf53f8aff6695ad81aa4c8a8e7c582786a840a4f30617732e2cb49f4109b971a9242c31c9fc
+  languageName: node
+  linkType: hard
+
+"@zooai/logo@npm:^1.0.5":
+  version: 1.0.5
+  resolution: "@zooai/logo@npm:1.0.5"
+  dependencies:
+    sharp: "npm:^0.34.4"
+  peerDependencies:
+    react: ">=16.8.0"
+  peerDependenciesMeta:
+    react:
+      optional: true
+  checksum: 10/c7864be89d51ef4a65115eeef49074761eaed67b0063548fafaa284fc3bdfc8186b1636203a773e6e104801bcc17a9e5844193a206b275ce7ab5f6bbe2450879
   languageName: node
   linkType: hard
 
