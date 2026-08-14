@@ -63,10 +63,26 @@ const MetaTags = ({ prefetchUrl }: { prefetchUrl: string }) => (
       </>
     ) : (
       <>
-        <link rel="shortcut icon" href={brand.faviconUrl} />
+        {/* The mark itself, transparent, carrying a prefers-color-scheme rule —
+            so the tab shows dark ink on a light chrome and light ink on a dark
+            one, instead of a tile that is the wrong colour on one of them.
+            Browsers that read SVG icons prefer this; the .ico below is what the
+            rest fall back to, and it cannot ask what colour the chrome is, so it
+            commits to a white mark with a dark keyline.
+
+            Both sizes are load-bearing, and this pairing was arrived at by
+            reading the tab strip rather than the spec. Chrome ranks candidates
+            by how near a declared size is to the one it wants, so it silently
+            preferred the .ico while the SVG sat there unused: an unsized
+            `shortcut icon` outranks an SVG that declares nothing, and it still
+            outranks `sizes="any"`. Saying what the .ico actually is — 32x32 —
+            lets "any" win it, and the .ico stays declared so a reader without
+            SVG support still gets THIS brand's mark rather than falling through
+            to the root /favicon.ico, which one static export shares with every
+            other brand. */}
+        <link rel="icon" type="image/svg+xml" sizes="any" href={brand.markUrl} />
+        <link rel="icon" sizes="32x32" href={brand.faviconUrl} />
         <link rel="apple-touch-icon" sizes="192x192" href={`${brandIcons}/android-chrome-192x192.png`} />
-        <link rel="icon" type="image/png" sizes="512x512" href={`${brandIcons}/android-chrome-512x512.png`} />
-        <link rel="icon" type="image/png" sizes="192x192" href={`${brandIcons}/android-chrome-192x192.png`} />
       </>
     )}
   </>

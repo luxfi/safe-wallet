@@ -2,7 +2,7 @@
 import { mkdirSync, writeFileSync } from 'node:fs'
 import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { getWordmarkAdaptiveSVG, getWordmarkSquareSVG } from '@luxfi/logo'
+import { getWordmarkAdaptiveSVG, getMenuBarSVG as luxMark, getFaviconSVG as luxKeylined } from '@luxfi/logo'
 import { getMenuBarSVG as hanzoMark } from '@hanzo/logo'
 import { getColorSVG as zooMark } from '@zooai/logo'
 import { logoColorSVG as parsMark } from '@parsdao/brand'
@@ -38,8 +38,18 @@ const lockup = (mark, name, width) =>
   `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} 28" width="${width}" height="28" role="img" aria-label="${name}"><style>svg{color:#121312}.t{fill:#121312;font-family:Inter,'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:19px;font-weight:700;letter-spacing:-.4px}@media(prefers-color-scheme:dark){svg{color:#fff}.t{fill:#fff}}</style>${inset(mark, { x: 0, y: 4, w: 20, h: 20 })}<text class="t" x="30" y="20">${name}</text></svg>`
 
 const brands = {
-  // Lux draws its own wordmark, so the name is lettered rather than typeset.
-  lux: { 'logo.svg': getWordmarkAdaptiveSVG(), 'mark.svg': getWordmarkSquareSVG() },
+  // Lux draws its own wordmark, so the name is lettered rather than typeset. The
+  // mark is the triangle — `getWordmarkSquareSVG` letterboxes the wordmark into a
+  // square instead, and its own docstring puts the floor at 32px, which is twice
+  // a tab icon. It was reaching the favicon, where "LUX" closed into grey mush.
+  lux: {
+    'logo.svg': getWordmarkAdaptiveSVG(),
+    'mark.svg': adapt(luxMark()),
+    // What the tab wears while it waits on a signature. It keeps the keyline
+    // instead of the theme rule, because an alert should read red on either
+    // chrome rather than turn back into the ordinary mark on one of them.
+    'mark-alert.svg': luxKeylined().replace('fill="#ffffff"', 'fill="#ff3b30"'),
+  },
   zoo: { 'logo.svg': lockup(zooMark(), 'Zoo Safe', 120), 'mark.svg': zooMark() },
   pars: { 'logo.svg': lockup(parsMark, 'Pars Safe', 122), 'mark.svg': parsMark },
   hanzo: { 'logo.svg': lockup(hanzoMark(), 'Hanzo Vault', 150), 'mark.svg': adapt(hanzoMark()) },

@@ -27,5 +27,6 @@ public/robots.txt
 # Drawn by each brand's own logo package — see scripts/generate-brand.mjs
 public/brand/*/logo.svg
 public/brand/*/mark.svg
+public/brand/*/mark-alert.svg
 
 docs/superpowers/
