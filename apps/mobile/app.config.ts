@@ -25,9 +25,9 @@ const sslPinningDomains = {
   'safe-client.safe.global': amazonRootCAs,
 }
 
-// Brand-aware product name. Reads EXPO_PUBLIC_BRAND_NAME at build time so
-// `yarn build:lux` / `yarn build:hanzo` produce correctly-branded artifacts
-// without touching this file. Defaults match upstream Safe.
+// A mobile binary carries one name, chosen when it is built — it has no
+// request host to ask, the way the web app does. Set EXPO_PUBLIC_BRAND_NAME in
+// the EAS profile that builds it; unset, the app is still named for upstream.
 const brandName = process.env.EXPO_PUBLIC_BRAND_NAME ?? 'Safe{Mobile}'
 const name = IS_DEV ? `Dev-${brandName}` : brandName
 
