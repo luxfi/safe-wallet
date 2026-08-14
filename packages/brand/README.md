@@ -4,49 +4,38 @@ White-label brand tokens for the Safe wallet monorepo.
 
 ## Why
 
-The Safe wallet codebase is the upstream OSS reference. Lux Safe, Hanzo Vault,
-and future partner builds all ship from the same source. To keep them in lock-
+The Safe wallet codebase is the upstream OSS reference. Lux Safe, Zoo Safe,
+Pars Safe and Hanzo Vault all ship from the same source. To keep them in lock-
 step we keep brand strings (product name, URLs, support contacts, asset paths,
 primary color) out of the source — they live here, in one file, behind one
-type — and per-brand builds override them via env vars.
+type.
 
 ## Shape
 
 ```ts
 import { brand } from '@safe-global/brand'
 
-brand.name // "Safe{Wallet}"  (or "Lux Safe", "Hanzo Vault", …)
-brand.domain // "safe.global"
-brand.email // "support@safe.global"
-brand.helpUrl // "https://help.safe.global"
-brand.logoUrl // "/images/safe-logo-green.png"
-brand.primaryColor // "#12FF80"
+brand.name // "Lux Safe"  (or "Zoo Safe", "Pars Safe", "Hanzo Vault")
+brand.domain // "safe.lux.network"
+brand.email // "support@lux.network"
+brand.helpUrl // "https://docs.lux.network/safe"
+brand.logoUrl // "/brand/lux/logo.svg"
+brand.primaryColor // "#000000"
 ```
 
 See [`src/index.ts`](src/index.ts) for the full `Brand` interface.
 
-## Setting brand values at build time
+## Where the values come from
 
-Web uses `NEXT_PUBLIC_BRAND_*`, mobile uses `EXPO_PUBLIC_BRAND_*`. The brand
-module reads whichever is set, so a single env file can drive both apps.
+The request host, at runtime — the same way `getWhiteLabelBrand` works across
+the rest of the Lux/Hanzo stack. `safe.lux.network` is Lux, `safe.zoo.network`
+is Zoo, `safe.pars.network` is Pars, `vault.hanzo.ai` is Hanzo Vault. A host
+that matches nothing gets Lux.
 
-```bash
-# apps/web/.env.lux
-NEXT_PUBLIC_BRAND_NAME="Lux Safe"
-NEXT_PUBLIC_BRAND_DOMAIN="safe.lux.network"
-NEXT_PUBLIC_BRAND_EMAIL="support@lux.network"
-NEXT_PUBLIC_BRAND_HELP_URL="https://help.lux.network"
-NEXT_PUBLIC_BRAND_LOGO_URL="/brand/lux/logo.svg"
-```
-
-The repo ships three sample env files in `apps/web/`:
-
-- `.env.safe` — upstream Safe defaults (sanity check)
-- `.env.lux` — Lux Safe
-- `.env.hanzo` — Hanzo Vault
-
-`scripts/select-brand.sh <slug>` copies the selected env file and the matching
-asset directory into place, then the normal Next build picks them up.
+Nothing is baked in at build time, so one image serves every brand. Adding a
+brand means adding an entry to the registry in [`src/index.ts`](src/index.ts)
+and an asset directory under `apps/web/public/brand/<slug>/` — there is no env
+var to set and no per-brand build to run.
 
 ## Rule
 

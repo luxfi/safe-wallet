@@ -21,9 +21,9 @@ RUN yarn workspace @safe-global/web after-install
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV NODE_OPTIONS=--max-old-space-size=8192
-# Select the Lux brand (copies .env.lux -> .env.local, brand assets -> active),
-# export the brand env so the build-time fetch-chains hits the Lux CGW, then
-# build the static export. `next build` itself also loads .env.local.
+# Copy .env.lux -> .env.local, export it so the build-time fetch-chains hits
+# the Lux CGW, then build the static export. `next build` itself also loads
+# .env.local. Every brand's assets ship in the one image; the host picks.
 RUN bash scripts/select-brand.sh lux \
  && set -a && . apps/web/.env.local && set +a \
  && yarn workspace @safe-global/web build

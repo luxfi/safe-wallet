@@ -5,9 +5,9 @@ branded wallets (Lux Safe, Hanzo Vault, partner builds) from a single source.
 
 ## Strategy
 
-One source. Env-driven brand tokens. Every hardcoded brand reference in app
-code reads from a single `Brand` config object exposed by the workspace
-package `@safe-global/brand`.
+One source. One image. Every hardcoded brand reference in app code reads from
+a single `Brand` object exposed by the workspace package `@safe-global/brand`,
+which resolves against the request host at runtime.
 
 ```ts
 // packages/brand/src/index.ts
@@ -24,17 +24,17 @@ export interface Brand {
   // … and more
 }
 
-export const brand: Brand = {
-  name: env('NAME', 'Safe{Wallet}'),
-  domain: env('DOMAIN', 'safe.global'),
-  email: env('EMAIL', 'support@safe.global'),
-  // …
-}
+/** Host suffix → brand. First match wins; Lux monochrome is the fallback. */
+const REGISTRY: ReadonlyArray<readonly [RegExp, Brand]> = [
+  [/(^|\.)lux\.network$/i, lux],
+  [/(^|\.)zoo\.network$/i, zoo],
+  [/(^|\.)pars\.network$/i, pars],
+  [/(^|\.)hanzo\.ai$/i, hanzo],
+]
 ```
 
-Defaults match upstream Safe values, so an unbranded build is byte-for-byte
-the same as today. Per-brand builds override via `NEXT_PUBLIC_BRAND_*` (web)
-or `EXPO_PUBLIC_BRAND_*` (mobile) env vars at build time.
+Because the host decides, the same bundle serves every brand and there is
+nothing to bake in. A host that matches nothing gets Lux.
 
 ## Pattern table
 
@@ -69,51 +69,45 @@ or `EXPO_PUBLIC_BRAND_*` (mobile) env vars at build time.
 - `OFFICIAL_HOSTS` / `IPFS_HOSTS` regexes (identity check for the
   upstream-deployed canonical host).
 
-## Per-brand build
+## Assets
 
-Three sample brand bundles ship in-tree:
+Four brands ship in-tree, one asset directory each:
 
-| Slug    | Brand        | Env file              | Asset dir                      |
-| ------- | ------------ | --------------------- | ------------------------------ |
-| `safe`  | Safe{Wallet} | `apps/web/.env.safe`  | `apps/web/public/brand/safe/`  |
-| `lux`   | Lux Safe     | `apps/web/.env.lux`   | `apps/web/public/brand/lux/`   |
-| `hanzo` | Hanzo Vault  | `apps/web/.env.hanzo` | `apps/web/public/brand/hanzo/` |
+| Host                | Brand       | Asset dir                      |
+| ------------------- | ----------- | ------------------------------ |
+| `safe.lux.network`  | Lux Safe    | `apps/web/public/brand/lux/`   |
+| `safe.zoo.network`  | Zoo Safe    | `apps/web/public/brand/zoo/`   |
+| `safe.pars.network` | Pars Safe   | `apps/web/public/brand/pars/`  |
+| `vault.hanzo.ai`    | Hanzo Vault | `apps/web/public/brand/hanzo/` |
 
-Each `apps/web/public/brand/<slug>/` directory holds the per-brand
-`manifest.json` plus logo and icon assets.
+Each directory holds that brand's `manifest.json`, wordmark (`logo.svg`),
+square mark (`mark.svg`) and icons. The Lux wordmark and mark are not kept
+here — `apps/web/scripts/generate-brand.mjs` draws them from `@luxfi/logo`
+before `next build`, so the letterforms have one home.
 
 ### Build invocation
 
 ```bash
 # From repo root.
-yarn workspace @safe-global/web build:lux       # Lux Safe
-yarn workspace @safe-global/web build:hanzo     # Hanzo Vault
-yarn workspace @safe-global/web build:safe      # Upstream Safe defaults (sanity check)
+yarn workspace @safe-global/web build:lux
 ```
 
-Under the hood each `build:<slug>` runs
-`scripts/select-brand.sh <slug>` then `yarn build`. The selector:
+`build:lux` runs `scripts/select-brand.sh lux` then `yarn build`. The selector
+copies `apps/web/.env.lux` → `apps/web/.env.local`; that file carries build
+settings (production mode, client gateway, default chain), not brand tokens.
+`.env.local` is gitignored so a local selection never leaks into a commit.
 
-1. Copies `apps/web/.env.<slug>` → `apps/web/.env.local`
-2. Copies `apps/web/public/brand/<slug>/` → `apps/web/public/brand/active/`
-3. Copies `apps/web/public/brand/<slug>/manifest.json` →
-   `apps/web/public/safe.webmanifest`
-
-`apps/web/.env.local` and `apps/web/public/brand/active/` should be in
-`.gitignore` (or treated as build outputs) so the local-dev brand selection
-never leaks into commits.
+There is one build. The brand follows the host it is served from.
 
 ### Adding a new brand
 
-1. Add `apps/web/.env.<slug>` with `NEXT_PUBLIC_BRAND_*` values.
+1. Add the brand and its host pattern to the registry in
+   `packages/brand/src/index.ts`.
 2. Add `apps/web/public/brand/<slug>/` with `manifest.json`, `logo.svg`,
-   `favicon.ico`, and the Android Chrome icon sizes referenced by the
-   manifest.
-3. Add a `build:<slug>` script to `apps/web/package.json`.
-4. (Mobile) wire `EXPO_PUBLIC_BRAND_*` into the EAS build profile in
-   `apps/mobile/eas.json`.
+   `mark.svg`, `favicon.ico`, and the Android Chrome icon sizes referenced by
+   the manifest.
 
-That's the entire surface area. No source file changes needed.
+That's the entire surface area. No env vars, no extra build.
 
 ## Identity
 
@@ -158,20 +152,23 @@ package's own defaults — no brand strings in app source.
 The build pipeline is correct; the items below need human follow-up before a
 true non-Safe branded release ships, but do not block per-brand builds.
 
-### Brand assets (placeholders in tree)
+### Brand assets
 
-The `lux/` and `hanzo/` directories ship 1x1 transparent placeholder PNGs and
-a text-only SVG logo so the manifests resolve at runtime. Design must replace
-with real artwork before public release:
+`logo.svg` and `mark.svg` are real for all four brands — drawn at build time
+from each brand's own logo package (`@luxfi/logo`, `@zooai/logo`,
+`@hanzo/logo`, `@parsdao/brand`) by `apps/web/scripts/generate-brand.mjs`.
 
-- `apps/web/public/brand/lux/logo.svg`
-- `apps/web/public/brand/lux/favicon.ico`
-- `apps/web/public/brand/lux/android-chrome-192x192.png`
-- `apps/web/public/brand/lux/android-chrome-512x512.png`
-- `apps/web/public/brand/hanzo/logo.svg`
-- `apps/web/public/brand/hanzo/favicon.ico`
-- `apps/web/public/brand/hanzo/android-chrome-192x192.png`
-- `apps/web/public/brand/hanzo/android-chrome-512x512.png`
+The raster icons are still generic: `favicon.ico` and both
+`android-chrome-*.png` are byte-identical across zoo, pars and hanzo. Each
+brand needs its own set cut from its own mark:
+
+- `apps/web/public/brand/{zoo,pars,hanzo}/favicon.ico`
+- `apps/web/public/brand/{zoo,pars,hanzo}/android-chrome-192x192.png`
+- `apps/web/public/brand/{zoo,pars,hanzo}/android-chrome-512x512.png`
+
+Only Lux has real letterforms. The other three name themselves in Inter beside
+their mark, because their logo packages ship a mark and a `<text>` element
+rather than outlined type.
 
 ### Legal copy
 

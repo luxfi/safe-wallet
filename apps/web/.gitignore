@@ -24,8 +24,8 @@ storybook-static
 src/config/__generated__/
 public/version.json
 public/robots.txt
-# Drawn by @luxfi/logo — see scripts/generate-brand.mjs
-public/brand/lux/logo.svg
-public/brand/lux/mark.svg
+# Drawn by each brand's own logo package — see scripts/generate-brand.mjs
+public/brand/*/logo.svg
+public/brand/*/mark.svg
 
 docs/superpowers/
