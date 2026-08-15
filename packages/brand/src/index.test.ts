@@ -35,6 +35,9 @@ describe('brand', () => {
     expect(distinct('twitterUrl')).toBe(brands.length)
     expect(distinct('primaryColor')).toBe(brands.length)
     expect(distinct('markUrl')).toBe(brands.length)
+    // A brand that forgot to override this would report its neighbour's
+    // security mailbox, which is the one leak here that costs a report.
+    expect(distinct('securityEmail')).toBe(brands.length)
   })
 
   it('exposes every documented URL', () => {
