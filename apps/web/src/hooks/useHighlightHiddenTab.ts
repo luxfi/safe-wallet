@@ -1,6 +1,11 @@
 import { useEffect } from 'react'
+import { brand } from '@safe-global/brand'
 
-const ALT_FAVICON = '/favicons/favicon-dot.ico'
+// The blinking icon is the brand's own mark in alert red. It was Safe's green
+// mark with a red dot on every white-label, which is the one place a competitor's
+// logo reached a Lux tab — and it only showed while a tab waited on a signature,
+// so nobody looking at the app ever saw it.
+const ALT_FAVICON = brand.markUrl.replace(/mark\.svg$/, 'mark-alert.svg')
 const TITLE_PREFIX = '‼️ '
 
 const setFavicon = (favicon: HTMLLinkElement | null, href: string) => {

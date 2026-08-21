@@ -35,6 +35,13 @@ export interface Brand {
   appHost: string
   appUrl: string
   email: string
+  /**
+   * Where a vulnerability report goes. Set on every brand, never inherited —
+   * the spreads below would otherwise hand one brand's mailbox to the rest.
+   * A brand without its own security mailbox states its support address, which
+   * is a real inbox someone reads, rather than one invented for the field.
+   */
+  securityEmail: string
   helpUrl: string
   termsUrl: string
   privacyUrl: string
@@ -82,6 +89,7 @@ const lux: Brand = {
   appHost: 'safe.lux.network',
   appUrl: 'https://safe.lux.network',
   email: 'support@lux.network',
+  securityEmail: 'security@lux.network',
   helpUrl: 'https://docs.lux.network/safe',
   termsUrl: 'https://lux.network/terms',
   privacyUrl: 'https://lux.network/privacy',
@@ -118,6 +126,7 @@ const zoo: Brand = {
   appHost: 'safe.zoo.network',
   appUrl: 'https://safe.zoo.network',
   email: 'support@zoo.network',
+  securityEmail: 'support@zoo.network',
   helpUrl: 'https://docs.zoo.network/safe',
   termsUrl: 'https://zoo.network/terms',
   privacyUrl: 'https://zoo.network/privacy',
@@ -146,6 +155,7 @@ const pars: Brand = {
   appHost: 'safe.pars.network',
   appUrl: 'https://safe.pars.network',
   email: 'support@pars.network',
+  securityEmail: 'support@pars.network',
   helpUrl: 'https://docs.pars.network/safe',
   termsUrl: 'https://pars.network/terms',
   privacyUrl: 'https://pars.network/privacy',
@@ -174,6 +184,7 @@ const hanzo: Brand = {
   appHost: 'vault.hanzo.ai',
   appUrl: 'https://vault.hanzo.ai',
   email: 'support@hanzo.ai',
+  securityEmail: 'security@hanzo.ai',
   helpUrl: 'https://docs.hanzo.ai/vault',
   termsUrl: 'https://hanzo.ai/terms',
   privacyUrl: 'https://hanzo.ai/privacy',
