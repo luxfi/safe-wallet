@@ -35,7 +35,7 @@ const adapt = (svg) =>
 // Horizontal lockup: the mark, then the name. Ink follows the reader's theme —
 // marks drawn in currentColor track it, marks drawn in brand colour keep theirs.
 const lockup = (mark, name, width) =>
-  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} 28" width="${width}" height="28" role="img" aria-label="${name}"><style>svg{color:#121312}.t{fill:#121312;font-family:Inter,'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:19px;font-weight:700;letter-spacing:-.4px}@media(prefers-color-scheme:dark){svg{color:#fff}.t{fill:#fff}}</style>${inset(mark, { x: 0, y: 4, w: 20, h: 20 })}<text class="t" x="30" y="20">${name}</text></svg>`
+  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} 28" width="${width}" height="28" role="img" aria-label="${name}"><style>svg{color:#121312}.t{fill:#121312;font-family:Zen, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;font-size:19px;font-weight:700;letter-spacing:-.4px}@media(prefers-color-scheme:dark){svg{color:#fff}.t{fill:#fff}}</style>${inset(mark, { x: 0, y: 4, w: 20, h: 20 })}<text class="t" x="30" y="20">${name}</text></svg>`
 
 const brands = {
   // Lux draws its own wordmark, so the name is lettered rather than typeset. The

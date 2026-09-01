@@ -134,7 +134,7 @@
 
 @theme inline {
   /* Override Tailwind's default system font stack with the Safe{Wallet} app font */
-  --font-sans: 'DM Sans', sans-serif;
+  --font-sans: Zen, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);

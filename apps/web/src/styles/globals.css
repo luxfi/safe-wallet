@@ -17,8 +17,7 @@ body {
   padding: 0;
   margin: 0;
   font-family:
-    DM Sans,
-    sans-serif;
+    Zen, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   /* Restores MUI CssBaseline's text rendering (removed in the shadcn migration) so fonts
      render with the same antialiasing weight as before. Without this the browser falls back
      to subpixel smoothing and all text looks heavier/larger. */
