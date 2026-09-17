@@ -1,9 +1,3 @@
 {
-  "extends": "../../config/tsconfig/confs/base.json",
-  "compilerOptions": {
-    "baseUrl": "./",
-    "paths": {
-      "@safe-global/brand/*": ["../../packages/brand/src/*"]
-    }
-  }
+  "extends": "../../config/tsconfig/confs/base.json"
 }

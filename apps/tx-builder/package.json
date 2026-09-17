@@ -7,7 +7,7 @@
     "dev": "vite --port 4000",
     "build": "tsc -b && vite build",
     "preview": "vite preview",
-    "type-check": "tsc --noEmit",
+    "type-check": "../../node_modules/tsgo/bin/tsc --noEmit --incremental false",
     "lint": "eslint src",
     "lint:fix": "eslint src --fix",
     "prettier": "prettier --check . --config ../../.prettierrc --ignore-path ../../.prettierignore",
@@ -67,7 +67,7 @@
     "msw": "^2.7.3",
     "prettier": "^3.6.2",
     "ts-jest": "^29.2.5",
-    "typescript": "~5.9.2",
+    "typescript": "6.0.3",
     "typescript-eslint": "^8.31.1",
     "vite": "8.0.16",
     "vite-plugin-svgr": "^5.2.0"

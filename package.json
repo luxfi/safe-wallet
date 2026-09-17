@@ -53,6 +53,7 @@
     "msw": "^2.7.3",
     "prettier": "^3.6.2",
     "storybook": "^10.2.7",
+    "tsgo": "npm:typescript@7.0.2",
     "turbo": "^2.9.14"
   },
   "dependenciesMeta": {

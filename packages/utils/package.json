@@ -8,7 +8,7 @@
     "test:integration": "jest --config jest.integration.config.js",
     "lint": "eslint src",
     "lint:fix": "eslint src --fix",
-    "type-check": "tsc --noEmit",
+    "type-check": "../../node_modules/tsgo/bin/tsc --noEmit --incremental false",
     "prettier": "prettier --check . --config ../../.prettierrc --ignore-path ../../.prettierignore",
     "prettier:fix": "prettier --write . --config ../../.prettierrc --ignore-path ../../.prettierignore",
     "test:coverage": "jest --coverage"
@@ -23,7 +23,7 @@
     "ethers": "6.17.0",
     "jest": "^29.7.0",
     "prettier": "^3.6.2",
-    "typescript": "~5.9.2",
+    "typescript": "6.0.3",
     "typescript-eslint": "^8.31.1"
   },
   "dependencies": {

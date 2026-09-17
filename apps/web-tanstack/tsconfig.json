@@ -15,8 +15,8 @@
     "jsx": "preserve",
     "incremental": true,
     "types": ["vite/client", "jest", "@testing-library/jest-dom"],
-    "baseUrl": ".",
     "paths": {
+      "*": ["./*"],
       "@/*": ["../web/src/*"],
       "@/public/*": ["../web/public/*"],
       "@/storybook/*": ["../web/.storybook/*"],

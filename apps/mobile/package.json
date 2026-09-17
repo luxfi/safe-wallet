@@ -22,7 +22,7 @@
     "test:snapshots": "jest -u",
     "lint": "eslint src/*",
     "lint:fix": "eslint src/* --fix",
-    "type-check": "tsc --noEmit",
+    "type-check": "../../node_modules/tsgo/bin/tsc --noEmit --incremental false",
     "prettier": "prettier --check . --config ../../.prettierrc --ignore-path ../../.prettierignore",
     "prettier:fix": "prettier --write . --config ../../.prettierrc --ignore-path ../../.prettierignore",
     "storybook-generate": "sb-rn-get-stories --config-path ./.storybook",
@@ -193,7 +193,7 @@
     "redux-devtools-expo-dev-plugin": "^2.0.0",
     "storybook": "^10.2.7",
     "ts-node": "^10.9.2",
-    "typescript": "~5.9.2",
+    "typescript": "6.0.3",
     "typescript-eslint": "^8.31.1",
     "webpack": "^5.104.1"
   },

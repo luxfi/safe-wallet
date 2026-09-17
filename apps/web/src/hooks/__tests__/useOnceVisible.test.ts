@@ -27,6 +27,7 @@ describe('useOnceVisible hook', () => {
         takeRecords: jest.fn(),
         root: null,
         rootMargin: '',
+        scrollMargin: '',
         thresholds: [],
       }
 

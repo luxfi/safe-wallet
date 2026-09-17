@@ -1,6 +1,3 @@
 {
-  "extends": "../../config/tsconfig/confs/base.json",
-  "compilerOptions": {
-    "baseUrl": "./"
-  }
+  "extends": "../../config/tsconfig/confs/base.json"
 }
